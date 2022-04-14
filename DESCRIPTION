@@ -20,3 +20,5 @@ Imports:
     magrittr,
     stats,
     base
+URL: https://github.com/agkamel/ptchart
+BugReports: https://github.com/agkamel/ptchart/issues
