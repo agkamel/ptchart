@@ -2,7 +2,7 @@
 % Please edit documentation in R/antilog.R
 \name{antilog}
 \alias{antilog}
-\title{Compute antilogarithm}
+\title{antilog}
 \usage{
 antilog(x, base = 10)
 }
@@ -16,6 +16,9 @@ Numeric.
 }
 \description{
 `antilog()` returns the antilog of a value.
+}
+\details{
+Compute antilogarithm
 }
 \examples{
 antilog(0.25)
