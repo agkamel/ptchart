@@ -15,7 +15,7 @@ antilog(x, base = 10)
 Numeric.
 }
 \description{
-`antilog()` returns `antilog()` the antilogarithm of a value.
+`antilog()` returns the antilogarithm of a value.
 }
 \details{
 Compute antilogarithm
