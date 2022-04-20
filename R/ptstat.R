@@ -13,7 +13,7 @@
 #' @return A list
 #' @export
 #'
-#' @examples
+#' @examples #ptstat(date, date, count, time, date_zero, phase)
 #' @importFrom magrittr %>%
 ptstat <- function(data,
                    date,

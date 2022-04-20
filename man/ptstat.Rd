@@ -25,3 +25,6 @@ A list
 \description{
 This a description that will be added here.
 }
+\examples{
+#ptstat(date, date, count, time, date_zero, phase)
+}
