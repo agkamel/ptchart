@@ -11,5 +11,7 @@
 #'
 #' @examples antilog(0.25)
 antilog <- function(x, base = 10) {
+  stopifnot("x must be numeric" = is.numeric(x))
+  stopifnot("base must be numeric" = is.numeric(base))
   base^x
 }
