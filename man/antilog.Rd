@@ -2,20 +2,20 @@
 % Please edit documentation in R/antilog.R
 \name{antilog}
 \alias{antilog}
-\title{antilog}
+\title{Antilogarithm}
 \usage{
 antilog(x, base = 10)
 }
 \arguments{
 \item{x}{Numeric. Value to which base is augmented.}
 
-\item{base}{Numeric. Value to augment by x.}
+\item{base}{Numeric. Value to be augmented by x.}
 }
 \value{
 Numeric.
 }
 \description{
-`antilog()` returns the antilog of a value.
+`antilog()` returns `antilog()` the antilogarithm of a value.
 }
 \details{
 Compute antilogarithm

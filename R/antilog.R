@@ -1,10 +1,11 @@
 #' Compute antilogarithm
 #'
-#' @title antilog
-#' @description `antilog()` returns the antilog of a value.
+#' @title Antilogarithm
+#' @description
+#' `antilog()` returns the antilogarithm of a value.
 #'
 #' @param x Numeric. Value to which base is augmented.
-#' @param base Numeric. Value to augment by x.
+#' @param base Numeric. Value to be augmented by x.
 #'
 #' @return Numeric.
 #' @export
