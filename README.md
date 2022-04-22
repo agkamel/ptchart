@@ -6,14 +6,32 @@
 <!-- badges: start -->
 <!-- badges: end -->
 
-The goal of ptchart is to …
+## Overview
+
+ptchart is an R package that helps behavior analysts to compute
+behavioral mesures and/or generate standardized charts based on the
+Standard Celeration Chart.
+
+There two main functions in ptchart:
+
+-   `ptstat()` for computing behavioral mesures
+-   `ptchart()` for generating a standardized chart
+
+Please note that this is a beta version.
 
 ## Installation
 
-You can install the development version of ptchart like so:
+Install the ptchart package via CRAN:
 
 ``` r
-# FILL THIS IN! HOW CAN PEOPLE INSTALL YOUR DEV PACKAGE?
+install.packages("ptchart")
+```
+
+Install the development version via GitHub:
+
+``` r
+# intstall.packages("devtools")
+devtools::install_github("agkamel/ptchart")
 ```
 
 ## Example
