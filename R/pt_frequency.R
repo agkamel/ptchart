@@ -7,6 +7,7 @@
 #' @return A numeric vector.
 #'
 #' @examples #pt_frequency()
+#' @import dplyr
 #' @export
 pt_frequency <- function(count, time, rule = log10(2)) {
   # Fonction pt_frequency
