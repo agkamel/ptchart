@@ -12,8 +12,8 @@
 #' @importFrom forcats as_factor
 #' @export
 #'
-#' @examples # format_data()
-format_data <- function(data, date, count, time, phase, date_zero) {
+#' @examples # pt_format_data()
+pt_format_data <- function(data, date, count, time, phase, date_zero) {
 
   # Data type checking
   stopifnot(
