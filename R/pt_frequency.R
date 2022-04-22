@@ -10,8 +10,6 @@
 #' @import dplyr
 #' @export
 pt_frequency <- function(count, time, rule = log10(2)) {
-  # Fonction pt_frequency
-  # Note: bloquer celui de stats::frequency si le nom n'est pas pt_frequency
   dplyr::case_when(
     count == 0 ~ .frequency_if_zero_count(time, rule = rule),
     TRUE       ~ count / time
