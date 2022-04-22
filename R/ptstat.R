@@ -14,7 +14,7 @@
 #' @export
 #'
 #' @examples #ptstat(date, date, count, time, date_zero, phase)
-#' @importFrom magrittr %>%
+#' @import dplyr
 ptstat <- function(data,
                    date,
                    count,
