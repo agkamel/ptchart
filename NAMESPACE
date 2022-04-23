@@ -2,7 +2,7 @@
 
 export(antilog)
 export(pt_format_data)
-export(pt_frequency)
+export(pt_freq)
 export(pt_time_floor)
 export(ptstat)
 import(dplyr)
