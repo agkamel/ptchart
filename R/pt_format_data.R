@@ -1,4 +1,4 @@
-#' Format data for futher analysis
+#' Format data for further analysis
 #'
 #' @param data A dataframe.
 #' @param date A date vector.
@@ -15,12 +15,33 @@
 #' @examples # pt_format_data()
 pt_format_data <- function(data, date, count, time, phase, date_zero) {
 
-  # Data type checking
+  # NOTE: To prevent message of "Undefined global functions or variables 'freq'"
+  freq <- NULL
+
+  # Check if input data are in the right format
   stopifnot(
-    class(data %>% dplyr::select({{ date }}) %>% dplyr::pull()) == "Date",
-    class(data %>% dplyr::select({{ count }}) %>% dplyr::pull()) == "numeric",
-    class(data %>% dplyr::select({{ time }}) %>% dplyr::pull()) == "numeric",
-    class({{ date_zero }}) == "Date"
+
+    # data
+    "data must be of class `data.frame`." = "data.frame" %in% class(data),
+
+    # date
+    "Argument `date` must be of class `Date`." = class(data %>% dplyr::select({{ date }}) %>% dplyr::pull()) == "Date",
+
+    # count
+    "Argument `count` must be numeric." = class(data %>% dplyr::select({{ count }}) %>% dplyr::pull()) == "numeric",
+    "Argument `count` must be greater of equal than 0." = data %>% dplyr::select({{ count }}) %>% dplyr::pull() >= 0,
+    "Argument `count` must be whole numbers." = data %>% dplyr::select({{ count }}) %>% dplyr::pull() %% 1 == 0,
+
+    # time
+    "Argument `time` must be numeric." = class(data %>% dplyr::select({{ time }}) %>% dplyr::pull()) == "numeric",
+    "Argument `time` must be greater of equal than 0." = data %>% dplyr::select({{ time }}) %>% dplyr::pull() >= 0,
+
+    # phase
+    # TODO
+
+    # date_zero
+    "Argument `date` must be of class `Date`." = class({{ date_zero }}) == "Date",
+    "Argument `date` must be of length 1." = length({{ date_zero }}) == 1
   )
 
   # Format data
@@ -31,8 +52,8 @@ pt_format_data <- function(data, date, count, time, phase, date_zero) {
       count = {{ count }},
       time = {{ time }},
       timefloor = pt_time_floor({{ time }}),
-      frequency = pt_frequency({{ count }}, {{ time }}),
-      log10freq = log10(frequency),
+      freq = pt_freq({{ count }}, {{ time }}),
+      log10freq = log10(freq),
       phase = forcats::as_factor({{ phase }})
     )
 
