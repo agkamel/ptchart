@@ -4,7 +4,7 @@
 \alias{pt_format_data}
 \title{Format data for further analysis}
 \usage{
-pt_format_data(data, date, count, time, phase, date_zero)
+pt_format_data(data, date, count, time, phase, date_zero = NULL)
 }
 \arguments{
 \item{data}{A dataframe.}

@@ -20,12 +20,11 @@ pt_stat <- function(data,
                    count,
                    time,
                    phase,
-                   date_zero#,
+                   date_zero = NULL#,
                    #log_freq = TRUE#,
 ) {
 
-  formated_data <- pt_format_data(
-    data = data,
+  formated_data <- data %>% pt_format_data(
     date = {{ date }},
     count = {{ count }},
     time = {{ time }},
