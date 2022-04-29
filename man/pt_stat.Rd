@@ -4,7 +4,7 @@
 \alias{pt_stat}
 \title{Calculate measures of behavioral change}
 \usage{
-pt_stat(data, date, count, time, phase = NULL, date_zero)
+pt_stat(data, date, count, time, phase, date_zero)
 }
 \arguments{
 \item{data}{A data.frame}
