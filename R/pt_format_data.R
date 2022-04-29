@@ -13,32 +13,42 @@
 #' @export
 #'
 #' @examples # pt_format_data()
-pt_format_data <- function(data, date, count, time, phase, date_zero) {
+pt_format_data <- function(data, date, count, time, phase, date_zero = NULL) {
 
   # NOTE: To prevent message of "Undefined global functions or variables 'freq'"
   freq <- NULL
 
   # Check if input data are in the right format
+
+  # data
+  stopifnot("data must be of class `data.frame`." = "data.frame" %in% class(data))
+
+  # date
+  stopifnot("Argument `date` must be of class `Date`." = class(
+    data %>% dplyr::select({{ date }}) %>% dplyr::pull()) == "Date")
+
+  # count
   stopifnot(
-
-    # data
-    "data must be of class `data.frame`." = "data.frame" %in% class(data),
-
-    # date
-    "Argument `date` must be of class `Date`." = class(data %>% dplyr::select({{ date }}) %>% dplyr::pull()) == "Date",
-
-    # count
     "Argument `count` must be numeric." = class(data %>% dplyr::select({{ count }}) %>% dplyr::pull()) == "numeric",
     "Argument `count` must be greater of equal than 0." = data %>% dplyr::select({{ count }}) %>% dplyr::pull() >= 0,
-    "Argument `count` must be whole numbers." = data %>% dplyr::select({{ count }}) %>% dplyr::pull() %% 1 == 0,
+    "Argument `count` must be whole numbers." = data %>% dplyr::select({{ count }}) %>% dplyr::pull() %% 1 == 0
+  )
 
+  # time
+  stopifnot(
     # time
     "Argument `time` must be numeric." = class(data %>% dplyr::select({{ time }}) %>% dplyr::pull()) == "numeric",
-    "Argument `time` must be greater than 0." = data %>% dplyr::select({{ time }}) %>% dplyr::pull() > 0,
+    "Argument `time` must be greater than 0." = data %>% dplyr::select({{ time }}) %>% dplyr::pull() > 0
+  )
 
-    # phase
-    # TODO
+  # phase
+  # TODO
 
+  # Check if date_zero is in the right format
+  if (is.null(date_zero) == TRUE) {
+    date_zero <- pt_find_last_sunday(data %>% dplyr::select({{ date }}) %>% dplyr::pull())
+  }
+  stopifnot(
     # date_zero
     "Argument `date_zero` must be of class `Date`." = class(date_zero) == "Date",
     "Argument `date_zero` must be of length 1." = length(date_zero) == 1,
