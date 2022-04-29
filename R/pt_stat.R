@@ -13,9 +13,9 @@
 #' @return A list
 #' @export
 #'
-#' @examples #ptstat(date, date, count, time, date_zero, phase)
+#' @examples #pt_stat(date, date, count, time, date_zero, phase)
 #' @import dplyr
-ptstat <- function(data,
+pt_stat <- function(data,
                    date,
                    count,
                    time,
@@ -145,8 +145,8 @@ ptstat <- function(data,
 
 
 # Test
-#ptstat(my_data_test3, my_date, my_response, my_time, "2021-07-18", log_freq = TRUE)
-#ptstat(my_data_test2, my_date, my_response, my_time, "2021-07-18", log_freq = TRUE)[[2]] %>% View(title = "b")
+#pt_stat(my_data_test3, my_date, my_response, my_time, "2021-07-18", log_freq = TRUE)
+#pt_stat(my_data_test2, my_date, my_response, my_time, "2021-07-18", log_freq = TRUE)[[2]] %>% View(title = "b")
 
 
 

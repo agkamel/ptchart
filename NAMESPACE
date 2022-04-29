@@ -3,7 +3,7 @@
 export(antilog)
 export(pt_format_data)
 export(pt_freq)
+export(pt_stat)
 export(pt_time_floor)
-export(ptstat)
 import(dplyr)
 importFrom(forcats,as_factor)
