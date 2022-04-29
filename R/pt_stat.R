@@ -19,7 +19,7 @@ pt_stat <- function(data,
                    date,
                    count,
                    time,
-                   phase = NULL,
+                   phase,
                    date_zero#,
                    #log_freq = TRUE#,
 ) {
