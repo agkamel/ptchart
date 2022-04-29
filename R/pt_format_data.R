@@ -41,7 +41,8 @@ pt_format_data <- function(data, date, count, time, phase, date_zero) {
 
     # date_zero
     "Argument `date_zero` must be of class `Date`." = class({{ date_zero }}) == "Date",
-    "Argument `date_zero` must be of length 1." = length({{ date_zero }}) == 1
+    "Argument `date_zero` must be of length 1." = length({{ date_zero }}) == 1,
+    "Argument `date_zero` must be a sunday." = pt_is_sunday({{ date_zero }}) == TRUE
   )
 
   # Format data
