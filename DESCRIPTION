@@ -12,7 +12,8 @@ LazyData: true
 RoxygenNote: 7.1.2
 Imports:
     dplyr,
-    forcats
+    forcats,
+    lubridate
 URL: https://github.com/agkamel/ptchart
 BugReports: https://github.com/agkamel/ptchart/issues
 Suggests: 
