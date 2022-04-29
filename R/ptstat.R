@@ -1,5 +1,5 @@
 # Fonction pour calculer la régression linéaire ####
-#' Calculate measures of behavioral changing
+#' Calculate measures of behavioral change
 #'
 #' This a description that will be added here.
 #'

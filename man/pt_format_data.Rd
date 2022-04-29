@@ -2,7 +2,7 @@
 % Please edit documentation in R/pt_format_data.R
 \name{pt_format_data}
 \alias{pt_format_data}
-\title{Format data for futher analysis}
+\title{Format data for further analysis}
 \usage{
 pt_format_data(data, date, count, time, phase, date_zero)
 }
@@ -23,7 +23,7 @@ pt_format_data(data, date, count, time, phase, date_zero)
 A dataframe
 }
 \description{
-Format data for futher analysis
+Format data for further analysis
 }
 \examples{
 # pt_format_data()

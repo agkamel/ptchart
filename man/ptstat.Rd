@@ -2,7 +2,7 @@
 % Please edit documentation in R/ptstat.R
 \name{ptstat}
 \alias{ptstat}
-\title{Calculate measures of behavioral changing}
+\title{Calculate measures of behavioral change}
 \usage{
 ptstat(data, date, count, time, date_zero, log_freq = TRUE)
 }
