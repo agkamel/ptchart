@@ -4,7 +4,7 @@
 \alias{pt_stat}
 \title{Calculate measures of behavioral change}
 \usage{
-pt_stat(data, date, count, time, date_zero, log_freq = TRUE)
+pt_stat(data, date, count, time, phase = NULL, date_zero)
 }
 \arguments{
 \item{data}{A data.frame}
@@ -15,9 +15,9 @@ pt_stat(data, date, count, time, date_zero, log_freq = TRUE)
 
 \item{time}{Time of observations}
 
-\item{date_zero}{Date of the first sunday}
+\item{phase}{Phase of observations}
 
-\item{log_freq}{Logical. Are frequencies logged on base 10 ?}
+\item{date_zero}{Date of the first sunday}
 }
 \value{
 A list
