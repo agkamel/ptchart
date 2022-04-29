@@ -3,12 +3,12 @@
 #'
 #' This a description that will be added here.
 #'
-#' @param data A data.frame
-#' @param date Date of observations
-#' @param count Count of observations
-#' @param time Time of observations
-#' @param phase Phase of observations
-#' @param date_zero Date of the first sunday
+#' @param data A data.frame.
+#' @param date Date of observations.
+#' @param count Count of observations.
+#' @param time Time of observations. If not provided, a 1-minute timing is used for all observations.
+#' @param phase Phase of observations.
+#' @param date_zero Date of the first sunday. If not provided, the closest sunday before the first date is used.
 #'
 #' @return A list
 #' @export

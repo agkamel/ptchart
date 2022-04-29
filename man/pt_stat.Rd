@@ -7,17 +7,17 @@
 pt_stat(data, date, count, time, phase, date_zero = NULL)
 }
 \arguments{
-\item{data}{A data.frame}
+\item{data}{A data.frame.}
 
-\item{date}{Date of observations}
+\item{date}{Date of observations.}
 
-\item{count}{Count of observations}
+\item{count}{Count of observations.}
 
-\item{time}{Time of observations}
+\item{time}{Time of observations. If not provided, a 1-minute timing is used for all observations.}
 
-\item{phase}{Phase of observations}
+\item{phase}{Phase of observations.}
 
-\item{date_zero}{Date of the first sunday}
+\item{date_zero}{Date of the first sunday. If not provided, the closest sunday before the first date is used.}
 }
 \value{
 A list
