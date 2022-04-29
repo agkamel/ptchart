@@ -34,7 +34,7 @@ pt_format_data <- function(data, date, count, time, phase, date_zero) {
 
     # time
     "Argument `time` must be numeric." = class(data %>% dplyr::select({{ time }}) %>% dplyr::pull()) == "numeric",
-    "Argument `time` must be greater of equal than 0." = data %>% dplyr::select({{ time }}) %>% dplyr::pull() >= 0,
+    "Argument `time` must be greater than 0." = data %>% dplyr::select({{ time }}) %>% dplyr::pull() > 0,
 
     # phase
     # TODO

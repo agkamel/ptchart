@@ -157,7 +157,7 @@ test_that("input data type are in the right format", {
   my_date_zero <- as.Date("2022-09-18")
   my_data <- data.frame(my_date = as.Date("2022-09-23"),
                         my_count = 2,
-                        my_time = -1, # error
+                        my_time = 0, # error
                         my_phase = factor("a")
   )
   expect_error(pt_format_data(data = my_data,
