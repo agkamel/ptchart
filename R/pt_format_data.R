@@ -13,7 +13,7 @@
 #' @export
 #'
 #' @examples # pt_format_data()
-pt_format_data <- function(data, date, count, time, phase, date_zero = NULL) {
+pt_format_data <- function(data, date, count, time, phase, date_zero) {
 
   # NOTE: To prevent message of "Undefined global functions or variables 'freq'"
   freq <- NULL
