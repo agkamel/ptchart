@@ -26,10 +26,10 @@ pt_stat <- function(data,
 
   formated_data <- pt_format_data(
     data = data,
-    date = date,
-    count = count,
-    time = time,
-    phase = phase,
+    date = {{ date }},
+    count = {{ count }},
+    time = {{ time }},
+    phase = {{ phase }},
     date_zero = date_zero
   )
 
