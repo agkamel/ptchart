@@ -18,18 +18,21 @@
 pt_stat <- function(data,
                    date,
                    count,
-                   time = NULL,
+                   time,
                    phase,
                    date_zero = NULL#,
                    #log_freq = TRUE#,
 ) {
 
-  time <- rlang::enquo(time)
-  if (rlang::quo_is_null(time)) {
-    time <- 1
-  } else if (rlang::quo_is_symbol(time)) {
-    time <- rlang::get_expr(time)
-  }
+  #timing <- rlang::enquo(timing)
+  #print(timing)
+  #if (rlang::quo_is_null(timing)) {
+  #  timing <- 1
+  #} else if (rlang::quo_is_symbol(timing)) {
+  #  timing <- rlang::get_expr(timing)
+  #}
+
+  #print(timing)
 
   formated_data <- data %>% pt_format_data(
     date = {{ date }},
@@ -38,8 +41,6 @@ pt_stat <- function(data,
     phase = {{ phase }},
     date_zero = date_zero
   )
-
-  return(formated_data)
 
 }
 
