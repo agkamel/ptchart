@@ -32,6 +32,12 @@ pt_stat <- function(data,
     date_zero = date_zero
   )
 
+  described_data <- formated_data %>% pt_describe_data(
+    day = {{ day }},
+    log10freq = {{ log10freq }}
+  )
+
+  return(list(formated_data, described_data))
 
 
 }
