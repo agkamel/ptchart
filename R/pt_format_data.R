@@ -66,7 +66,8 @@ pt_format_data <- function(data, date, count, time, phase, date_zero) {
       freq = pt_freq({{ count }}, {{ time }}),
       log10freq = log10(freq),
       phase = forcats::as_factor({{ phase }})
-    )
+    ) %>%
+    group_by({{ phase }})
 
   # Ordering by date
   data <- data %>% dplyr::arrange(date)
