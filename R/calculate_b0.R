@@ -6,6 +6,6 @@ calculate_b0 <- function(day, log10_freq, antilog = FALSE) {
   if (antilog == FALSE) {
     mean_log10_freq - (b1 * mean_day)
   } else {
-    antilog10(mean_log10_freq - (b1 * mean_day))
+    antilog(mean_log10_freq - (b1 * mean_day))
   }
 }

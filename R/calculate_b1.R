@@ -10,7 +10,7 @@ calculate_b1 <- function(day, log10_freq, antilog = FALSE) {
   if (antilog == FALSE) {
     sum(day_deviation_from_mean * log10_freq_deviation_from_mean) / sum(day_deviation_from_mean_squared)
   } else {
-    antilog10(sum(day_deviation_from_mean * log10_freq_deviation_from_mean) / sum(day_deviation_from_mean_squared))
+    antilog(sum(day_deviation_from_mean * log10_freq_deviation_from_mean) / sum(day_deviation_from_mean_squared))
   }
 
 

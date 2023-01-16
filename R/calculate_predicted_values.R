@@ -5,6 +5,6 @@ calculate_predicted_values <- function(day, log10_freq, antilog = FALSE){
   if (antilog == FALSE) {
     b0 + b1 * day
   } else {
-    antilog10(b0 + b1 * day)
+    antilog(b0 + b1 * day)
   }
 }

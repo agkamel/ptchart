@@ -4,7 +4,7 @@ calculate_errors <- function(day, log10_freq, antilog = FALSE, squared = FALSE){
   if (antilog == FALSE){
     errors <- log10_freq - predicted_values
   } else {
-    errors <- antilog10(log10_freq - predicted_values)
+    errors <- antilog(log10_freq - predicted_values)
   }
 
   if (squared == FALSE){
