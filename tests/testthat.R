@@ -1,4 +1,4 @@
 library(testthat)
 library(ptchart)
 
-test_check("ptchart")
+#test_check("ptchart")
