@@ -1,19 +1,15 @@
-new_ptstat <- function(x = list()) {
-  stopifnot(is.list(x))
-  structure(x,
-            class = "ptstat"
-  )
-}
-
-
-# Validateur S3 validate_ptstat() -----------------------------------------
-validate_ptstat <- function(x) {
-  values <- unclass(x)
-  x
-}
-
-
-# Helper S3 ptstat() ------------------------------------------------------
+#' ptstat
+#'
+#' @param data
+#' @param day
+#' @param freq
+#' @param phase
+#'
+#' @return
+#' @export
+#'
+#' @examples
+#' # NOT RUN
 ptstat <- function(data, day, freq, phase) {
 
   splitted_data <- split(data, data[[phase]])
@@ -72,9 +68,23 @@ ptstat <- function(data, day, freq, phase) {
   validate_ptstat(new_ptstat(ptstat_list))
 }
 
+# Constructeur S3
+new_ptstat <- function(x = list()) {
+  stopifnot(is.list(x))
+  structure(x,
+            class = "ptstat"
+  )
+}
 
 
-# Method print.ptstat() ---------------------------------------------------
+# Validateur S3
+validate_ptstat <- function(x) {
+  values <- unclass(x)
+  x
+}
+
+
+# Method print.ptstat()
 print.ptstat <- function(x) {
   cat("", sep = "\n")
   cat("PT Values", sep = "\n")
