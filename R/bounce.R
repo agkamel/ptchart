@@ -9,3 +9,4 @@ bounce_up <- function(day, log10_freq, raw = TRUE) {
   }
 
 }
+
