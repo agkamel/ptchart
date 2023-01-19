@@ -7,7 +7,7 @@
 \usage{
 ptstat(data, day, freq, phase)
 
-\method{print}{ptstat}(x)
+\method{print}{ptstat}(x, ...)
 }
 \arguments{
 \item{data}{A Dataframe.}
@@ -19,6 +19,8 @@ ptstat(data, day, freq, phase)
 \item{phase}{Charactor or factor.}
 
 \item{x}{An S3 object of class ptstat.}
+
+\item{...}{Additional arguments.}
 }
 \value{
 An object of class S3 which is a list.

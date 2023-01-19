@@ -5,6 +5,7 @@
 #' @param freq Double.
 #' @param phase Charactor or factor.
 #' @param x An S3 object of class ptstat.
+#' @param ... Additional arguments.
 #'
 #' @return An object of class S3 which is a list.
 #' @export
@@ -138,14 +139,14 @@ validate_ptstat <- function(x) { # Validateur S3
   x
 }
 
-
+#' @export
 #' @describeIn ptstat Print method for ptstat
-print.ptstat <- function(x) { # Method print.ptstat()
+print.ptstat <- function(x, ...) { # Method print.ptstat()
   cat("", sep = "\n")
   cat("PT Values", sep = "\n")
-  print(x$ptmainvalues)
+  print(x$ptmainvalues, ...)
   cat("", sep = "\n")
   cat("PT Tables", sep = "\n")
-  print(x$pttables)
+  print(x$pttables, ...)
   return(invisible(x))
 }
