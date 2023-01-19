@@ -4,6 +4,7 @@
 #' @param day Integer.
 #' @param freq Double.
 #' @param phase Charactor or factor.
+#' @param x An S3 object of class ptstat.
 #'
 #' @return An object of class S3 which is a list.
 #' @export

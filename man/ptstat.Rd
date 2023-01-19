@@ -17,6 +17,8 @@ ptstat(data, day, freq, phase)
 \item{freq}{Double.}
 
 \item{phase}{Charactor or factor.}
+
+\item{x}{An S3 object of class ptstat.}
 }
 \value{
 An object of class S3 which is a list.
