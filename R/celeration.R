@@ -18,15 +18,9 @@ celeration <- function(day, log10_freq, raw = TRUE) {
   c_raw <- antilog(b1)^7
   c_val <- convert_value(c_raw)
 
-  if (c_raw == c_val) {
-    direction <- paste0("\327", round(c_val, 2))
-  } else {
-    direction <- paste0("\367", round(c_val, 2))
-  }
-
   if (raw == TRUE) {
     return(c_raw)
   } else {
-    return(direction)
+    return(c_val)
   }
 }
