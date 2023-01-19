@@ -1,11 +1,11 @@
 #' ptstat
 #'
-#' @param data
-#' @param day
-#' @param freq
-#' @param phase
+#' @param data A Dataframe.
+#' @param day Integer.
+#' @param freq Double.
+#' @param phase Charactor or factor.
 #'
-#' @return
+#' @return An object of class S3 which is a list.
 #' @export
 #'
 #' @examples
@@ -68,24 +68,21 @@ ptstat <- function(data, day, freq, phase) {
   validate_ptstat(new_ptstat(ptstat_list))
 }
 
-# Constructeur S3
-new_ptstat <- function(x = list()) {
+new_ptstat <- function(x = list()) { # Constructeur S3
   stopifnot(is.list(x))
   structure(x,
             class = "ptstat"
   )
 }
 
-
-# Validateur S3
-validate_ptstat <- function(x) {
+validate_ptstat <- function(x) { # Validateur S3
   values <- unclass(x)
   x
 }
 
 
-# Method print.ptstat()
-print.ptstat <- function(x) {
+#' @describeIn ptstat Print method for ptstat
+print.ptstat <- function(x) { # Method print.ptstat()
   cat("", sep = "\n")
   cat("PT Values", sep = "\n")
   print(x$ptvalues)
