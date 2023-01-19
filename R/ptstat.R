@@ -62,9 +62,62 @@ ptstat <- function(data, day, freq, phase) {
 
   }
 
+  # Calculate jumps
+  jump_phase_names <- vector(mode = "character", length = length(unique_phase) - 1)
+  jump_raw <- vector(mode = "double", length = length(unique_phase) - 1)
+  jump_values <- vector(mode = "double", length = length(unique_phase) - 1)
 
+  for (i in seq_along(length(unique_phase) - 1)) {
+    a <- pttables[[i]]
+    b <- pttables[[i+1]]
+    jump_raw[i] <- antilog(b$pred[1] - a$pred[length(a$pred)])
+    jump_values[i] <- convert_value(antilog(b$pred[1] - a$pred[length(a$pred)]))
+
+    a_name <- names(pttables[i])
+    b_name <- names(pttables[i+1])
+    jump_phase_names[i] <- paste0(a_name, "_to_", b_name)
+  }
+
+  ptjumpvalues <- tibble::tibble(change = jump_phase_names,
+                                 j_raw = jump_raw,
+                                 j = jump_values)
+
+
+
+
+
+  # Calculate turn
+  turn_phase_names <- vector(mode = "character", length = length(unique_phase) - 1)
+  turn_raw <- vector(mode = "double", length = length(unique_phase) - 1)
+  turn_values <- vector(mode = "double", length = length(unique_phase) - 1)
+
+  for (i in seq_along(length(unique_phase) - 1)) {
+    a <- ptvalues[[i]]
+    b <- ptvalues[[i+1]]
+    turn_raw[i] <- antilog((b$b1 * 7) - (a$b1 * 7))
+    turn_values[i] <- convert_value(antilog((b$b1 * 7) - (a$b1 * 7)))
+
+    a_name <- names(ptvalues[i])
+    b_name <- names(ptvalues[i+1])
+    turn_phase_names[i] <- paste0(a_name, "_to_", b_name)
+  }
+
+  ptturnvalues <- tibble::tibble(change = turn_phase_names,
+                                 t_raw = turn_raw,
+                                 t = turn_values)
+
+
+
+
+
+
+
+
+  # Return list
   ptstat_list <- list(pttables = pttables,
-                      ptvalues = ptvalues)
+                      ptvalues = ptvalues,
+                      ptjumpvalues = ptjumpvalues,
+                      ptturnvalues = ptturnvalues)
 
   validate_ptstat(new_ptstat(ptstat_list))
 }
