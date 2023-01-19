@@ -3,4 +3,5 @@
 export(antilog)
 export(bounce)
 export(celeration)
+export(is_ptstat)
 export(ptstat)
