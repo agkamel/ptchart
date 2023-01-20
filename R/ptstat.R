@@ -72,11 +72,20 @@ ptstat <- function(data, day, freq, phase, date = NULL, date_zero = NULL, count 
   cel_raw <- vector(mode = "double", length = phase_n)
   cel_values <- vector(mode = "double", length = phase_n)
 
+  cel_raw_err <- vector(mode = "double", length = phase_n)
+  cel_values_err <- vector(mode = "double", length = phase_n)
+
   bounce_up_raw <- vector(mode = "double", length = phase_n)
   bounce_up_values <- vector(mode = "double", length = phase_n)
   bounce_down_raw <- vector(mode = "double", length = phase_n)
   bounce_down_values <- vector(mode = "double", length = phase_n)
   bounce_total_values <- vector(mode = "double", length = phase_n)
+
+  bounce_up_raw_err <- vector(mode = "double", length = phase_n)
+  bounce_up_values_err <- vector(mode = "double", length = phase_n)
+  bounce_down_raw_err <- vector(mode = "double", length = phase_n)
+  bounce_down_values_err <- vector(mode = "double", length = phase_n)
+  bounce_total_values_err <- vector(mode = "double", length = phase_n)
 
   # Calculate main values
   for (i in seq_along(splitted_data)) {
@@ -118,12 +127,21 @@ ptstat <- function(data, day, freq, phase, date = NULL, date_zero = NULL, count 
     cel_raw[i] <- calculate_celeration(iday, ilog10_freq)
     cel_values[i] <- calculate_celeration(iday, ilog10_freq, raw = FALSE)
 
+    cel_raw_err[i] <- calculate_celeration(iday, ilog10_freq_err)
+    cel_values_err[i] <- calculate_celeration(iday, ilog10_freq_err, raw = FALSE)
+
     # b_table
     bounce_up_raw[i] <- calculate_bounce_up(iday, ilog10_freq)
     bounce_up_values[i] <- calculate_bounce_up(iday, ilog10_freq, raw = FALSE)
     bounce_down_raw[i] <- calculate_bounce_down(iday, ilog10_freq)
     bounce_down_values[i] <- calculate_bounce_down(iday, ilog10_freq, raw = FALSE)
     bounce_total_values[i] <- calculate_bounce_total(iday, ilog10_freq)
+
+    bounce_up_raw_err[i] <- calculate_bounce_up(iday, ilog10_freq_err)
+    bounce_up_values_err[i] <- calculate_bounce_up(iday, ilog10_freq_err, raw = FALSE)
+    bounce_down_raw_err[i] <- calculate_bounce_down(iday, ilog10_freq_err)
+    bounce_down_values_err[i] <- calculate_bounce_down(iday, ilog10_freq_err, raw = FALSE)
+    bounce_total_values_err[i] <- calculate_bounce_total(iday, ilog10_freq_err)
 
 
     pttables[[i]] <- tibble::tibble(day = iday,
@@ -156,14 +174,22 @@ ptstat <- function(data, day, freq, phase, date = NULL, date_zero = NULL, count 
 
   c_table <- tibble::tibble(phase = unique_phase,
                             c_raw = cel_raw,
-                            c = cel_values)
+                            c = cel_values,
+                            c_raw_err = cel_raw_err,
+                            c_err = cel_values_err)
 
   b_table <- tibble::tibble(phase = unique_phase,
                             b_up_raw = bounce_up_raw,
                             b_up = bounce_up_values,
                             b_down_raw = bounce_down_raw,
                             b_down = bounce_down_values,
-                            b_total = bounce_total_values)
+                            b_total = bounce_total_values,
+
+                            b_up_raw_err = bounce_up_raw_err,
+                            b_up_err = bounce_up_values_err,
+                            b_down_raw_err = bounce_down_raw_err,
+                            b_down_err = bounce_down_values_err,
+                            b_total_err = bounce_total_values_err)
 
 
 
