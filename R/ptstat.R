@@ -22,9 +22,6 @@ ptstat <- function(data, day, freq, phase) {
   pttables <- vector(mode = "list", length = length(unique_phase))
   names(pttables) <- unique_phase
 
-  ptmainvalues <- vector(mode = "list", length = length(unique_phase))
-  names(ptmainvalues) <- unique_phase
-
   day_mean_values <- vector(mode = "double", length = phase_n)
   log10_freq_mean_values <- vector(mode = "double", length = phase_n)
   n_values <- vector(mode = "integer", length = phase_n)
@@ -92,18 +89,6 @@ ptstat <- function(data, day, freq, phase) {
                                     phase = iphase,
                                     pred = predicted_values,
                                     errors = errors)
-
-    ptmainvalues[[i]] <- tibble::tibble(b0 = b0,
-                                    b1 = b1,
-                                    day_mean = day_mean,
-                                    log10_freq_mean = log10_freq_mean,
-                                    c_raw = c_raw,
-                                    c = c,
-                                    b_up_raw = b_up_raw,
-                                    b_up = b_up,
-                                    b_down_raw = b_down_raw,
-                                    b_down = b_down,
-                                    b_total = b_total)
   }
 
   desc_table <- tibble::tibble(phase = unique_phase,
@@ -141,8 +126,6 @@ ptstat <- function(data, day, freq, phase) {
     jump_raw[i] <- antilog(b$pred[1] - a$pred[length(a$pred)])
     jump_values[i] <- convert_value(antilog(b$pred[1] - a$pred[length(a$pred)]))
 
-    a_name <- names(pttables[i])
-    b_name <- names(pttables[i+1])
     jump_phase_from[i] <- unique_phase[i]
     jump_phase_to[i] <- unique_phase[i+1]
   }
@@ -163,13 +146,11 @@ ptstat <- function(data, day, freq, phase) {
   turn_phase_to <- vector(mode = "character", length = phase_n - 1)
 
   for (i in seq_along(phase_n - 1)) {
-    a <- ptmainvalues[[i]]
-    b <- ptmainvalues[[i+1]]
-    turn_raw[i] <- antilog((b$b1 * 7) - (a$b1 * 7))
-    turn_values[i] <- convert_value(antilog((b$b1 * 7) - (a$b1 * 7)))
+    a_b1 <- b1_values[i]
+    b_b1 <- b1_values[i+1]
+    turn_raw[i] <- antilog((b_b1 * 7) - (a_b1 * 7))
+    turn_values[i] <- convert_value(antilog((b_b1 * 7) - (a_b1 * 7)))
 
-    a_name <- names(ptmainvalues[i])
-    b_name <- names(ptmainvalues[i+1])
     turn_phase_from[i] <- unique_phase[i]
     turn_phase_to[i] <- unique_phase[i+1]
   }
@@ -188,7 +169,6 @@ ptstat <- function(data, day, freq, phase) {
 
   # Return list
   ptstat_list <- list(pttables = pttables,
-                      ptmainvalues = ptmainvalues,
                       desc = desc_table,
                       terms = terms_table,
                       c_table = c_table,
@@ -214,9 +194,6 @@ validate_ptstat <- function(x) { # Validateur S3
 #' @export
 #' @describeIn ptstat Print method for ptstat
 print.ptstat <- function(x, ...) { # Method print.ptstat()
-  cat("", sep = "\n")
-  cat("PT Values", sep = "\n")
-  print(x$ptmainvalues, ...)
   cat("", sep = "\n")
   cat("PT Tables", sep = "\n")
   print(x$pttables, ...)
