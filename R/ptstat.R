@@ -39,48 +39,36 @@ ptstat <- function(data, day, freq, phase) {
   bounce_total_values <- vector(mode = "double", length = phase_n)
 
   for (i in seq_along(splitted_data)) {
+
+    # variable by phase
     iday <- splitted_data[[i]][[day]]
     ilog10_freq <- log10(splitted_data[[i]][[freq]])
     ifreq <- splitted_data[[i]][[freq]]
     iphase <- splitted_data[[i]][[phase]]
 
-    b1 <- calculate_b1(iday, ilog10_freq)
-    b0 <- calculate_b0(iday, ilog10_freq)
-    n <- nrow(splitted_data[[i]])
-
-    day_mean <- mean(iday, na.rm = TRUE)
-    log10_freq_mean <- mean(ilog10_freq, na.rm = TRUE)
-
+    # pttables
     predicted_values <- calculate_predicted_values(iday, ilog10_freq)
     errors <- calculate_errors(iday, ilog10_freq)
 
-    c <- celeration(iday, ilog10_freq, raw = FALSE)
-    c_raw <- celeration(iday, ilog10_freq)
-    b_up <- bounce_up(iday, ilog10_freq, raw = FALSE)
-    b_up_raw <- bounce_up(iday, ilog10_freq)
-    b_down <- bounce_down(iday, ilog10_freq, raw = FALSE)
-    b_down_raw <- bounce_down(iday, ilog10_freq)
-    b_total <- bounce_total(iday, ilog10_freq)
-
     # desc_table
-    n_values[i] <- n
-    day_mean_values[i] <- day_mean
-    log10_freq_mean_values[i] <- log10_freq_mean
+    n_values[i] <- nrow(splitted_data[[i]])
+    day_mean_values[i] <- mean(iday)
+    log10_freq_mean_values[i] <- mean(ilog10_freq)
 
     # terms_table
-    b1_values[i] <- b1
-    b0_values[i] <- b0
+    b1_values[i] <- calculate_b1(iday, ilog10_freq)
+    b0_values[i] <- calculate_b0(iday, ilog10_freq)
 
     # c_table
-    cel_raw[i] <- c
-    cel_values[i] <- c_raw
+    cel_raw[i] <- celeration(iday, ilog10_freq)
+    cel_values[i] <- celeration(iday, ilog10_freq, raw = FALSE)
 
     # b_table
-    bounce_up_raw[i] <- b_up_raw
-    bounce_up_values[i] <- b_up
-    bounce_down_raw[i] <- b_down_raw
-    bounce_down_values[i] <- b_down
-    bounce_total_values[i] <- b_total
+    bounce_up_raw[i] <- bounce_up(iday, ilog10_freq)
+    bounce_up_values[i] <- bounce_up(iday, ilog10_freq, raw = FALSE)
+    bounce_down_raw[i] <- bounce_down(iday, ilog10_freq)
+    bounce_down_values[i] <- bounce_down(iday, ilog10_freq, raw = FALSE)
+    bounce_total_values[i] <- bounce_total(iday, ilog10_freq)
 
 
     pttables[[i]] <- tibble::tibble(day = iday,
