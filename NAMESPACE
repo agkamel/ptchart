@@ -2,7 +2,7 @@
 
 S3method(print,ptstat)
 export(antilog)
-export(bounce)
+export(calculate_bounce)
 export(calculate_celeration)
 export(is_ptstat)
 export(ptstat)

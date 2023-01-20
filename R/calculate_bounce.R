@@ -18,7 +18,7 @@
 #' @examples
 #' # TODO
 #' @describeIn bounce General bounce function
-bounce <- function(day, log10_freq, type, raw = TRUE) {
+calculate_bounce <- function(day, log10_freq, type, raw = TRUE) {
   errors <- calculate_errors(day, log10_freq)
 
   type <- match.arg(type, choices = c("up", "down"))
@@ -35,18 +35,18 @@ bounce <- function(day, log10_freq, type, raw = TRUE) {
 }
 
 #' @describeIn bounce Bounce up
-bounce_up <- function(day, log10_freq, raw = TRUE) {
-  bounce(day = day, log10_freq = log10_freq, type = "up", raw = raw)
+calculate_bounce_up <- function(day, log10_freq, raw = TRUE) {
+  calculate_bounce(day = day, log10_freq = log10_freq, type = "up", raw = raw)
 }
 
 #' @describeIn bounce Bounce down
-bounce_down <- function(day, log10_freq, raw = TRUE) {
-  bounce(day = day, log10_freq = log10_freq, type = "down", raw = raw)
+calculate_bounce_down <- function(day, log10_freq, raw = TRUE) {
+  calculate_bounce(day = day, log10_freq = log10_freq, type = "down", raw = raw)
 }
 
 #' @describeIn bounce Bounce total
-bounce_total <- function(day, log10_freq) {
-  bounce_up <- bounce_up(day, log10_freq, raw = FALSE)
-  bounce_down <- bounce_down(day, log10_freq, raw = FALSE)
+calculate_bounce_total <- function(day, log10_freq) {
+  bounce_up <- calculate_bounce_up(day, log10_freq, raw = FALSE)
+  bounce_down <- calculate_bounce_down(day, log10_freq, raw = FALSE)
   bounce_up * bounce_down
 }

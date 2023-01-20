@@ -107,11 +107,11 @@ ptstat <- function(data, day, freq, phase, date = NULL, date_zero = NULL, count 
     cel_values[i] <- calculate_celeration(iday, ilog10_freq, raw = FALSE)
 
     # b_table
-    bounce_up_raw[i] <- bounce_up(iday, ilog10_freq)
-    bounce_up_values[i] <- bounce_up(iday, ilog10_freq, raw = FALSE)
-    bounce_down_raw[i] <- bounce_down(iday, ilog10_freq)
-    bounce_down_values[i] <- bounce_down(iday, ilog10_freq, raw = FALSE)
-    bounce_total_values[i] <- bounce_total(iday, ilog10_freq)
+    bounce_up_raw[i] <- calculate_bounce_up(iday, ilog10_freq)
+    bounce_up_values[i] <- calculate_bounce_up(iday, ilog10_freq, raw = FALSE)
+    bounce_down_raw[i] <- calculate_bounce_down(iday, ilog10_freq)
+    bounce_down_values[i] <- calculate_bounce_down(iday, ilog10_freq, raw = FALSE)
+    bounce_total_values[i] <- calculate_bounce_total(iday, ilog10_freq)
 
 
     pttables[[i]] <- tibble::tibble(day = iday,
