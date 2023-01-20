@@ -27,6 +27,7 @@ ptstat <- function(data, day, freq, phase) {
 
   day_mean_values <- vector(mode = "double", length = phase_n)
   log10_freq_mean_values <- vector(mode = "double", length = phase_n)
+  n_values <- vector(mode = "integer", length = phase_n)
 
   b1_values <- vector(mode = "double", length = phase_n)
   b0_values <- vector(mode = "double", length = phase_n)
@@ -48,6 +49,8 @@ ptstat <- function(data, day, freq, phase) {
 
     b1 <- calculate_b1(iday, ilog10_freq)
     b0 <- calculate_b0(iday, ilog10_freq)
+    n <- nrow(splitted_data[[i]])
+
     day_mean <- mean(iday, na.rm = TRUE)
     log10_freq_mean <- mean(ilog10_freq, na.rm = TRUE)
 
@@ -63,6 +66,7 @@ ptstat <- function(data, day, freq, phase) {
     b_total <- bounce_total(iday, ilog10_freq)
 
     # desc_table
+    n_values[i] <- n
     day_mean_values[i] <- day_mean
     log10_freq_mean_values[i] <- log10_freq_mean
 
@@ -103,6 +107,7 @@ ptstat <- function(data, day, freq, phase) {
   }
 
   desc_table <- tibble::tibble(phase = unique_phase,
+                               n = n_values,
                                day_mean = day_mean_values,
                                log10_freq_mean = log10_freq_mean_values)
 
