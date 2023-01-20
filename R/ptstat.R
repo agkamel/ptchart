@@ -15,14 +15,18 @@
 ptstat <- function(data, day, freq, phase) {
 
   splitted_data <- split(data, data[[phase]])
-
   unique_phase <- unique(data[[phase]])
+  phase_n <- length(unique_phase)
+
 
   pttables <- vector(mode = "list", length = length(unique_phase))
   names(pttables) <- unique_phase
 
   ptmainvalues <- vector(mode = "list", length = length(unique_phase))
   names(ptmainvalues) <- unique_phase
+
+  cel_raw <- vector(mode = "double", length = phase_n)
+  cel_values <- vector(mode = "double", length = phase_n)
 
   for (i in seq_along(splitted_data)) {
     iday <- splitted_data[[i]][[day]]
@@ -46,6 +50,9 @@ ptstat <- function(data, day, freq, phase) {
     b_down_raw <- bounce_down(iday, ilog10_freq)
     b_total <- bounce_total(iday, ilog10_freq)
 
+    cel_raw[i] <- c
+    cel_values[i] <- c_raw
+
 
     pttables[[i]] <- tibble::tibble(day = iday,
                                     freq = ifreq,
@@ -67,10 +74,18 @@ ptstat <- function(data, day, freq, phase) {
                                     b_total = b_total)
   }
 
+  c_table <- tibble::tibble(phase = unique_phase,
+                            c_raw = cel_raw,
+                            c = cel_values)
+
+
+
+
   # Calculate jumps
-  jump_phase_names <- vector(mode = "character", length = length(unique_phase) - 1)
   jump_raw <- vector(mode = "double", length = length(unique_phase) - 1)
   jump_values <- vector(mode = "double", length = length(unique_phase) - 1)
+  jump_phase_from <- vector(mode = "character", length = length(unique_phase) - 1)
+  jump_phase_to <- vector(mode = "character", length = length(unique_phase) - 1)
 
   for (i in seq_along(length(unique_phase) - 1)) {
     a <- pttables[[i]]
@@ -80,12 +95,14 @@ ptstat <- function(data, day, freq, phase) {
 
     a_name <- names(pttables[i])
     b_name <- names(pttables[i+1])
-    jump_phase_names[i] <- paste0(a_name, "_to_", b_name)
+    jump_phase_from[i] <- unique_phase[i]
+    jump_phase_to[i] <- unique_phase[i+1]
   }
 
-  ptjumpvalues <- tibble::tibble(change = jump_phase_names,
-                                 j_raw = jump_raw,
-                                 j = jump_values)
+  j_table <- tibble::tibble(from = jump_phase_from,
+                            to = jump_phase_to,
+                            j_raw = jump_raw,
+                            j = jump_values)
 
 
 
@@ -107,7 +124,7 @@ ptstat <- function(data, day, freq, phase) {
     turn_phase_names[i] <- paste0(a_name, "_to_", b_name)
   }
 
-  ptturnvalues <- tibble::tibble(change = turn_phase_names,
+  t_table <- tibble::tibble(change = turn_phase_names,
                                  t_raw = turn_raw,
                                  t = turn_values)
 
@@ -121,8 +138,9 @@ ptstat <- function(data, day, freq, phase) {
   # Return list
   ptstat_list <- list(pttables = pttables,
                       ptmainvalues = ptmainvalues,
-                      ptjumpvalues = ptjumpvalues,
-                      ptturnvalues = ptturnvalues)
+                      c_table = c_table,
+                      j_table = j_table,
+                      t_table = t_table)
 
   validate_ptstat(new_ptstat(ptstat_list))
 }
