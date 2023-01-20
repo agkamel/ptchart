@@ -9,13 +9,13 @@ ptstat(
   data,
   day,
   freq,
-  freq_err,
   phase,
-  date,
-  date_zero,
-  count,
-  count_err,
-  time
+  date = NULL,
+  date_zero = NULL,
+  count = NULL,
+  time = NULL,
+  count_err = NULL,
+  freq_err = NULL
 )
 
 \method{print}{ptstat}(x, ...)
@@ -27,8 +27,6 @@ ptstat(
 
 \item{freq}{Double.}
 
-\item{freq_err}{Double.}
-
 \item{phase}{Charactor or factor.}
 
 \item{date}{Date.}
@@ -37,9 +35,11 @@ ptstat(
 
 \item{count}{Integer.}
 
+\item{time}{Double. Number of minutes.}
+
 \item{count_err}{Integer.}
 
-\item{time}{Double. Number of minutes.}
+\item{freq_err}{Double.}
 
 \item{x}{An S3 object of class ptstat.}
 

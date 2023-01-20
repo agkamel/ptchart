@@ -18,14 +18,14 @@
 #'
 #' @examples
 #' # NOT RUN
-ptstat <- function(data, day, freq, freq_err, phase, date, date_zero, count, count_err, time) {
+ptstat <- function(data, day, freq, phase, date = NULL, date_zero = NULL, count = NULL, time = NULL, count_err = NULL, freq_err = NULL) {
 
   # Conditions for supplying day, date and date_zero
   if (missing(day)) {
-    if (!missing(date) & !missing(date_zero)){
+    if (!is.null(date) & !is.null(date_zero)){
       data[["day"]] <- calculate_day(data[[date]], date_zero)
       day <- "day"
-    } else if (!missing(date) & missing(date_zero)) {
+    } else if (!is.null(date) & is.null(date_zero)) {
       date_zero <- first_sunday(data[[date]])
       data[["day"]] <- calculate_day(data[[date]], date_zero)
       day <- "day"
@@ -34,7 +34,7 @@ ptstat <- function(data, day, freq, freq_err, phase, date, date_zero, count, cou
 
   # Conditions for supplying freq, count and time
   if (missing(freq)) {
-    if (!missing(count) & !missing(time)) {
+    if (!is.null(count) & !is.null(time)) {
       data[["freq"]] <- calculate_freq(data[[count]], data[[time]])
       freq <- "freq"
     }
@@ -42,7 +42,7 @@ ptstat <- function(data, day, freq, freq_err, phase, date, date_zero, count, cou
 
   # Conditions for supplying freq_err, count_err and time
   if (missing(freq_err)) {
-    if (!missing(count_err) & !missing(time)) {
+    if (!is.null(count_err) & !is.null(time)) {
       data[["freq_err"]] <- calculate_freq(data[[count_err]], data[[time]])
       freq <- "freq_err"
     }
