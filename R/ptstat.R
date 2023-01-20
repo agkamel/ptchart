@@ -103,8 +103,8 @@ ptstat <- function(data, day, freq, phase, date = NULL, date_zero = NULL, count 
     b0_values[i] <- calculate_b0(iday, ilog10_freq)
 
     # c_table
-    cel_raw[i] <- celeration(iday, ilog10_freq)
-    cel_values[i] <- celeration(iday, ilog10_freq, raw = FALSE)
+    cel_raw[i] <- calculate_celeration(iday, ilog10_freq)
+    cel_values[i] <- calculate_celeration(iday, ilog10_freq, raw = FALSE)
 
     # b_table
     bounce_up_raw[i] <- bounce_up(iday, ilog10_freq)

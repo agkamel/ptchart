@@ -1,5 +1,5 @@
 #' @title
-#' Celeration
+#' Calculate celeration
 #'
 #' @description
 #' Calculate celeration.
@@ -13,7 +13,7 @@
 #'
 #' @examples
 #' #TODO
-celeration <- function(day, log10_freq, raw = TRUE) {
+calculate_celeration <- function(day, log10_freq, raw = TRUE) {
   b1 <- calculate_b1(day, log10_freq)
   c_raw <- antilog(b1)^7
   c_val <- convert_value(c_raw)
