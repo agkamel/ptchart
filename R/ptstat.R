@@ -3,6 +3,7 @@
 #' @param data A Dataframe.
 #' @param day Integer.
 #' @param freq Double.
+#' @param dfreq Double.
 #' @param phase Charactor or factor.
 #' @param date Date.
 #' @param date_zero Date of length one.
@@ -16,7 +17,7 @@
 #'
 #' @examples
 #' # NOT RUN
-ptstat <- function(data, day, freq, phase, date, date_zero, count, time) {
+ptstat <- function(data, day, freq, dfreq, phase, date, date_zero, count, time) {
 
   # Conditions for supplying day, date and date_zero
   if (missing(day)) {

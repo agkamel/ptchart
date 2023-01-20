@@ -5,7 +5,7 @@
 \alias{print.ptstat}
 \title{ptstat}
 \usage{
-ptstat(data, day, freq, phase, date, date_zero, count, time)
+ptstat(data, day, freq, dfreq, phase, date, date_zero, count, time)
 
 \method{print}{ptstat}(x, ...)
 }
@@ -15,6 +15,8 @@ ptstat(data, day, freq, phase, date, date_zero, count, time)
 \item{day}{Integer.}
 
 \item{freq}{Double.}
+
+\item{dfreq}{Double.}
 
 \item{phase}{Charactor or factor.}
 
