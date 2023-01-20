@@ -6,6 +6,8 @@
 #' @param phase Charactor or factor.
 #' @param date Date.
 #' @param date_zero Date of length one.
+#' @param count Integer.
+#' @param time Double. Number of minutes.
 #' @param x An S3 object of class ptstat.
 #' @param ... Additional arguments.
 #'
@@ -14,9 +16,9 @@
 #'
 #' @examples
 #' # NOT RUN
-ptstat <- function(data, day, freq, phase, date, date_zero) {
+ptstat <- function(data, day, freq, phase, date, date_zero, count, time) {
 
-  # Condition for suppling day, date and date_zero
+  # Conditions for supplying day, date and date_zero
   if (missing(day)) {
     if (!missing(date) & !missing(date_zero)){
       data[["day"]] <- calculate_day(data[[date]], date_zero)

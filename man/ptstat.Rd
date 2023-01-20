@@ -5,7 +5,7 @@
 \alias{print.ptstat}
 \title{ptstat}
 \usage{
-ptstat(data, day, freq, phase, date, date_zero)
+ptstat(data, day, freq, phase, date, date_zero, count, time)
 
 \method{print}{ptstat}(x, ...)
 }
@@ -21,6 +21,10 @@ ptstat(data, day, freq, phase, date, date_zero)
 \item{date}{Date.}
 
 \item{date_zero}{Date of length one.}
+
+\item{count}{Integer.}
+
+\item{time}{Double. Number of minutes.}
 
 \item{x}{An S3 object of class ptstat.}
 
