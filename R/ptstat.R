@@ -12,12 +12,24 @@
 #'
 #' @examples
 #' # NOT RUN
-ptstat <- function(data, day, freq, phase) {
+ptstat <- function(data, day, freq, phase, date, date_zero) {
+
+  if (missing(day) & (!missing(date) & !missing(date_zero))) {
+    data[["day"]] <- calculate_day(data[[date]], date_zero)
+    day <- "day"
+  }
+
+  if (missing(day) & (!missing(date) & missing(date_zero))) {
+    date_zero <- find_last_sunday(data[[date]])
+    data[["day"]] <- calculate_day(data[[date]], date_zero)
+    day <- "day"
+  }
 
   splitted_data <- split(data, data[[phase]])
   unique_phase <- unique(data[[phase]])
   phase_n <- length(unique_phase)
 
+  # Initialize vectors
   pttables <- vector(mode = "list", length = length(unique_phase))
   names(pttables) <- unique_phase
 
@@ -109,7 +121,7 @@ ptstat <- function(data, day, freq, phase) {
 
 
 
-
+  # Initialize jump and turn vectors
   jump_raw <- vector(mode = "double", length = phase_n - 1)
   jump_values <- vector(mode = "double", length = phase_n - 1)
   jump_phase_from <- vector(mode = "character", phase_n - 1)
@@ -137,7 +149,6 @@ ptstat <- function(data, day, freq, phase) {
                             j = jump_values)
 
   # Calculate turn
-
   for (i in seq_along(phase_n - 1)) {
     a_b1 <- b1_values[i]
     b_b1 <- b1_values[i+1]
