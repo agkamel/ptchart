@@ -40,6 +40,14 @@ ptstat <- function(data, day, freq, freq_err, phase, date, date_zero, count, cou
     }
   }
 
+  # Conditions for supplying freq_err, count_err and time
+  if (missing(freq_err)) {
+    if (!missing(count_err) & !missing(time)) {
+      data[["freq_err"]] <- calculate_freq(data[[count_err]], data[[time]])
+      freq <- "freq_err"
+    }
+  }
+
   # Splitting data by phase
   splitted_data <- split(data, data[[phase]])
   unique_phase <- unique(data[[phase]])
