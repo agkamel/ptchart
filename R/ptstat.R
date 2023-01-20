@@ -4,6 +4,8 @@
 #' @param day Integer.
 #' @param freq Double.
 #' @param phase Charactor or factor.
+#' @param date Date.
+#' @param date_zero Date of length one.
 #' @param x An S3 object of class ptstat.
 #' @param ... Additional arguments.
 #'
@@ -14,15 +16,16 @@
 #' # NOT RUN
 ptstat <- function(data, day, freq, phase, date, date_zero) {
 
-  if (missing(day) & (!missing(date) & !missing(date_zero))) {
-    data[["day"]] <- calculate_day(data[[date]], date_zero)
-    day <- "day"
-  }
-
-  if (missing(day) & (!missing(date) & missing(date_zero))) {
-    date_zero <- first_sunday(data[[date]])
-    data[["day"]] <- calculate_day(data[[date]], date_zero)
-    day <- "day"
+  # Condition for suppling day, date and date_zero
+  if (missing(day)) {
+    if (!missing(date) & !missing(date_zero)){
+      data[["day"]] <- calculate_day(data[[date]], date_zero)
+      day <- "day"
+    } else if (!missing(date) & missing(date_zero)) {
+      date_zero <- first_sunday(data[[date]])
+      data[["day"]] <- calculate_day(data[[date]], date_zero)
+      day <- "day"
+    }
   }
 
   splitted_data <- split(data, data[[phase]])
