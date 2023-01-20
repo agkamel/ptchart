@@ -15,4 +15,6 @@ URL: https://github.com/agkamel/ptchart
 BugReports: https://github.com/agkamel/ptchart/issues
 Suggests: 
     tibble,
-    testthat
+    testthat,
+    dplyr,
+    lubridate
