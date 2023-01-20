@@ -20,7 +20,7 @@ ptstat <- function(data, day, freq, phase, date, date_zero) {
   }
 
   if (missing(day) & (!missing(date) & missing(date_zero))) {
-    date_zero <- find_last_sunday(data[[date]])
+    date_zero <- first_sunday(data[[date]])
     data[["day"]] <- calculate_day(data[[date]], date_zero)
     day <- "day"
   }
