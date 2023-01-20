@@ -32,6 +32,7 @@ ptstat <- function(data, day, freq, phase, date = NULL, date_zero = NULL, count 
     message("i `date` was used to calculate `day`.")
   }
 
+
   # Conditions for supplying freq, count and time
   if (!is.null(count) & !is.null(time)) {
     data[["freq"]] <- calculate_freq(data[[count]], data[[time]])
@@ -41,12 +42,12 @@ ptstat <- function(data, day, freq, phase, date = NULL, date_zero = NULL, count 
 
 
   # Conditions for supplying freq_err, count_err and time
-  if (missing(freq_err)) {
-    if (!is.null(count_err) & !is.null(time)) {
-      data[["freq_err"]] <- calculate_freq(data[[count_err]], data[[time]])
-      freq <- "freq_err"
-    }
+  if (!is.null(count_err) & !is.null(time)) {
+    data[["freq_err"]] <- calculate_freq(data[[count_err]], data[[time]])
+    freq <- "freq_err"
+    message("i `count_err` and `time` were used to calculate `freq_err`.")
   }
+
 
   # Splitting data by phase
   splitted_data <- split(data, data[[phase]])
