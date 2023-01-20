@@ -5,7 +5,18 @@
 \alias{print.ptstat}
 \title{ptstat}
 \usage{
-ptstat(data, day, freq, dfreq, phase, date, date_zero, count, time)
+ptstat(
+  data,
+  day,
+  freq,
+  freq_err,
+  phase,
+  date,
+  date_zero,
+  count,
+  count_err,
+  time
+)
 
 \method{print}{ptstat}(x, ...)
 }
@@ -16,7 +27,7 @@ ptstat(data, day, freq, dfreq, phase, date, date_zero, count, time)
 
 \item{freq}{Double.}
 
-\item{dfreq}{Double.}
+\item{freq_err}{Double.}
 
 \item{phase}{Charactor or factor.}
 
@@ -25,6 +36,8 @@ ptstat(data, day, freq, dfreq, phase, date, date_zero, count, time)
 \item{date_zero}{Date of length one.}
 
 \item{count}{Integer.}
+
+\item{count_err}{Integer.}
 
 \item{time}{Double. Number of minutes.}
 

@@ -3,11 +3,12 @@
 #' @param data A Dataframe.
 #' @param day Integer.
 #' @param freq Double.
-#' @param dfreq Double.
+#' @param freq_err Double.
 #' @param phase Charactor or factor.
 #' @param date Date.
 #' @param date_zero Date of length one.
 #' @param count Integer.
+#' @param count_err Integer.
 #' @param time Double. Number of minutes.
 #' @param x An S3 object of class ptstat.
 #' @param ... Additional arguments.
@@ -17,7 +18,7 @@
 #'
 #' @examples
 #' # NOT RUN
-ptstat <- function(data, day, freq, dfreq, phase, date, date_zero, count, time) {
+ptstat <- function(data, day, freq, freq_err, phase, date, date_zero, count, count_err, time) {
 
   # Conditions for supplying day, date and date_zero
   if (missing(day)) {
