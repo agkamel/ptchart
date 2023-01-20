@@ -58,12 +58,16 @@ ptstat <- function(data, day, freq, phase, date = NULL, date_zero = NULL, count 
   pttables <- vector(mode = "list", length = length(unique_phase))
   names(pttables) <- unique_phase
 
+  n_values <- vector(mode = "integer", length = phase_n)
   day_mean_values <- vector(mode = "double", length = phase_n)
   log10_freq_mean_values <- vector(mode = "double", length = phase_n)
-  n_values <- vector(mode = "integer", length = phase_n)
+  log10_freq_err_mean_values <- vector(mode = "double", length = phase_n)
 
   b1_values <- vector(mode = "double", length = phase_n)
   b0_values <- vector(mode = "double", length = phase_n)
+
+  b1_values_err <- vector(mode = "double", length = phase_n)
+  b0_values_err <- vector(mode = "double", length = phase_n)
 
   cel_raw <- vector(mode = "double", length = phase_n)
   cel_values <- vector(mode = "double", length = phase_n)
@@ -88,19 +92,27 @@ ptstat <- function(data, day, freq, phase, date = NULL, date_zero = NULL, count 
     itime <- if (!is.null(time)) splitted_data[[i]][[time]] else rep(NA, nrow(splitted_data[[i]]))
     icount_err <- if (!is.null(count_err)) splitted_data[[i]][[count_err]] else rep(NA, nrow(splitted_data[[i]]))
     ifreq_err <- if (!is.null(freq_err)) splitted_data[[i]][[freq_err]] else rep(NA, nrow(splitted_data[[i]]))
+    ilog10_freq_err <- if (!is.null(freq_err)) log10(splitted_data[[i]][[freq_err]]) else rep(NA, nrow(splitted_data[[i]]))
 
     # pttables
     predicted_values <- calculate_predicted_values(iday, ilog10_freq)
     errors <- calculate_errors(iday, ilog10_freq)
 
+    predicted_values_err <- calculate_predicted_values(iday, ilog10_freq_err)
+    errors_err <- calculate_errors(iday, ilog10_freq_err)
+
     # desc_table
     n_values[i] <- nrow(splitted_data[[i]])
     day_mean_values[i] <- mean(iday)
     log10_freq_mean_values[i] <- mean(ilog10_freq)
+    log10_freq_err_mean_values[i] <- mean(ilog10_freq_err)
 
     # terms_table
     b1_values[i] <- calculate_b1(iday, ilog10_freq)
     b0_values[i] <- calculate_b0(iday, ilog10_freq)
+
+    b1_values_err[i] <- calculate_b1(iday, ilog10_freq_err)
+    b0_values_err[i] <- calculate_b0(iday, ilog10_freq_err)
 
     # c_table
     cel_raw[i] <- calculate_celeration(iday, ilog10_freq)
@@ -124,18 +136,23 @@ ptstat <- function(data, day, freq, phase, date = NULL, date_zero = NULL, count 
                                     log10_freq = ilog10_freq,
                                     phase = iphase,
                                     pred = predicted_values,
-                                    errors = errors)
+                                    errors = errors,
+                                    pred_err = predicted_values_err,
+                                    errors_err = errors_err)
   }
 
   # Make tables
   desc_table <- tibble::tibble(phase = unique_phase,
                                n = n_values,
                                day_mean = day_mean_values,
-                               log10_freq_mean = log10_freq_mean_values)
+                               log10_freq_mean = log10_freq_mean_values,
+                               log10_freq_err_mean = log10_freq_err_mean_values)
 
   terms_table <- tibble::tibble(phase = unique_phase,
                                 b0 = b0_values,
-                                b1 = b1_values)
+                                b1 = b1_values,
+                                b0_err = b0_values_err,
+                                b1_err = b1_values_err)
 
   c_table <- tibble::tibble(phase = unique_phase,
                             c_raw = cel_raw,
