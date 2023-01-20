@@ -25,6 +25,12 @@ ptstat <- function(data, day, freq, phase) {
   ptmainvalues <- vector(mode = "list", length = length(unique_phase))
   names(ptmainvalues) <- unique_phase
 
+  day_mean_values <- vector(mode = "double", length = phase_n)
+  log10_freq_mean_values <- vector(mode = "double", length = phase_n)
+
+  b1_values <- vector(mode = "double", length = phase_n)
+  b0_values <- vector(mode = "double", length = phase_n)
+
   cel_raw <- vector(mode = "double", length = phase_n)
   cel_values <- vector(mode = "double", length = phase_n)
 
@@ -55,6 +61,14 @@ ptstat <- function(data, day, freq, phase) {
     b_down <- bounce_down(iday, ilog10_freq, raw = FALSE)
     b_down_raw <- bounce_down(iday, ilog10_freq)
     b_total <- bounce_total(iday, ilog10_freq)
+
+    # desc_table
+    day_mean_values[i] <- day_mean
+    log10_freq_mean_values[i] <- log10_freq_mean
+
+    # terms_table
+    b1_values[i] <- b1
+    b0_values[i] <- b0
 
     # c_table
     cel_raw[i] <- c
@@ -87,6 +101,14 @@ ptstat <- function(data, day, freq, phase) {
                                     b_down = b_down,
                                     b_total = b_total)
   }
+
+  desc_table <- tibble::tibble(phase = unique_phase,
+                               day_mean = day_mean_values,
+                               log10_freq_mean = log10_freq_mean_values)
+
+  terms_table <- tibble::tibble(phase = unique_phase,
+                                b0 = b0_values,
+                                b1 = b1_values)
 
   c_table <- tibble::tibble(phase = unique_phase,
                             c_raw = cel_raw,
@@ -162,6 +184,8 @@ ptstat <- function(data, day, freq, phase) {
   # Return list
   ptstat_list <- list(pttables = pttables,
                       ptmainvalues = ptmainvalues,
+                      desc = desc_table,
+                      terms = terms_table,
                       c_table = c_table,
                       b_table = b_table,
                       j_table = j_table,
