@@ -18,7 +18,6 @@ ptstat <- function(data, day, freq, phase) {
   unique_phase <- unique(data[[phase]])
   phase_n <- length(unique_phase)
 
-
   pttables <- vector(mode = "list", length = length(unique_phase))
   names(pttables) <- unique_phase
 
@@ -38,9 +37,10 @@ ptstat <- function(data, day, freq, phase) {
   bounce_down_values <- vector(mode = "double", length = phase_n)
   bounce_total_values <- vector(mode = "double", length = phase_n)
 
+  # Calculate main values
   for (i in seq_along(splitted_data)) {
 
-    # variable by phase
+    # Variable by phase
     iday <- splitted_data[[i]][[day]]
     ilog10_freq <- log10(splitted_data[[i]][[freq]])
     ifreq <- splitted_data[[i]][[freq]]
@@ -79,6 +79,7 @@ ptstat <- function(data, day, freq, phase) {
                                     errors = errors)
   }
 
+  # Make tables
   desc_table <- tibble::tibble(phase = unique_phase,
                                n = n_values,
                                day_mean = day_mean_values,
@@ -102,12 +103,24 @@ ptstat <- function(data, day, freq, phase) {
 
 
 
-  # Calculate jumps
+
+
+
+
+
+
+
   jump_raw <- vector(mode = "double", length = phase_n - 1)
   jump_values <- vector(mode = "double", length = phase_n - 1)
   jump_phase_from <- vector(mode = "character", phase_n - 1)
   jump_phase_to <- vector(mode = "character", phase_n - 1)
 
+  turn_raw <- vector(mode = "double", length = phase_n - 1)
+  turn_values <- vector(mode = "double", length = phase_n - 1)
+  turn_phase_from <- vector(mode = "character", length = phase_n - 1)
+  turn_phase_to <- vector(mode = "character", length = phase_n - 1)
+
+  # Calculate jumps
   for (i in seq_along(phase_n - 1)) {
     a <- pttables[[i]]
     b <- pttables[[i+1]]
@@ -123,15 +136,7 @@ ptstat <- function(data, day, freq, phase) {
                             j_raw = jump_raw,
                             j = jump_values)
 
-
-
-
-
   # Calculate turn
-  turn_raw <- vector(mode = "double", length = phase_n - 1)
-  turn_values <- vector(mode = "double", length = phase_n - 1)
-  turn_phase_from <- vector(mode = "character", length = phase_n - 1)
-  turn_phase_to <- vector(mode = "character", length = phase_n - 1)
 
   for (i in seq_along(phase_n - 1)) {
     a_b1 <- b1_values[i]
