@@ -86,6 +86,8 @@ ptstat <- function(data, day, freq, phase, date = NULL, date_zero = NULL, count 
     idate <- if (!is.null(date)) splitted_data[[i]][[date]] else rep(NA, nrow(splitted_data[[i]]))
     icount <- if (!is.null(count)) splitted_data[[i]][[count]] else rep(NA, nrow(splitted_data[[i]]))
     itime <- if (!is.null(time)) splitted_data[[i]][[time]] else rep(NA, nrow(splitted_data[[i]]))
+    icount_err <- if (!is.null(count_err)) splitted_data[[i]][[count_err]] else rep(NA, nrow(splitted_data[[i]]))
+    ifreq_err <- if (!is.null(freq_err)) splitted_data[[i]][[freq_err]] else rep(NA, nrow(splitted_data[[i]]))
 
     # pttables
     predicted_values <- calculate_predicted_values(iday, ilog10_freq)
@@ -115,8 +117,10 @@ ptstat <- function(data, day, freq, phase, date = NULL, date_zero = NULL, count 
     pttables[[i]] <- tibble::tibble(day = iday,
                                     date = idate,
                                     count = icount,
+                                    count_err = icount_err,
                                     time = itime,
                                     freq = ifreq,
+                                    freq_err = ifreq_err,
                                     log10_freq = ilog10_freq,
                                     phase = iphase,
                                     pred = predicted_values,
