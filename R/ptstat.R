@@ -28,6 +28,12 @@ ptstat <- function(data, day, freq, phase) {
   cel_raw <- vector(mode = "double", length = phase_n)
   cel_values <- vector(mode = "double", length = phase_n)
 
+  bounce_up_raw <- vector(mode = "double", length = phase_n)
+  bounce_up_values <- vector(mode = "double", length = phase_n)
+  bounce_down_raw <- vector(mode = "double", length = phase_n)
+  bounce_down_values <- vector(mode = "double", length = phase_n)
+  bounce_total_values <- vector(mode = "double", length = phase_n)
+
   for (i in seq_along(splitted_data)) {
     iday <- splitted_data[[i]][[day]]
     ilog10_freq <- log10(splitted_data[[i]][[freq]])
@@ -50,8 +56,16 @@ ptstat <- function(data, day, freq, phase) {
     b_down_raw <- bounce_down(iday, ilog10_freq)
     b_total <- bounce_total(iday, ilog10_freq)
 
+    # c_table
     cel_raw[i] <- c
     cel_values[i] <- c_raw
+
+    # b_table
+    bounce_up_raw[i] <- b_up_raw
+    bounce_up_values[i] <- b_up
+    bounce_down_raw[i] <- b_down_raw
+    bounce_down_values[i] <- b_down
+    bounce_total_values[i] <- b_total
 
 
     pttables[[i]] <- tibble::tibble(day = iday,
@@ -77,6 +91,13 @@ ptstat <- function(data, day, freq, phase) {
   c_table <- tibble::tibble(phase = unique_phase,
                             c_raw = cel_raw,
                             c = cel_values)
+
+  b_table <- tibble::tibble(phase = unique_phase,
+                            b_up_raw = bounce_up_raw,
+                            b_up = bounce_up_values,
+                            b_down_raw = bounce_down_raw,
+                            b_down = bounce_down_values,
+                            b_total = bounce_total_values)
 
 
 
@@ -109,9 +130,10 @@ ptstat <- function(data, day, freq, phase) {
 
 
   # Calculate turn
-  turn_phase_names <- vector(mode = "character", length = length(unique_phase) - 1)
   turn_raw <- vector(mode = "double", length = length(unique_phase) - 1)
   turn_values <- vector(mode = "double", length = length(unique_phase) - 1)
+  turn_phase_from <- vector(mode = "character", length = length(unique_phase) - 1)
+  turn_phase_to <- vector(mode = "character", length = length(unique_phase) - 1)
 
   for (i in seq_along(length(unique_phase) - 1)) {
     a <- ptmainvalues[[i]]
@@ -121,12 +143,14 @@ ptstat <- function(data, day, freq, phase) {
 
     a_name <- names(ptmainvalues[i])
     b_name <- names(ptmainvalues[i+1])
-    turn_phase_names[i] <- paste0(a_name, "_to_", b_name)
+    turn_phase_from[i] <- unique_phase[i]
+    turn_phase_to[i] <- unique_phase[i+1]
   }
 
-  t_table <- tibble::tibble(change = turn_phase_names,
-                                 t_raw = turn_raw,
-                                 t = turn_values)
+  t_table <- tibble::tibble(from = turn_phase_from,
+                            to = turn_phase_to,
+                            t_raw = turn_raw,
+                            t = turn_values)
 
 
 
@@ -139,6 +163,7 @@ ptstat <- function(data, day, freq, phase) {
   ptstat_list <- list(pttables = pttables,
                       ptmainvalues = ptmainvalues,
                       c_table = c_table,
+                      b_table = b_table,
                       j_table = j_table,
                       t_table = t_table)
 
