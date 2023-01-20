@@ -6,9 +6,8 @@ calculate_freq <- function(count, time, rule = log10(2)) {
 }
 
 
+# log10(2) est utilisé selon la recommandation de l'article de Neely
 freq_if_zero_count <- function(time, rule = log10(2)){
-  # Fonction helper freq_if_zero_count
-  #    log10(2) est utilisé selon la recommandation de l'article de Neely
   antilog(log10(calculate_time_floor(time)) - rule)
 }
 
