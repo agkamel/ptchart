@@ -125,12 +125,12 @@ ptstat <- function(data, day, freq, phase) {
 
 
   # Calculate jumps
-  jump_raw <- vector(mode = "double", length = length(unique_phase) - 1)
-  jump_values <- vector(mode = "double", length = length(unique_phase) - 1)
-  jump_phase_from <- vector(mode = "character", length = length(unique_phase) - 1)
-  jump_phase_to <- vector(mode = "character", length = length(unique_phase) - 1)
+  jump_raw <- vector(mode = "double", length = phase_n - 1)
+  jump_values <- vector(mode = "double", length = phase_n - 1)
+  jump_phase_from <- vector(mode = "character", phase_n - 1)
+  jump_phase_to <- vector(mode = "character", phase_n - 1)
 
-  for (i in seq_along(length(unique_phase) - 1)) {
+  for (i in seq_along(phase_n - 1)) {
     a <- pttables[[i]]
     b <- pttables[[i+1]]
     jump_raw[i] <- antilog(b$pred[1] - a$pred[length(a$pred)])
@@ -152,12 +152,12 @@ ptstat <- function(data, day, freq, phase) {
 
 
   # Calculate turn
-  turn_raw <- vector(mode = "double", length = length(unique_phase) - 1)
-  turn_values <- vector(mode = "double", length = length(unique_phase) - 1)
-  turn_phase_from <- vector(mode = "character", length = length(unique_phase) - 1)
-  turn_phase_to <- vector(mode = "character", length = length(unique_phase) - 1)
+  turn_raw <- vector(mode = "double", length = phase_n - 1)
+  turn_values <- vector(mode = "double", length = phase_n - 1)
+  turn_phase_from <- vector(mode = "character", length = phase_n - 1)
+  turn_phase_to <- vector(mode = "character", length = phase_n - 1)
 
-  for (i in seq_along(length(unique_phase) - 1)) {
+  for (i in seq_along(phase_n - 1)) {
     a <- ptmainvalues[[i]]
     b <- ptmainvalues[[i+1]]
     turn_raw[i] <- antilog((b$b1 * 7) - (a$b1 * 7))
