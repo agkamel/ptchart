@@ -18,20 +18,23 @@
 #'
 #' @examples
 #' # NOT RUN
-ptstat <- function(data, day, freq, phase, date = NULL, date_zero = NULL, count = NULL, time = NULL, count_err = NULL, freq_err = NULL) {
+ptstat <- function(data, day = NULL, freq = NULL, phase = NULL, date = NULL, date_zero = NULL, count = NULL, time = NULL, count_err = NULL, freq_err = NULL) {
 
   # Stopifnot
   stopifnot("`data` must be a data.frame" = is.data.frame(data))
-  stopifnot("`day` must be numeric" = is.numeric(data[[day]]))
-  stopifnot("`freq` must be numeric" = is.numeric(data[[freq]]))
-  #stopifnot(phase)
-  stopifnot("`date` must be a class `Date`" = class(data[[date]]) == "Date")
-  stopifnot("`date_zero` must be a class `Date`" = class(date_zero) == "Date")
-  stopifnot("`date_zero` must be of length 1" = length(date_zero) == 1)
-  stopifnot("`count` must be numeric" = is.numeric(data[[count]]))
-  stopifnot("`time` must be numeric" = is.numeric(data[[time]]))
-  stopifnot("`count_err` must be numeric" = is.numeric(data[[count_err]]))
-  stopifnot("`freq_err` must be numeric" = is.numeric(data[[freq_err]]))
+
+  if (!is.null(day)) stopifnot("`day` must be numeric" = is.numeric(data[[day]]))
+  if (!is.null(freq)) stopifnot("`freq` must be numeric" = is.numeric(data[[freq]]))
+  if (!is.null(phase)) stopifnot("`phase` must be character or a class `factor`" = is.character(data[[phase]])) | class(data[[phase]]) == "factor"
+  if (!is.null(date)) stopifnot("`date` must be a class `Date`" = class(data[[date]]) == "Date")
+  if (!is.null(date_zero)) {
+    stopifnot("`date_zero` must be a class `Date`" = class(date_zero) == "Date")
+    stopifnot("`date_zero` must be of length 1" = length(date_zero) == 1)
+    }
+  if (!is.null(count)) stopifnot("`count` must be numeric" = is.numeric(data[[count]]))
+  if (!is.null(time)) stopifnot("`time` must be numeric" = is.numeric(data[[time]]))
+  if (!is.null(count_err)) stopifnot("`count_err` must be numeric" = is.numeric(data[[count_err]]))
+  if (!is.null(freq_err)) stopifnot("`freq_err` must be numeric" = is.numeric(data[[freq_err]]))
 
 
   # Conditions for supplying day, date and date_zero

@@ -7,9 +7,9 @@
 \usage{
 ptstat(
   data,
-  day,
-  freq,
-  phase,
+  day = NULL,
+  freq = NULL,
+  phase = NULL,
   date = NULL,
   date_zero = NULL,
   count = NULL,
