@@ -19,8 +19,8 @@
 #' # TODO
 #' @describeIn calculate_bounce General bounce function
 calculate_bounce <- function(day, log10_freq, type, raw = TRUE) {
-  stopifnot("`day` must be integer" = is.integer(day))
-  stopifnot("`log_10_freq` must be numeric" = is.numeric(log10_freq))
+  # stopifnot("`day` must be integer" = is.integer(day))
+  # stopifnot("`log_10_freq` must be numeric" = is.numeric(log10_freq))
 
   errors <- calculate_errors(day, log10_freq)
 
