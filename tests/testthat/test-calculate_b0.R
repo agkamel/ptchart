@@ -8,3 +8,8 @@ test_that("function raises an error if `log10_freq` is not numeric", {
   expect_error(calculate_b0(day = 1, log10_freq = "0.30103"))
   expect_error(calculate_b0(day = 1, log10_freq = TRUE))
 })
+
+test_that("function raises an error if `antilog` is a logical TRUE or FALSE", {
+  expect_error(calculate_b0(day = 1, log10_freq = 0.30103, antilog = NA))
+  expect_error(calculate_b0(day = 1, log10_freq = TRUE, antilog = "TRUE"))
+})
