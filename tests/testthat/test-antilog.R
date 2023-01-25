@@ -11,10 +11,10 @@ test_that("function raises an error for input type", {
 
 
 test_that("function raises an error for getting NaN", {
-  expect_error(antilog(x = -1.5, base = -1.5))
+  expect_error(antilog(x = c(-1.5, 1), base = -1.5))
 })
 
 
 test_that("function raises an error for getting Inf", {
-  expect_error(antilog(x = -1, base = 0))
+  expect_error(antilog(x = c(-1, 1), base = 0))
 })

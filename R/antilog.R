@@ -15,10 +15,10 @@ antilog <- function(x, base = 10) {
   stopifnot("x must be numeric" = is.numeric(x))
   stopifnot("base must be numeric" = is.numeric(base))
 
-  if (is.nan(base^x)) {
-    stop("`antilog` return a 'not a number' (NaN)")
-  } else if (is.infinite(base^x)) {
-    stop("`antilog` return an infinite number (Inf)")
+  if (sum(is.nan(base^x)) >= 1) {
+    stop("`antilog` returns some 'not a number' values (NaN)")
+  } else if (sum(is.infinite(base^x)) >= 1) {
+    stop("`antilog` returns some infinite (Inf) values")
   } else {
     return(base^x)
   }
