@@ -20,6 +20,20 @@
 #' # NOT RUN
 ptstat <- function(data, day, freq, phase, date = NULL, date_zero = NULL, count = NULL, time = NULL, count_err = NULL, freq_err = NULL) {
 
+  # Stopifnot
+  stopifnot("`data` must be a data.frame" = is.data.frame(data))
+  stopifnot("`day` must be numeric" = is.numeric(data[[day]]))
+  stopifnot("`freq` must be numeric" = is.numeric(data[[freq]]))
+  #stopifnot(phase)
+  stopifnot("`date` must be a class `Date`" = class(data[[date]]) == "Date")
+  stopifnot("`date_zero` must be a class `Date`" = class(date_zero) == "Date")
+  stopifnot("`date_zero` must be of length 1" = length(date_zero) == 1)
+  stopifnot("`count` must be numeric" = is.numeric(data[[count]]))
+  stopifnot("`time` must be numeric" = is.numeric(data[[time]]))
+  stopifnot("`count_err` must be numeric" = is.numeric(data[[count_err]]))
+  stopifnot("`freq_err` must be numeric" = is.numeric(data[[freq_err]]))
+
+
   # Conditions for supplying day, date and date_zero
   if (!is.null(date) & !is.null(date_zero)){
     data[["day"]] <- calculate_day(data[[date]], date_zero)
