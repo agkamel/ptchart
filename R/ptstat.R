@@ -41,12 +41,16 @@ ptstat <- function(data, day = NULL, freq = NULL, phase = NULL, date = NULL, dat
   if (!is.null(date) & !is.null(date_zero)){
     data[["day"]] <- calculate_day(data[[date]], date_zero)
     day <- "day"
-    message("i `date` and `date_zero` were used to calculate `day`.")
+    message("i `date` and `date_zero` were used to calculate `day`")
   } else if (!is.null(date) & is.null(date_zero)) {
     date_zero <- first_sunday(data[[date]])
     data[["day"]] <- calculate_day(data[[date]], date_zero)
     day <- "day"
-    message("i `date` was used to calculate `day`.")
+    message("i `date` was used to calculate `day`")
+  } else if (!is.null(day)) {
+    message("i `day` was used to calculate `day`")
+  } else {
+    stop("! One of these combinaisons must be supplied:\n    `day`\n    `date`\n    `date` and `date_zero`")
   }
 
 
@@ -54,7 +58,11 @@ ptstat <- function(data, day = NULL, freq = NULL, phase = NULL, date = NULL, dat
   if (!is.null(count) & !is.null(time)) {
     data[["freq"]] <- calculate_freq(data[[count]], data[[time]])
     freq <- "freq"
-    message("i `count` and `time` were used to calculate `freq`.")
+    message("i `count` and `time` were used to calculate `freq`")
+  } else if (!is.null(freq)) {
+    message("i `freq` was used to calculate `freq`")
+  } else {
+    stop("! One of these combinaisons must be supplied:\n    `freq`\n    `count` and `time`")
   }
 
 
@@ -62,7 +70,11 @@ ptstat <- function(data, day = NULL, freq = NULL, phase = NULL, date = NULL, dat
   if (!is.null(count_err) & !is.null(time)) {
     data[["freq_err"]] <- calculate_freq(data[[count_err]], data[[time]])
     freq <- "freq_err"
-    message("i `count_err` and `time` were used to calculate `freq_err`.")
+    message("i `count_err` and `time` were used to calculate `freq_err`")
+  } else if (!is.null(freq_err)) {
+    message("i `freq_err` was used to calculate `freq_err`")
+  } else {
+    stop("! One of these combinaisons must be supplied:\n    `freq_err`\n    `count_err` and `time`")
   }
 
 
