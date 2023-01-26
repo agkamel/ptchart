@@ -16,6 +16,7 @@ Suggests:
     tibble,
     testthat,
     dplyr,
-    lubridate
+    lubridate,
+    ggplot2
 Depends: 
     R (>= 2.10)
