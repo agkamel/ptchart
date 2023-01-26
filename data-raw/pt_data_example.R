@@ -1,19 +1,18 @@
-## code to prepare `DATASET` dataset goes here
-
-# Code R pour générer des données aléatoires
+# Code R pour générer des données aléatoires pour `example_pt_data.rda`
 
 # Packages ####
 library(dplyr)
 library(lubridate)
-library(readr)
+#library(readr)
 
 # Paramètres initaux ####
 
 # Premier dimanche - Jour zéro
 first_sunday <- as.Date("2021-07-18")
+example_pt_date_zero <- first_sunday
 # Sortie des données
-data_output <- "data-raw/example_pt_data.rda"
-first_sunday_output <- "data-raw/pt_date_zero_example.rda"
+#data_output <- "data-raw/example_pt_data.rda"
+#first_sunday_output <- "data-raw/pt_date_zero_example.rda"
 
 # Paramètres - phase A ####
 celeration_a <- 1.4
@@ -68,11 +67,12 @@ example_pt_data <-
   select(i, date, jour, reponse, minute, frequence, phase)
 
 # Exportation des données ####
-write_rds(my_data, data_output)
-write_rds(first_sunday, first_sunday_output)
+#write_rds(my_data, data_output)
+#write_rds(first_sunday, first_sunday_output)
 
 # Nettoyage de l'environnement de travail ####
 #   Note: Les packages sont cependant toujours chargées
-remove(list = ls())
+#remove(list = ls())
 
-usethis::use_data(DATASET, overwrite = TRUE)
+usethis::use_data(example_pt_data, overwrite = TRUE)
+usethis::use_data(example_pt_date_zero, overwrite = TRUE)
