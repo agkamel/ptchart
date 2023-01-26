@@ -3,3 +3,4 @@
 ^LICENSE\.md$
 ^README\.Rmd$
 ^package_en_developpement$
+^data-raw$
