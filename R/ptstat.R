@@ -189,6 +189,8 @@ ptstat <- function(data, day = NULL, freq = NULL, phase = NULL, date = NULL, dat
   }
 
   # Make tables
+  pttables_complete <- tibble::tibble(do.call("rbind", pttables))
+
   desc_table <- tibble::tibble(phase = unique_phase,
                                n = n_values,
                                day_mean = day_mean_values,
@@ -280,7 +282,8 @@ ptstat <- function(data, day = NULL, freq = NULL, phase = NULL, date = NULL, dat
 
 
   # Return list
-  ptstat_list <- list(pttables = pttables,
+  ptstat_list <- list(pttables_complete = pttables_complete,
+                      pttables = pttables,
                       desc = desc_table,
                       terms = terms_table,
                       c_table = c_table,
