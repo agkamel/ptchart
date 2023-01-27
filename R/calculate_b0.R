@@ -3,8 +3,8 @@ calculate_b0 <- function(day, log10_freq, antilog = FALSE) {
   # stopifnot("`log_10_freq` must be numeric" = is.numeric(log10_freq))
   stopifnot("`antilog` must be a logical `TRUE` or `FALSE`" = is.logical(antilog) & antilog %in% c(TRUE, FALSE))
 
-  mean_day <- mean(day, na.rm = TRUE)
-  mean_log10_freq <- mean(log10_freq, na.rm = TRUE)
+  mean_day <- mean(day)
+  mean_log10_freq <- mean(log10_freq)
   b1 <- calculate_b1(day, log10_freq)
 
   if (antilog == FALSE) {
