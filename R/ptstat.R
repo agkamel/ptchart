@@ -83,9 +83,9 @@ ptstat <- function(data,
     message("i `count_err` and `time` were used to calculate `freq_err`")
   } else if (!is.null(freq_err)) {
     message("i `freq_err` was used to calculate `freq_err`")
-  } else {
-    stop("! One of these combinaisons must be supplied:\n    `freq_err`\n    `count_err` and `time`")
-  }
+  } #else {
+    #stop("! One of these combinaisons must be supplied:\n    `freq_err`\n    `count_err` and `time`")
+  #}
 
 
   # Splitting data by phase
