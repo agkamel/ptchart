@@ -87,6 +87,7 @@ ptstat <- function(data,
     #stop("! One of these combinaisons must be supplied:\n    `freq_err`\n    `count_err` and `time`")
   #}
 
+
   # Condition if not supplying phase
   if (is.null(phase)) {
     data[["phase"]] <- rep("A", nrow(data))
@@ -207,7 +208,7 @@ ptstat <- function(data,
   }
 
   # Make tables
-  pttables_complete <- tibble::tibble(do.call("rbind", pttables))
+  pttable <- tibble::tibble(do.call("rbind", pttables))
 
   desc_table <- tibble::tibble(phase = unique_phase,
                                n = n_values,
@@ -316,7 +317,7 @@ ptstat <- function(data,
 
 
   # Return list
-  ptstat_list <- list(pttables_complete = pttables_complete,
+  ptstat_list <- list(pttable = pttable,
                       pttables = pttables,
                       desc = desc_table,
                       terms = terms_table,
