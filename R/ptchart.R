@@ -1,27 +1,114 @@
-# Fonction pour générer le graphique de célération standardisé
+test_ptchart <- function(object,
+                         zoom_x = NULL,
+                         zoom_y = NULL
+                         ) {
 
-# Packages ####
-library(readr)
-library(ggplot2)
-library(lubridate)
-library(dplyr)
+  stopifnot("`object` must be of class `ptstat`" = is_ptstat(object))
 
-# Paramètres ####
-#data_input <- "r/example_data.rds"
+  scale_x_params <- make_scale_x_params(object)
+  scale_y_params <- make_scale_y_params()
 
-# Importing dataset ####
-#my_data <- read_rds(data_input)
+  ggplot2::ggplot(
+    data = object[["pttables_complete"]],
+    mapping = aes(x = date, y = freq)
+    ) +
 
-# Fonction make_scale_x ####
-make_scale_x <- function(first_sunday) {
+    ggplot2::geom_point() +
 
-  if(is.character(first_sunday)) {first_sunday <- ymd(first_sunday)}
+    ggplot2::scale_y_log10(
+      name = "Frequency",
+      breaks = scale_y_params[["frequency"]][(scale_y_params[["is_y_breaks"]])],
+      labels = scale_y_params[["frequency"]][(scale_y_params[["is_y_breaks"]])],
+      minor_breaks = scale_y_params[["frequency"]],
+      limits = c(1/(24*60), 1000),
+      sec.axis = sec_axis(
+        trans = ~.,
+        breaks = c(.001, .002, .005, .01, .02, .05, .1, .2, .5, 1, 2, 3, 4, 6),
+        labels = c("1000'", "500'", "200'", "100'", "50'", "20'", "10'", "5'",
+                   "2'", "1'", "30\"", "20\"", "15\"", "10\""),
+        name = ""
+        )
+      ) +
+
+    ggplot2::scale_x_continuous(
+      name = "Date",
+      breaks = scale_x_params[["date"]][(scale_x_params[["breaks"]])],
+      labels = scale_x_params[["labels"]][!is.na(scale_x_params[["labels"]])],
+      minor_breaks = scale_x_params[["date"]],
+      limits = c(scale_x_params[["date"]][[1]],
+                 scale_x_params[["date"]][[length(scale_x_params[["date"]])]])
+      ) +
+
+    ggplot2::theme(
+      panel.grid.major = element_line(colour = "#00b1d9"),
+      panel.grid.minor = element_line(colour = "#66d1e8"),
+      text = element_text(family = "serif", size = 12)
+      #aspect.ratio = 5.44 / 8, # 5 7/16 de pouce par 8 pouce
+      #https://jweshleman.wordpress.com/2006/03/25/og-on-standard-celeration-charting-system-standards/
+      ) +
+
+    ggplot2::coord_fixed(
+      expand = FALSE,
+      #ratio = 1/1, # Voir note sur le ratio ci-bas, explication 1
+      #ratio = 7/1, # Voir note sur le ratio ci-bas, explication 2
+      #ratio = 7/log10(2), # 0.30103 voir note sur le ratio ci-bas, explication 3
+      ratio = 7/(log10(2)/tan(34*pi/180)), # 0.30105 / 0.6745 # Voir note sur le ratio ci-bas, explication 4
+
+      # ZOOM sur le graphique
+      xlim = zoom_x,
+      ylim = zoom_y
+      ) +
+
+    # Ligne séparant les phases
+    ggplot2::geom_vline(
+      xintercept = ymd("2021-08-01")+0.5
+      ) +
+
+    # Plancher d'enregistrement
+    #ggplot2::geom_segment(x = ymd("2021-07-20")-0.5,
+    #             xend = ymd("2021-07-20")+0.5,
+    #             y = log10(1),
+    #             yend = log10(1)
+    #             )# +
+
+  #Pente de régression
+  geom_smooth(
+    method = "lm",
+    se = FALSE,
+    mapping = aes(group = phase)
+    )# +
+
+  #geom_abline(slope = object[["terms"]][["b1"]][[1]],
+  #           intercept = object[["terms"]][["b0"]][[1]])
+}
+
+
+make_scale_y_params <- function() {
+  tibble::tibble(
+    base = 10,
+    exponent = c(-4, -4, -4, -4, rep(c(-3, -2, -1, 0, 1, 2), each = 9), 3),
+    base_to_exponent = base ^ exponent,
+    sub_unit = c((1 / 1440) / (10 ^ -4), 7:9, rep(1:9, times = 6), 1),
+    frequency = base ^ exponent * sub_unit,
+    is_y_breaks = dplyr::case_when(sub_unit == 1 |
+                                     sub_unit == 5 ~ TRUE,
+                                   TRUE ~ FALSE)
+  )
+}
+
+
+make_scale_x_params <- function(object) {
+
+  #if(is.character(first_sunday)) {first_sunday <- ymd(first_sunday)}
 
   # Vérification
-  stopifnot(
-    is.na(first_sunday) == FALSE,
-    wday(first_sunday, week_start = 1) == 7
-  )
+  #stopifnot(
+  #  is.na(first_sunday) == FALSE,
+  #  wday(first_sunday, week_start = 1) == 7
+  #)
+
+  first_sunday <- first_sunday(object[["pttables_complete"]][["date"]])
+
   # Création de la base de données pour ggplot
   tibble(
     date = seq.Date(
@@ -31,8 +118,8 @@ make_scale_x <- function(first_sunday) {
     ),
     no_date = seq(from = 0, to = 140),
     breaks = case_when(
-      no_date %% 7 == 0 ~ 1,
-      TRUE ~ 0
+      no_date %% 7 == 0 ~ TRUE,
+      TRUE ~ FALSE
     ),
     labels = case_when(
       no_date %% 14 == 0 ~ as.character(no_date),
@@ -50,119 +137,14 @@ make_scale_x <- function(first_sunday) {
   )
 }
 
-# Testing make_scale_x() ####
-#make_scale_x("2021-08-01")
-
-# Fonction make_scale_y() ####
-make_scale_y <- function(){
-  tibble(
-    base = 10,
-    exponent = c(-4, -4, -4, -4, rep(c(-3, -2, -1, 0, 1, 2), each = 9), 3),
-    base_to_exponent = base^exponent,
-    sub_unit = c((1/1440)/(10^-4), 7:9, rep(1:9, times = 6), 1),
-    frequency = base^exponent * sub_unit,
-    y_breaks = case_when(
-      sub_unit == 1 | sub_unit == 5 ~ TRUE,
-      TRUE ~ FALSE
-    )
-  )
-
-}
-
-# Testing make_scale_y() ####
-#make_scale_y()
-
-# Fonction ptchart() ####
-ptchart <- function(data,
-                    date,
-                    frequency,
-                    first_sunday,
-                    zoom_x = NULL,
-                    zoom_y = NULL,
-                    name_x = "Frequency",
-                    name_y = "Day") {
-
-  x_scale <- make_scale_x(first_sunday)
-
-  y_scale <- make_scale_y()
-
-  # Test for zoom_x
-  stopifnot(is.null(zoom_x) == TRUE | is.Date(zoom_x) & length(zoom_x) == 2)
-
-  # Test for zoom_y
-  stopifnot(is.null(zoom_y) == TRUE | is.vector(zoom_y, mode = "numeric") & length(zoom_y) == 2)
-
-  ggplot(data = data, mapping = aes(x = {{ date }}, y = {{ frequency }} )) +
-    geom_point() +
-    scale_y_log10(
-      name = name_x,
-      breaks = {y_scale %>% filter(y_breaks == TRUE) %>% select(frequency) %>% pull()},
-      labels = {y_scale %>% filter(y_breaks == TRUE) %>% select(frequency) %>% pull()},
-      minor_breaks = {y_scale %>% select(frequency)},
-      limits = c(1/(24*60), 1000),
-      sec.axis = sec_axis(
-        trans = ~.,
-        breaks = c(.001, .002, .005, .01, .02, .05, .1, .2, .5, 1, 2, 3, 4, 6),
-        labels = c("1000'", "500'", "200'", "100'", "50'", "20'", "10'", "5'", "2'", "1'", "30\"", "20\"", "15\"", "10\""),
-        name = ""
-      )
-    ) +
-    scale_x_continuous(
-      name = name_y,
-      breaks = {x_scale %>% filter(breaks == 1) %>% select(date) %>% pull()},
-      labels = {x_scale %>% filter(is.na(labels) == FALSE) %>% select(labels) %>% pull()},
-      minor_breaks = {x_scale$date},
-      limits = c(head(x_scale$date, 1),
-                 tail(x_scale$date, 1))
-    ) +
-    theme(
-      panel.grid.major = element_line(colour = "#00b1d9"),
-      panel.grid.minor = element_line(colour = "#66d1e8"),
-      text = element_text(family = "serif", size = 12)
-      #aspect.ratio = 5.44 / 8, # 5 7/16 de pouce par 8 pouce #https://jweshleman.wordpress.com/2006/03/25/og-on-standard-celeration-charting-system-standards/
-    ) +
-    coord_fixed(expand = FALSE,
-                #ratio = 1/1, # Voir note sur le ratio ci-bas, explication 1
-                #ratio = 7/1, # Voir note sur le ratio ci-bas, explication 2
-                #ratio = 7/log10(2), # 0.30103 voir note sur le ratio ci-bas, explication 3
-                ratio = 7/(log10(2)/tan(34*pi/180)), # 0.30105 / 0.6745 # Voir note sur le ratio ci-bas, explication 4
-
-                # ZOOM sur le graphique
-                xlim = zoom_x,
-                ylim = zoom_y,
-    )
-  # Ligne séparant les phases
-  #geom_vline(xintercept = ymd("2021-08-01")+0.5) +
-
-  # Plancher d'enregistrement
-  #geom_segment(x = ymd("2021-07-20")-0.5,
-  #             xend = ymd("2021-07-20")+0.5,
-  #             y = log10(1),
-  #             yend = log10(1)
-  #             ) +
-
-  # Pente de régression
-  #geom_smooth(method = "lm", se = FALSE, mapping = aes(group = phase)) +
-
-  #geom_line()
+first_date <- function(date){
+  date[[1]]
 }
 
 
-# Testing de la fonction ptchart() ####
-#ptchart(my_data, date, frequence, "2021-07-18",
-#        zoom_x = c(ymd("2021-07-18"), ymd("2021-07-18") + days(28)),
-#        zoom_y = c(1,20))
-
-
-#ggsave(filename = "r/output_ptcharts.pdf",
-#       scale = 1)
-
-
-
-
-
-
-
+last_date <- function(date){
+  date[[length(date)]]
+}
 
 
 
