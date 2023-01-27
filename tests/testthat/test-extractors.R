@@ -33,3 +33,7 @@ test_that("object is of class ptstat", {
 test_that("object is of class ptstat", {
   expect_error(describe("x"))
 })
+
+test_that("object is of class ptstat", {
+  expect_error(pttable("x"))
+})

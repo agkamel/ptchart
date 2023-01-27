@@ -13,7 +13,7 @@ ptchart <- function(object,
   scale_y_params <- make_scale_y_params()
 
   ggplot2::ggplot(
-    data = object[["pttables_complete"]],
+    data = pttable(object),
     mapping = ggplot2::aes(x = date, y = freq)
     ) +
 
@@ -114,7 +114,7 @@ make_scale_x_params <- function(object) {
   #  wday(first_sunday, week_start = 1) == 7
   #)
 
-  first_sunday <- first_sunday(object[["pttables_complete"]][["date"]])
+  first_sunday <- first_sunday(pttable(object)[["date"]])
 
   # Création de la base de données pour ggplot
   tibble::tibble(

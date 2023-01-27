@@ -1,13 +1,11 @@
 celeration <- function(object) {
   stopifnot("! `object` must be of class `ptstat`" = is_ptstat(object))
-  ptobject <- object[["c_table"]]
-  ptobject
+  object[["c_table"]]
 }
 
 bounce <- function(object) {
   stopifnot("! `object` must be of class `ptstat`" = is_ptstat(object))
-  ptobject <- object[["b_table"]]
-  ptobject
+  object[["b_table"]]
 }
 
 bounce_up <- function(object) {
@@ -30,25 +28,25 @@ bounce_total <- function(object) {
 
 jump <- function(object) {
   stopifnot("! `object` must be of class `ptstat`" = is_ptstat(object))
-  ptobject <- object[["j_table"]]
-  ptobject
+  object[["j_table"]]
 }
 
 turn <- function(object) {
   stopifnot("! `object` must be of class `ptstat`" = is_ptstat(object))
-  ptobject <- object[["t_table"]]
-  ptobject
+  object[["t_table"]]
 }
 
 describe <- function(object) {
   stopifnot("! `object` must be of class `ptstat`" = is_ptstat(object))
-  ptobject <- object[["desc"]]
-  ptobject
+  object[["desc"]]
 }
 
 terms <- function(object) {
   stopifnot("! `object` must be of class `ptstat`" = is_ptstat(object))
-  ptobject <- object[["terms"]]
-  ptobject
+  object[["terms"]]
 }
 
+pttable <- function(object) {
+  stopifnot("! `object` must be of class `ptstat`" = is_ptstat(object))
+  object[["pttable"]]
+}
