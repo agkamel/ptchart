@@ -87,6 +87,14 @@ ptstat <- function(data,
     #stop("! One of these combinaisons must be supplied:\n    `freq_err`\n    `count_err` and `time`")
   #}
 
+  # Condition if not supplying phase
+  if (is.null(phase)) {
+    data[["phase"]] <- rep("A", nrow(data))
+    print(data)
+    phase <- "phase"
+    message("i `phase` not supplied. Default phase set to `A` for all observation")
+  }
+
 
   # Splitting data by phase
   splitted_data <- split(data, data[[phase]])
@@ -129,7 +137,7 @@ ptstat <- function(data,
   # Calculate main values
   for (i in seq_along(splitted_data)) {
 
-    # Variable by phase
+    # Variable by phase - These ones must be calculated
     iday <- splitted_data[[i]][[day]]
     ilog10_freq <- log10(splitted_data[[i]][[freq]])
     ifreq <- splitted_data[[i]][[freq]]
@@ -252,37 +260,53 @@ ptstat <- function(data,
   turn_phase_from <- vector(mode = "character", length = phase_n - 1)
   turn_phase_to <- vector(mode = "character", length = phase_n - 1)
 
-  # Calculate jumps
-  for (i in seq_along(phase_n - 1)) {
-    a <- pttables[[i]]
-    b <- pttables[[i+1]]
-    jump_raw[i] <- antilog(b$pred[1] - a$pred[length(a$pred)])
-    jump_values[i] <- convert_value(antilog(b$pred[1] - a$pred[length(a$pred)]))
 
-    jump_phase_from[i] <- unique_phase[i]
-    jump_phase_to[i] <- unique_phase[i+1]
+  # Calculate jumps
+  if (phase_n > 1) {
+    for (i in seq_along(phase_n - 1)) {
+      a <- pttables[[i]]
+      b <- pttables[[i+1]]
+      jump_raw[i] <- antilog(b$pred[1] - a$pred[length(a$pred)])
+      jump_values[i] <- convert_value(antilog(b$pred[1] - a$pred[length(a$pred)]))
+
+      jump_phase_from[i] <- unique_phase[i]
+      jump_phase_to[i] <- unique_phase[i+1]
+    }
+
+    j_table <- tibble::tibble(from = jump_phase_from,
+                              to = jump_phase_to,
+                              j_raw = jump_raw,
+                              j = jump_values)
+  } else {
+    j_table <- tibble::tibble(from = NA,
+                              to = NA,
+                              j_raw = NA,
+                              j = NA)
   }
 
-  j_table <- tibble::tibble(from = jump_phase_from,
-                            to = jump_phase_to,
-                            j_raw = jump_raw,
-                            j = jump_values)
 
   # Calculate turn
-  for (i in seq_along(phase_n - 1)) {
-    a_b1 <- b1_values[i]
-    b_b1 <- b1_values[i+1]
-    turn_raw[i] <- antilog((b_b1 * 7) - (a_b1 * 7))
-    turn_values[i] <- convert_value(antilog((b_b1 * 7) - (a_b1 * 7)))
+  if (phase_n > 1) {
+    for (i in seq_along(phase_n - 1)) {
+      a_b1 <- b1_values[i]
+      b_b1 <- b1_values[i+1]
+      turn_raw[i] <- antilog((b_b1 * 7) - (a_b1 * 7))
+      turn_values[i] <- convert_value(antilog((b_b1 * 7) - (a_b1 * 7)))
 
-    turn_phase_from[i] <- unique_phase[i]
-    turn_phase_to[i] <- unique_phase[i+1]
+      turn_phase_from[i] <- unique_phase[i]
+      turn_phase_to[i] <- unique_phase[i+1]
+    }
+
+    t_table <- tibble::tibble(from = turn_phase_from,
+                              to = turn_phase_to,
+                              t_raw = turn_raw,
+                              t = turn_values)
+  } else {
+    t_table <- tibble::tibble(from = NA,
+                              to = NA,
+                              t_raw = NA,
+                              t = NA)
   }
-
-  t_table <- tibble::tibble(from = turn_phase_from,
-                            to = turn_phase_to,
-                            t_raw = turn_raw,
-                            t = turn_values)
 
 
 
