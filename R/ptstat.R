@@ -18,7 +18,17 @@
 #'
 #' @examples
 #' # NOT RUN
-ptstat <- function(data, day = NULL, freq = NULL, phase = NULL, date = NULL, date_zero = NULL, count = NULL, time = NULL, count_err = NULL, freq_err = NULL) {
+ptstat <- function(data,
+                   day = NULL,
+                   freq = NULL,
+                   phase = NULL,
+                   date = NULL,
+                   date_zero = NULL,
+                   count = NULL,
+                   time = NULL,
+                   count_err = NULL,
+                   freq_err = NULL
+                   ) {
 
   # Stopifnot
   stopifnot("`data` must be a data.frame" = is.data.frame(data))
