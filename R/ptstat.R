@@ -190,7 +190,7 @@ ptstat <- function(data,
     bounce_down_values_err[i] <- calculate_bounce_down(iday, ilog10_freq_err, raw = FALSE)
     bounce_total_values_err[i] <- calculate_bounce_total(iday, ilog10_freq_err)
 
-
+    # pttables by phase
     pttables[[i]] <- tibble::tibble(day = iday,
                                     date = idate,
                                     count = icount,
