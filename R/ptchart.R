@@ -3,6 +3,10 @@ ptchart <- function(object,
                     zoom_y = NULL
                     ) {
 
+  # To prevent note of "no visible binding for global variable 'x'" when building the package
+  freq <- phase <- NULL
+
+
   stopifnot("`object` must be of class `ptstat`" = is_ptstat(object))
 
   scale_x_params <- make_scale_x_params(object)
@@ -10,7 +14,7 @@ ptchart <- function(object,
 
   ggplot2::ggplot(
     data = object[["pttables_complete"]],
-    mapping = aes(x = date, y = freq)
+    mapping = ggplot2::aes(x = date, y = freq)
     ) +
 
     ggplot2::geom_point() +
@@ -21,7 +25,7 @@ ptchart <- function(object,
       labels = scale_y_params[["frequency"]][(scale_y_params[["is_y_breaks"]])],
       minor_breaks = scale_y_params[["frequency"]],
       limits = c(1/(24*60), 1000),
-      sec.axis = sec_axis(
+      sec.axis = ggplot2::sec_axis(
         trans = ~.,
         breaks = c(.001, .002, .005, .01, .02, .05, .1, .2, .5, 1, 2, 3, 4, 6),
         labels = c("1000'", "500'", "200'", "100'", "50'", "20'", "10'", "5'",
@@ -40,9 +44,9 @@ ptchart <- function(object,
       ) +
 
     ggplot2::theme(
-      panel.grid.major = element_line(colour = "#00b1d9"),
-      panel.grid.minor = element_line(colour = "#66d1e8"),
-      text = element_text(family = "serif", size = 12)
+      panel.grid.major = ggplot2::element_line(colour = "#00b1d9"),
+      panel.grid.minor = ggplot2::element_line(colour = "#66d1e8"),
+      text = ggplot2::element_text(family = "serif", size = 12)
       #aspect.ratio = 5.44 / 8, # 5 7/16 de pouce par 8 pouce
       #https://jweshleman.wordpress.com/2006/03/25/og-on-standard-celeration-charting-system-standards/
       ) +
@@ -61,7 +65,7 @@ ptchart <- function(object,
 
     # Ligne séparant les phases
     ggplot2::geom_vline(
-      xintercept = ymd("2021-08-01")+0.5
+      xintercept = lubridate::ymd("2021-08-01")+0.5
       ) +
 
     # Plancher d'enregistrement
@@ -72,10 +76,10 @@ ptchart <- function(object,
     #             )# +
 
   #Pente de régression
-  geom_smooth(
+    ggplot2::geom_smooth(
     method = "lm",
     se = FALSE,
-    mapping = aes(group = phase)
+    mapping = ggplot2::aes(group = phase)
     )# +
 
   #geom_abline(slope = object[["terms"]][["b1"]][[1]],
@@ -84,6 +88,9 @@ ptchart <- function(object,
 
 
 make_scale_y_params <- function() {
+  # To prevent note of "no visible binding for global variable 'x'" when building the package
+  base <- exponent <- sub_unit <- NULL
+
   tibble::tibble(
     base = 10,
     exponent = c(-4, -4, -4, -4, rep(c(-3, -2, -1, 0, 1, 2), each = 9), 3),
@@ -110,27 +117,27 @@ make_scale_x_params <- function(object) {
   first_sunday <- first_sunday(object[["pttables_complete"]][["date"]])
 
   # Création de la base de données pour ggplot
-  tibble(
+  tibble::tibble(
     date = seq.Date(
       from = first_sunday,
       by = "day",
       length.out = 141 # Because the first sunday is 0, not 1
     ),
     no_date = seq(from = 0, to = 140),
-    breaks = case_when(
+    breaks = dplyr::case_when(
       no_date %% 7 == 0 ~ TRUE,
       TRUE ~ FALSE
     ),
-    labels = case_when(
+    labels = dplyr::case_when(
       no_date %% 14 == 0 ~ as.character(no_date),
       no_date %% 7 == 0 ~ "",
       TRUE ~ NA_character_
     ),
-    sec_axis_breaks = case_when(
+    sec_axis_breaks = dplyr::case_when(
       no_date %% 28 == 0 ~ 1,
       TRUE ~ 0
     ),
-    sec_axis_labels = case_when(
+    sec_axis_labels = dplyr::case_when(
       no_date %% 28 == 0 ~ no_date / 7,
       TRUE ~ NA_real_
     )
