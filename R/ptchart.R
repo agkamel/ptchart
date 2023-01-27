@@ -1,7 +1,7 @@
-test_ptchart <- function(object,
-                         zoom_x = NULL,
-                         zoom_y = NULL
-                         ) {
+ptchart <- function(object,
+                    zoom_x = NULL,
+                    zoom_y = NULL
+                    ) {
 
   stopifnot("`object` must be of class `ptstat`" = is_ptstat(object))
 
