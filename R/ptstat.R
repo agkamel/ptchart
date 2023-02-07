@@ -79,7 +79,7 @@ ptstat <- function(data,
   # Conditions for supplying freq_err, count_err and time
   if (!is.null(count_err) & !is.null(time)) {
     data[["freq_err"]] <- calculate_freq(data[[count_err]], data[[time]])
-    freq <- "freq_err"
+    freq_err <- "freq_err"
     message("i `count_err` and `time` were used to calculate `freq_err`")
   } else if (!is.null(freq_err)) {
     message("i `freq_err` was used to calculate `freq_err`")
