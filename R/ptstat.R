@@ -144,12 +144,12 @@ ptstat <- function(data,
     ifreq <- splitted_data[[i]][[freq]]
     iphase <- splitted_data[[i]][[phase]]
 
-    idate <- if (!is.null(date)) splitted_data[[i]][[date]] else rep(NA, nrow(splitted_data[[i]]))
-    icount <- if (!is.null(count)) splitted_data[[i]][[count]] else rep(NA, nrow(splitted_data[[i]]))
-    itime <- if (!is.null(time)) splitted_data[[i]][[time]] else rep(NA, nrow(splitted_data[[i]]))
-    icount_err <- if (!is.null(count_err)) splitted_data[[i]][[count_err]] else rep(NA, nrow(splitted_data[[i]]))
-    ifreq_err <- if (!is.null(freq_err)) splitted_data[[i]][[freq_err]] else rep(NA, nrow(splitted_data[[i]]))
-    ilog10_freq_err <- if (!is.null(freq_err)) log10(splitted_data[[i]][[freq_err]]) else rep(NA, nrow(splitted_data[[i]]))
+    idate <- if (!is.null(date)) splitted_data[[i]][[date]] else rep(NA_real_, nrow(splitted_data[[i]]))
+    icount <- if (!is.null(count)) splitted_data[[i]][[count]] else rep(NA_real_, nrow(splitted_data[[i]]))
+    itime <- if (!is.null(time)) splitted_data[[i]][[time]] else rep(NA_integer_, nrow(splitted_data[[i]]))
+    icount_err <- if (!is.null(count_err)) splitted_data[[i]][[count_err]] else rep(NA_integer_, nrow(splitted_data[[i]]))
+    ifreq_err <- if (!is.null(freq_err)) splitted_data[[i]][[freq_err]] else rep(NA_real_, nrow(splitted_data[[i]]))
+    ilog10_freq_err <- if (!is.null(freq_err)) log10(splitted_data[[i]][[freq_err]]) else rep(NA_real_, nrow(splitted_data[[i]]))
 
     # pttables
     predicted_values <- calculate_predicted_values(iday, ilog10_freq)
@@ -279,10 +279,10 @@ ptstat <- function(data,
                               j_raw = jump_raw,
                               j = jump_values)
   } else {
-    j_table <- tibble::tibble(from = NA,
-                              to = NA,
-                              j_raw = NA,
-                              j = NA)
+    j_table <- tibble::tibble(from = NA_character_,
+                              to = NA_character_,
+                              j_raw = NA_real_,
+                              j = NA_real_)
   }
 
 
@@ -303,10 +303,10 @@ ptstat <- function(data,
                               t_raw = turn_raw,
                               t = turn_values)
   } else {
-    t_table <- tibble::tibble(from = NA,
-                              to = NA,
-                              t_raw = NA,
-                              t = NA)
+    t_table <- tibble::tibble(from = NA_character_,
+                              to = NA_character_,
+                              t_raw = NA_real_,
+                              t = NA_real_)
   }
 
 
