@@ -154,6 +154,7 @@ ptstat <- function(data,
     # pttables
     time_floor_values <- calculate_time_floor(itime)
     accuracy_ratio_values_raw <- calculate_accuracy_ratio(ifreq, ifreq_err)
+    log10_accuracy_ratio_values_raw <- log10(accuracy_ratio_values_raw)
     accuracy_ratio_values <- calculate_accuracy_ratio(ifreq, ifreq_err, raw = FALSE)
 
     predicted_values <- calculate_predicted_values(iday, ilog10_freq)
@@ -206,6 +207,7 @@ ptstat <- function(data,
                                     log10_freq = ilog10_freq,
                                     phase = iphase,
                                     acc_ratio_raw = accuracy_ratio_values_raw,
+                                    log10_acc_ratio_raw = log10_accuracy_ratio_values_raw,
                                     acc_ratio = accuracy_ratio_values,
                                     time_floor = time_floor_values,
                                     pred = predicted_values,
