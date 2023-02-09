@@ -10,8 +10,3 @@ calculate_freq <- function(count, time, rule = log10(2)) {
 freq_if_zero_count <- function(time, rule = log10(2)){
   antilog(log10(calculate_time_floor(time)) - rule)
 }
-
-
-calculate_time_floor <- function(time) {
-  1 / time
-}
