@@ -152,6 +152,8 @@ ptstat <- function(data,
     ilog10_freq_err <- if (!is.null(freq_err)) log10(splitted_data[[i]][[freq_err]]) else rep(NA_real_, nrow(splitted_data[[i]]))
 
     # pttables
+    time_floor_values <- calculate_time_floor(itime)
+
     predicted_values <- calculate_predicted_values(iday, ilog10_freq)
     errors <- calculate_errors(iday, ilog10_freq)
 
@@ -201,6 +203,7 @@ ptstat <- function(data,
                                     freq_err = ifreq_err,
                                     log10_freq = ilog10_freq,
                                     phase = iphase,
+                                    time_floor = time_floor_values,
                                     pred = predicted_values,
                                     errors = errors,
                                     pred_err = predicted_values_err,
