@@ -50,3 +50,8 @@ pttable <- function(object) {
   stopifnot("! `object` must be of class `ptstat`" = is_ptstat(object))
   object[["pttable"]]
 }
+
+accuracy <- function(object) {
+  stopifnot("! `object` must be of class `ptstat`" = is_ptstat(object))
+  object[["a_table"]]
+}
