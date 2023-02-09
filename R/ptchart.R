@@ -13,11 +13,17 @@ ptchart <- function(object,
   scale_y_params <- make_scale_y_params()
 
   ggplot2::ggplot(
-    data = pttable(object),
-    mapping = ggplot2::aes(x = date, y = freq)
+    data = pttable(object)
     ) +
 
-    ggplot2::geom_point() +
+    ggplot2::geom_point(
+      mapping = ggplot2::aes(x = date, y = freq)
+    ) +
+
+    ggplot2::geom_point(
+      mapping = ggplot2::aes(x = date, y = freq_err),
+      shape = 4
+    ) +
 
     ggplot2::scale_y_log10(
       name = "Frequency",
@@ -79,7 +85,13 @@ ptchart <- function(object,
     ggplot2::geom_smooth(
     method = "lm",
     se = FALSE,
-    mapping = ggplot2::aes(group = phase)
+    mapping = ggplot2::aes(x = date, y = freq, group = phase)
+    ) +
+
+    ggplot2::geom_smooth(
+      method = "lm",
+      se = FALSE,
+      mapping = ggplot2::aes(x = date, y = freq_err, group = phase), color = "red"
     )# +
 
   #geom_abline(slope = object[["terms"]][["b1"]][[1]],
