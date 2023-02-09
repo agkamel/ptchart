@@ -117,6 +117,9 @@ ptstat <- function(data,
   b1_values_err <- vector(mode = "double", length = phase_n)
   b0_values_err <- vector(mode = "double", length = phase_n)
 
+  acc_raw <- vector(mode = "double", length = phase_n)
+  acc_values <- vector(mode = "double", length = phase_n)
+
   cel_raw <- vector(mode = "double", length = phase_n)
   cel_values <- vector(mode = "double", length = phase_n)
 
@@ -176,6 +179,10 @@ ptstat <- function(data,
     b1_values_err[i] <- calculate_b1(iday, ilog10_freq_err)
     b0_values_err[i] <- calculate_b0(iday, ilog10_freq_err)
 
+    # a_table
+    acc_raw[i] <- calculate_accuracy(iday, log10_accuracy_ratio_values_raw)
+    acc_values[i] <- calculate_accuracy(iday, log10_accuracy_ratio_values_raw, raw = FALSE)
+
     # c_table
     cel_raw[i] <- calculate_celeration(iday, ilog10_freq)
     cel_values[i] <- calculate_celeration(iday, ilog10_freq, raw = FALSE)
@@ -230,6 +237,11 @@ ptstat <- function(data,
                                 b1 = b1_values,
                                 b0_err = b0_values_err,
                                 b1_err = b1_values_err)
+
+  a_table <- tibble::tibble(phase = unique_phase,
+                            a_raw = acc_raw,
+                            a = acc_values
+                            )
 
   c_table <- tibble::tibble(phase = unique_phase,
                             c_raw = cel_raw,
@@ -330,6 +342,7 @@ ptstat <- function(data,
                       pttables = pttables,
                       desc = desc_table,
                       terms = terms_table,
+                      a_table = a_table,
                       c_table = c_table,
                       b_table = b_table,
                       j_table = j_table,
