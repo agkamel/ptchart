@@ -1,6 +1,7 @@
 ptchart <- function(object,
                     zoom_x = NULL,
-                    zoom_y = NULL
+                    zoom_y = NULL,
+                    title = "ptchart output"
                     ) {
 
   # To prevent note of "no visible binding for global variable 'x'" when building the package
@@ -16,17 +17,9 @@ ptchart <- function(object,
     data = pttable(object)
     ) +
 
-    ggplot2::geom_point(
-      mapping = ggplot2::aes(x = date, y = freq)
-    ) +
-
-    ggplot2::geom_point(
-      mapping = ggplot2::aes(x = date, y = freq_err),
-      shape = 4
-    ) +
 
     ggplot2::scale_y_log10(
-      name = "Frequency",
+      name = "Nombre de comportement par minute",
       breaks = scale_y_params[["frequency"]][(scale_y_params[["is_y_breaks"]])],
       labels = scale_y_params[["frequency"]][(scale_y_params[["is_y_breaks"]])],
       minor_breaks = scale_y_params[["frequency"]],
@@ -41,7 +34,7 @@ ptchart <- function(object,
       ) +
 
     ggplot2::scale_x_continuous(
-      name = "Date",
+      name = "Jour consécutif du calendrier",
       breaks = scale_x_params[["date"]][(scale_x_params[["breaks"]])],
       labels = scale_x_params[["labels"]][!is.na(scale_x_params[["labels"]])],
       minor_breaks = scale_x_params[["date"]],
@@ -49,7 +42,10 @@ ptchart <- function(object,
                  scale_x_params[["date"]][[length(scale_x_params[["date"]])]])
       ) +
 
+    ggplot2::ggtitle(title) +
+
     ggplot2::theme(
+      plot.title = ggplot2::element_text(hjust = 0.5, size = 20),
       panel.grid.major = ggplot2::element_line(colour = "#00b1d9"),
       panel.grid.minor = ggplot2::element_line(colour = "#66d1e8"),
       text = ggplot2::element_text(family = "serif", size = 12)
@@ -79,7 +75,13 @@ ptchart <- function(object,
     #             xend = ymd("2021-07-20")+0.5,
     #             y = log10(1),
     #             yend = log10(1)
-    #             )# +
+    #             ) +
+
+    # Time floor
+    ggplot2::geom_point(
+      mapping = ggplot2::aes(x = date, y = time_floor),
+      shape = "\u2013", size = 5, color = "gray30"
+    ) +
 
   #Pente de régression
     ggplot2::geom_smooth(
@@ -92,7 +94,29 @@ ptchart <- function(object,
       method = "lm",
       se = FALSE,
       mapping = ggplot2::aes(x = date, y = freq_err, group = phase), color = "red"
+    ) +
+
+  #Point de fréquence cible et non-cible
+    ggplot2::geom_point(
+      mapping = ggplot2::aes(x = date, y = freq),
+      shape = 16#, size = 2
+    ) +
+
+    ggplot2::geom_point(
+      mapping = ggplot2::aes(x = date, y = freq_err),
+      shape = 4, size = 2.5,
     )# +
+
+
+
+
+  # Annotation
+  #  ggplot2::annotate("text",
+  #                    x = lubridate::ymd("2021-07-24"),
+  #                    y = 50, label = paste0("\u00d7", round(celeration(object)$c[1], 2)))
+
+
+
 
   #geom_abline(slope = object[["terms"]][["b1"]][[1]],
   #           intercept = object[["terms"]][["b0"]][[1]])
