@@ -1,3 +1,15 @@
+#' ptchart
+#'
+#' @param object An object of class `ptstat`.
+#' @param zoom_x A vector of class `Date` and of length 2 for setting limits for the x axis.
+#' @param zoom_y A numerical vector of length 2 for setting limits for the y axes.
+#' @param title A character vector of length 1 for setting the title.
+#'
+#' @return A precision teaching chart.
+#' @export
+#'
+#' @examples
+#' #TODO
 ptchart <- function(object,
                     zoom_x = NULL,
                     zoom_y = NULL,
