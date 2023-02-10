@@ -5,7 +5,7 @@ ptchart <- function(object,
                     ) {
 
   # To prevent note of "no visible binding for global variable 'x'" when building the package
-  freq <- freq_err <- phase <- NULL
+  freq <- freq_err <- phase <- time_floor <- NULL
 
 
   stopifnot("`object` must be of class `ptstat`" = is_ptstat(object))
