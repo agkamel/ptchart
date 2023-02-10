@@ -14,3 +14,16 @@ convert_value <- function(x) {
 
   antilog(abs(log10(x)))
 }
+
+
+convert_value_with_ptsign <- function(x) {
+
+  raw <- x
+  val <- convert_value(x)
+
+  if (raw == val) {
+    return(paste0("\u00d7", val))
+  } else {
+    return(paste0("\u00f7", val))
+  }
+}
