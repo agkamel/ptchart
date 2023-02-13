@@ -15,7 +15,9 @@ ptstat(
   count = NULL,
   time = NULL,
   count_err = NULL,
-  freq_err = NULL
+  freq_err = NULL,
+  count_floor = NULL,
+  count_ceil = NULL
 )
 
 \method{print}{ptstat}(x, ...)
@@ -40,6 +42,10 @@ ptstat(
 \item{count_err}{Integer.}
 
 \item{freq_err}{Double.}
+
+\item{count_floor}{Double.}
+
+\item{count_ceil}{Double.}
 
 \item{x}{An S3 object of class ptstat.}
 

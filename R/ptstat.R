@@ -10,6 +10,8 @@
 #' @param count Integer.
 #' @param count_err Integer.
 #' @param time Double. Number of minutes.
+#' @param count_floor Double.
+#' @param count_ceil Double.
 #' @param x An S3 object of class ptstat.
 #' @param ... Additional arguments.
 #'
