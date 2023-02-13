@@ -95,6 +95,23 @@ ptchart <- function(object,
       shape = "\u2013", size = 5, color = "gray30"
     ) +
 
+    # Count floor
+    ggplot2::geom_point(
+      mapping = ggplot2::aes(x = date, y = count_floor),
+      shape = "\u2012", size = 5, color = "gray20"
+    ) +
+
+    # Count ceil
+    ggplot2::geom_point(
+      mapping = ggplot2::aes(x = date, y = count_ceil),
+      shape = "\u2013", size = 5, color = "gray10"
+    ) +
+
+
+
+
+
+
   #Pente de régression
     ggplot2::geom_smooth(
     method = "lm",
