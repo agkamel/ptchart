@@ -27,7 +27,9 @@ ptstat <- function(data,
                    count = NULL,
                    time = NULL,
                    count_err = NULL,
-                   freq_err = NULL
+                   freq_err = NULL,
+                   count_floor = NULL,
+                   count_ceil = NULL
                    ) {
 
   # Stopifnot
@@ -45,6 +47,8 @@ ptstat <- function(data,
   if (!is.null(time)) stopifnot("`time` must be numeric" = is.numeric(data[[time]]))
   if (!is.null(count_err)) stopifnot("`count_err` must be numeric" = is.numeric(data[[count_err]]))
   if (!is.null(freq_err)) stopifnot("`freq_err` must be numeric" = is.numeric(data[[freq_err]]))
+  if (!is.null(count_floor)) stopifnot("`count_floor` must be numeric" = is.numeric(data[[count_floor]]))
+  if (!is.null(count_ceil)) stopifnot("`count_ceil` must be numeric" = is.numeric(data[[count_ceil]]))
 
 
   # Conditions for supplying day, date and date_zero
@@ -153,9 +157,14 @@ ptstat <- function(data,
     icount_err <- if (!is.null(count_err)) splitted_data[[i]][[count_err]] else rep(NA_integer_, nrow(splitted_data[[i]]))
     ifreq_err <- if (!is.null(freq_err)) splitted_data[[i]][[freq_err]] else rep(NA_real_, nrow(splitted_data[[i]]))
     ilog10_freq_err <- if (!is.null(freq_err)) log10(splitted_data[[i]][[freq_err]]) else rep(NA_real_, nrow(splitted_data[[i]]))
+    icount_floor <- if (!is.null(count_floor)) splitted_data[[i]][[count_floor]] else rep(NA_real_, nrow(splitted_data[[i]]))
+    icount_ceil <- if (!is.null(count_ceil)) splitted_data[[i]][[count_ceil]] else rep(NA_real_, nrow(splitted_data[[i]]))
 
     # pttables
     time_floor_values <- calculate_time_floor(itime)
+    count_floor_values <- calculate_count_floor(icount_floor)
+    count_ceil_values <- calculate_count_ceil(icount_ceil)
+
     accuracy_ratio_values_raw <- calculate_accuracy_ratio(ifreq, ifreq_err)
     log10_accuracy_ratio_values_raw <- log10(accuracy_ratio_values_raw)
     accuracy_ratio_values <- calculate_accuracy_ratio(ifreq, ifreq_err, raw = FALSE)
@@ -217,6 +226,8 @@ ptstat <- function(data,
                                     log10_acc_ratio_raw = log10_accuracy_ratio_values_raw,
                                     acc_ratio = accuracy_ratio_values,
                                     time_floor = time_floor_values,
+                                    count_floor = count_floor_values,
+                                    count_ceil = count_ceil_values,
                                     pred = predicted_values,
                                     errors = errors,
                                     pred_err = predicted_values_err,
