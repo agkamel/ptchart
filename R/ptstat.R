@@ -111,7 +111,6 @@ ptstat <- function(data,
   # Condition if not supplying phase
   if (is.null(phase)) {
     data[["phase"]] <- rep("A", nrow(data))
-    print(data)
     phase <- "phase"
     message("i `phase` not supplied. Default phase set to `A` for all observation")
   }
