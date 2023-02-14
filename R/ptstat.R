@@ -52,6 +52,20 @@ ptstat <- function(data,
   if (!is.null(count_floor)) stopifnot("`count_floor` must be numeric" = is.numeric(data[[count_floor]]))
   if (!is.null(count_ceil)) stopifnot("`count_ceil` must be numeric" = is.numeric(data[[count_ceil]]))
 
+  # Table of supplied argument
+  arg_table <- tibble::tibble(
+    day = if (is.null(day)) NA else day,
+    freq = if (is.null(freq)) NA else freq,
+    phase = if (is.null(phase)) NA else phase,
+    date = if (is.null(date)) NA else date,
+    date_zero = if (is.null(date_zero)) NA else date_zero,
+    count = if (is.null(count)) NA else count,
+    time = if (is.null(time)) NA else time,
+    count_err = if (is.null(count_err)) NA else count_err,
+    freq_err = if (is.null(freq_err)) NA else freq_err,
+    count_floor = if (is.null(count_floor)) NA else count_floor,
+    count_ceil = if (is.null(count_ceil)) NA else count_ceil)
+
 
   # Conditions for supplying day, date and date_zero
   if (!is.null(date) & !is.null(date_zero)){
@@ -101,6 +115,11 @@ ptstat <- function(data,
     phase <- "phase"
     message("i `phase` not supplied. Default phase set to `A` for all observation")
   }
+
+
+
+
+
 
 
   # Splitting data by phase
@@ -351,7 +370,8 @@ ptstat <- function(data,
 
 
   # Return list
-  ptstat_list <- list(pttable = pttable,
+  ptstat_list <- list(arg_table = arg_table,
+                      pttable = pttable,
                       pttables = pttables,
                       desc = desc_table,
                       terms = terms_table,
