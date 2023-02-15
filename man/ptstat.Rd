@@ -48,6 +48,8 @@ ptstat(
 
 \item{count_ceil}{Double.}
 
+\item{verbose}{Logical.}
+
 \item{x}{An S3 object of class ptstat.}
 
 \item{...}{Additional arguments.}
