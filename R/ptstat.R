@@ -12,6 +12,7 @@
 #' @param time Double. Number of minutes.
 #' @param count_floor Double.
 #' @param count_ceil Double.
+#' @param verbose Logical.
 #' @param x An S3 object of class ptstat.
 #' @param ... Additional arguments.
 #'
@@ -52,6 +53,7 @@ ptstat <- function(data,
   if (!is.null(freq_err)) stopifnot("`freq_err` must be numeric" = is.numeric(data[[freq_err]]))
   if (!is.null(count_floor)) stopifnot("`count_floor` must be numeric" = is.numeric(data[[count_floor]]))
   if (!is.null(count_ceil)) stopifnot("`count_ceil` must be numeric" = is.numeric(data[[count_ceil]]))
+  stopifnot("`verbose` must be logical" = is.logical(verbose))
 
   # Table of supplied argument
   arg_table <- tibble::tibble(

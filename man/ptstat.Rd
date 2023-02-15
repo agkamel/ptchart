@@ -17,7 +17,8 @@ ptstat(
   count_err = NULL,
   freq_err = NULL,
   count_floor = NULL,
-  count_ceil = NULL
+  count_ceil = NULL,
+  verbose = TRUE
 )
 
 \method{print}{ptstat}(x, ...)
