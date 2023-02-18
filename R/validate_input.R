@@ -27,10 +27,26 @@ validate_arg_freq <- function(data, freq) {
     stop("`freq` must be greater or equal than 0`")
   }
 
-  if ( ((Inf %in% (data[[freq]])) == TRUE) | ((-Inf %in% (data[[freq]])) == TRUE) ) {
+  if ((Inf %in% (data[[freq]])) == TRUE) {
     stop("`freq` must not contain `Inf` or `-Inf` values")
   }
 }
+
+validate_arg_freq_err <- function(data, freq_err) {
+  if (is.numeric(data[[freq_err]]) == FALSE) {
+    stop("`freq_err` must be numeric")
+  }
+
+  if ((FALSE %in% (data[[freq_err]] >= 0)) == TRUE) {
+    stop("`freq_err` must be greater or equal than 0`")
+  }
+
+  if ((Inf %in% (data[[freq_err]])) == TRUE) {
+    stop("`freq_err` must not contain `Inf` or `-Inf` values")
+  }
+}
+
+
 
 validate_arg_phase <- function(data, phase) {
   if ((is.character(data[[phase]]) | inherits(data[[phase]], "factor")) == FALSE) {

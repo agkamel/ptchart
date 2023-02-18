@@ -30,12 +30,26 @@ test_that("Arg `freq` in `ptstat()` throw an error if is not greater of equal th
   expect_error(validate_arg_freq(data = data.frame(x = c(-1, 0, 1)),
                                 freq = "x"))
 })
-test_that("Arg `freq` in `ptstat()` throw an error if contains Inf or -Inf values", {
+test_that("Arg `freq` in `ptstat()` throw an error if contains Inf values", {
   expect_error(validate_arg_freq(data = data.frame(x = c(0, 1, Inf)),
                                  freq = "x"))
-  expect_error(validate_arg_freq(data = data.frame(x = c(0, 1, -Inf)),
-                                 freq = "x"))
 })
+
+
+test_that("Arg `freq_err` in `ptstat()` throw an error if is not numeric", {
+  expect_error(validate_arg_freq_err(data = data.frame(x = c("a", "b", "c")),
+                                 freq_err = "x"))
+})
+test_that("Arg `freq_err` in `ptstat()` throw an error if is not greater of equal than zero", {
+  expect_error(validate_arg_freq_err(data = data.frame(x = c(-1, 0, 1)),
+                                 freq_err = "x"))
+})
+test_that("Arg `freq_err` in `ptstat()` throw an error if contains Inf values", {
+  expect_error(validate_arg_freq_err(data = data.frame(x = c(0, 1, Inf)),
+                                 freq_err = "x"))
+})
+
+
 
 
 
