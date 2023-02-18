@@ -36,10 +36,10 @@ ptstat <- function(data,
                    verbose = TRUE
                    ) {
 
-  # Stopifnot
-  stopifnot("`data` must be a data.frame" = is.data.frame(data))
+  # Validate input
+  validate_arg_data(data)
+  if (!is.null(day)) { validate_arg_day(data, day) }
 
-  if (!is.null(day)) stopifnot("`day` must be numeric" = is.numeric(data[[day]]))
   if (!is.null(freq)) stopifnot("`freq` must be numeric" = is.numeric(data[[freq]]))
   if (!is.null(phase)) stopifnot("`phase` must be character or a class `factor`" = is.character(data[[phase]])) | class(data[[phase]]) == "factor"
   if (!is.null(date)) stopifnot("`date` must be a class `Date`" = class(data[[date]]) == "Date")
