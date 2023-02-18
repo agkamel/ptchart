@@ -33,15 +33,22 @@ validate_arg_freq <- function(data, freq) {
 }
 
 validate_arg_phase <- function(data, phase) {
-  if ((is.character(data[[phase]]) | (class(data[[phase]]) == "factor")) == FALSE) {
+  if ((is.character(data[[phase]]) | inherits(data[[phase]], "factor")) == FALSE) {
     stop("`phase` must be character or a class `factor`")
   }
 }
 
 validate_arg_date <- function(data, date) {
-  if ((class(data[[date]]) == "Date") == FALSE)
+  if (inherits(data[[date]], "Date") == FALSE)
     stop("`date` must be a class `Date`")
 }
 
-
+validate_arg_date_zero <- function(date_zero) {
+  if (inherits(date_zero, "Date") == FALSE) {
+    stop("`date_zero` must be a class `Date`")
+  }
+  if (length(date_zero) != 1) {
+    stop("`date_zero` must be of length 1")
+  }
+}
 

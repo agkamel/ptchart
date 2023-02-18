@@ -52,3 +52,14 @@ test_that("Arg `date` in `ptstat()` throw an error if is not class `Date`", {
   expect_error(validate_arg_date(data = data.frame(x = c(0, 1, 2)),
                                  date = "x"))
 })
+
+
+
+test_that("Arg `date_zero` in `ptstat()` throw an error if is not class `Date`", {
+  expect_error(validate_arg_date_zero(date_zero = "2023-02-18"))
+  expect_error(validate_arg_date_zero(date_zero = 1))
+})
+test_that("Arg `date_zero` in `ptstat()` throw an error if is length greater than 1", {
+  expect_error(validate_arg_date_zero(date_zero = as.Date(c("2023-02-18", "2023-02-19"))))
+})
+
