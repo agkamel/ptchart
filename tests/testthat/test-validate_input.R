@@ -26,7 +26,7 @@ test_that("Arg `freq` in `ptstat()` throw an error if is not numeric", {
   expect_error(validate_arg_freq(data = data.frame(x = c("a", "b", "c")),
                                 freq = "x"))
 })
-test_that("Arg `freq` in `ptstat()` throw an error if is not greater than zero", {
+test_that("Arg `freq` in `ptstat()` throw an error if is not greater of equal than zero", {
   expect_error(validate_arg_freq(data = data.frame(x = c(-1, 0, 1)),
                                 freq = "x"))
 })
