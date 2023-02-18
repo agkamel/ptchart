@@ -36,3 +36,12 @@ test_that("Arg `freq` in `ptstat()` throw an error if contains Inf or -Inf value
   expect_error(validate_arg_freq(data = data.frame(x = c(0, 1, -Inf)),
                                  freq = "x"))
 })
+
+
+
+test_that("Arg `phase` in `ptstat()` throw an error if is not character or class `factor`", {
+  expect_error(validate_arg_phase(data = data.frame(x = c(0, 1, 2)),
+                                  phase = "x"))
+  expect_error(validate_arg_phase(data = data.frame(x = c(TRUE, FALSE)),
+                                  phase = "x"))
+})

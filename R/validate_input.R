@@ -32,6 +32,12 @@ validate_arg_freq <- function(data, freq) {
   }
 }
 
+validate_arg_phase <- function(data, phase) {
+  if ((is.character(data[[phase]]) | (class(data[[phase]]) == "factor")) == FALSE) {
+    stop("`phase` must be character or a class `factor`")
+  }
+}
+
 
 
 
