@@ -38,6 +38,10 @@ validate_arg_phase <- function(data, phase) {
   }
 }
 
+validate_arg_date <- function(data, date) {
+  if ((class(data[[date]]) == "Date") == FALSE)
+    stop("`date` must be a class `Date`")
+}
 
 
 

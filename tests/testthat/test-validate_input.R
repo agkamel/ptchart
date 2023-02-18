@@ -45,3 +45,10 @@ test_that("Arg `phase` in `ptstat()` throw an error if is not character or class
   expect_error(validate_arg_phase(data = data.frame(x = c(TRUE, FALSE)),
                                   phase = "x"))
 })
+
+
+
+test_that("Arg `date` in `ptstat()` throw an error if is not class `Date`", {
+  expect_error(validate_arg_date(data = data.frame(x = c(0, 1, 2)),
+                                 date = "x"))
+})
