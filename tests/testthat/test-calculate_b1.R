@@ -11,7 +11,24 @@
 # })
 #
 #
+test_that("function raises an error if `antilog` is a logical TRUE or FALSE", {
+  expect_error(calculate_b1(day = 1, log10_freq = 0.30103, antilog = NA))
+  expect_error(calculate_b1(day = 1, log10_freq = 0.30103, antilog = "TRUE"))
+})
+
+
+test_that("function works correctly", {
+  expect_equal(calculate_b1(day = c(1, 8),
+                            log10_freq = log10(c(1, 2))),
+               expected = 0.04300429)
+
+  expect_equal(calculate_b1(day = c(1, 8),
+                            log10_freq = log10(c(1, 0.5))),
+               expected = -0.04300429)
+})
+
+
 # test_that("function raises an error if `antilog` is a logical TRUE or FALSE", {
-#   expect_error(calculate_b1(day = 1, log10_freq = 0.30103, antilog = NA))
-#   expect_error(calculate_b1(day = 1, log10_freq = TRUE, antilog = "TRUE"))
+#   expect_error(calculate_b1(day = 1, log10_freq = 0.30103))
+#   expect_error(calculate_b1(day = 1, log10_freq = 0.30103))
 # })

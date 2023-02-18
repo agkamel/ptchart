@@ -13,3 +13,7 @@
 #   expect_error(calculate_b0(day = 1, log10_freq = 0.30103, antilog = NA))
 #   expect_error(calculate_b0(day = 1, log10_freq = TRUE, antilog = "TRUE"))
 # })
+
+# test_that("test", {
+#   calculate_b0(day = c(1, 2), log10_freq = log10(c(1, 2)))
+# })
