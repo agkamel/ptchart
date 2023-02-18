@@ -63,3 +63,13 @@ validate_arg_count <- function(data, count) {
     stop("`count` must be a integer")
   }
 }
+
+validate_arg_time <- function(data, time) {
+  if (is.numeric(data[[time]]) == FALSE) {
+    stop("`time` must be numeric")
+  }
+
+  if ((FALSE %in% (data[[time]] > 0)) == TRUE) {
+    stop("`time` must be greater than 0`")
+  }
+}
