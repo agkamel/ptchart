@@ -64,6 +64,20 @@ validate_arg_count <- function(data, count) {
   }
 }
 
+validate_arg_count_err <- function(data, count_err) {
+  if (is.numeric(data[[count_err]]) == FALSE) {
+    stop("`count_err` must be numeric")
+  }
+  if ((FALSE %in% (data[[count_err]] >= 0)) == TRUE) {
+    stop("`count_err` must be greater or equal than 0`")
+  }
+  if ((sum(data[[count_err]] %% 1) > 0) == TRUE) {
+    stop("`count_err` must be a integer")
+  }
+}
+
+
+
 validate_arg_time <- function(data, time) {
   if (is.numeric(data[[time]]) == FALSE) {
     stop("`time` must be numeric")

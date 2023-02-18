@@ -79,6 +79,19 @@ test_that("Arg `count` in `ptstat()` throw an error if is not an integer", {
 })
 
 
+test_that("Arg `count_err` in `ptstat()` throw an error if is not numeric", {
+  expect_error(validate_arg_count_err(data = data.frame(x = c("a", "b", "c")),
+                                  count_err = "x"))
+})
+test_that("Arg `count_err` in `ptstat()` throw an error if is not greater than zero", {
+  expect_error(validate_arg_count_err(data = data.frame(x = c(-1, 0, 1)),
+                                  count_err = "x"))
+})
+test_that("Arg `count_err` in `ptstat()` throw an error if is not an integer", {
+  expect_error(validate_arg_count_err(data = data.frame(x = c(0.1, 1)),
+                                  count_err = "x"))
+})
+
 
 test_that("Arg `time` in `ptstat()` throw an error if is not numeric", {
   expect_error(validate_arg_time(data = data.frame(x = c("a", "b", "c")),
