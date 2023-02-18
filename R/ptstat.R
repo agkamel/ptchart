@@ -43,7 +43,7 @@ ptstat <- function(data,
   if (!is.null(phase)) validate_arg_phase(data, phase)
   if (!is.null(date)) validate_arg_date(data, date)
   if (!is.null(date_zero)) validate_arg_date_zero(date_zero)
-  if (!is.null(count)) stopifnot("`count` must be numeric" = is.numeric(data[[count]]))
+  if (!is.null(count)) validate_arg_count(data, count)
   if (!is.null(time)) stopifnot("`time` must be numeric" = is.numeric(data[[time]]))
   if (!is.null(count_err)) stopifnot("`count_err` must be numeric" = is.numeric(data[[count_err]]))
   if (!is.null(freq_err)) stopifnot("`freq_err` must be numeric" = is.numeric(data[[freq_err]]))

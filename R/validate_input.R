@@ -52,3 +52,14 @@ validate_arg_date_zero <- function(date_zero) {
   }
 }
 
+validate_arg_count <- function(data, count) {
+  if (is.numeric(data[[count]]) == FALSE) {
+    stop("`count` must be numeric")
+  }
+  if ((FALSE %in% (data[[count]] >= 0)) == TRUE) {
+    stop("`count` must be greater or equal than 0`")
+  }
+  if ((sum(data[[count]] %% 1) > 0) == TRUE) {
+    stop("`count` must be a integer")
+  }
+}

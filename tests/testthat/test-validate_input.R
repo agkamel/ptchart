@@ -63,3 +63,18 @@ test_that("Arg `date_zero` in `ptstat()` throw an error if is length greater tha
   expect_error(validate_arg_date_zero(date_zero = as.Date(c("2023-02-18", "2023-02-19"))))
 })
 
+
+
+test_that("Arg `count` in `ptstat()` throw an error if is not numeric", {
+  expect_error(validate_arg_count(data = data.frame(x = c("a", "b", "c")),
+                                count = "x"))
+})
+test_that("Arg `count` in `ptstat()` throw an error if is not greater than zero", {
+  expect_error(validate_arg_count(data = data.frame(x = c(-1, 0, 1)),
+                                count = "x"))
+})
+test_that("Arg `count` in `ptstat()` throw an error if is not an integer", {
+  expect_error(validate_arg_count(data = data.frame(x = c(0.1, 1)),
+                                count = "x"))
+})
+
