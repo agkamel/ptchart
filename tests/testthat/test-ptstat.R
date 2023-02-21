@@ -7,7 +7,8 @@ test_that("function return a s3 class 'ptstat'", {
 })
 
 
-test_that("function return an arror because of day or date", {
+# Conditions for supplying day, date and date_zero
+test_that("function return an error because of day or date", {
   expect_error(
     ptstat(example_pt_data,
            #day = "jour",
@@ -28,6 +29,7 @@ test_that("function return an arror because of day or date", {
 })
 
 
+# Conditions for supplying freq, count and time
 test_that("function return an error because of freq or count and time", {
   expect_error(
     ptstat(example_pt_data,
