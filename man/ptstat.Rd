@@ -24,31 +24,31 @@ ptstat(
 \method{print}{ptstat}(x, ...)
 }
 \arguments{
-\item{data}{A Dataframe.}
+\item{data}{Dataframe.}
 
-\item{day}{Integer.}
+\item{day}{Numeric. No of the successive day of the calendar. Values must be integers and >= 0.}
 
-\item{freq}{Double.}
+\item{freq}{Numeric. Frequencies of observations aimed to be accelerated. Values must be >= 0.}
 
-\item{phase}{Charactor or factor.}
+\item{phase}{Charactor. Phase of intervention. If none are provided, default phase is `"A"` for all observations. Note: Providing factor vector to be implemented.}
 
-\item{date}{Date.}
+\item{date}{Date. Dates of observations in the format "yyyy-mm-dd". If `date_zero` is not provided, the closest sunday before the first date will be used for `date_zero`.}
 
-\item{date_zero}{Date of length one.}
+\item{date_zero}{Date of length one. A date that correspond to day 0 in the format "yyyy-mm-dd".}
 
-\item{count}{Integer.}
+\item{count}{Integer. Count of responses aimed to be accelerated. Values must be >= 0.}
 
-\item{time}{Double. Number of minutes.}
+\item{time}{Numeric. Number of minutes. Values must be > 0.}
 
-\item{count_err}{Integer.}
+\item{count_err}{Integer. Count of responses aimed to be decelerated. Values must be >= 0.}
 
-\item{freq_err}{Double.}
+\item{freq_err}{Numeric. Frequencies of observations aimed to be decelerated. Values must be >= 0.}
 
-\item{count_floor}{Double.}
+\item{count_floor}{Double. NOTE. Name may be changed...}
 
-\item{count_ceil}{Double.}
+\item{count_ceil}{Double. NOTE. Name may be changed...}
 
-\item{verbose}{Logical.}
+\item{verbose}{Logical. Show informational messages. Default to `TRUE`.}
 
 \item{x}{An S3 object of class ptstat.}
 

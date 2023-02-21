@@ -1,18 +1,18 @@
 #' ptstat
 #'
-#' @param data A Dataframe.
-#' @param day Integer.
-#' @param freq Double.
-#' @param freq_err Double.
-#' @param phase Charactor or factor.
-#' @param date Date.
-#' @param date_zero Date of length one.
-#' @param count Integer.
-#' @param count_err Integer.
-#' @param time Double. Number of minutes.
-#' @param count_floor Double.
-#' @param count_ceil Double.
-#' @param verbose Logical.
+#' @param data Dataframe.
+#' @param day Numeric. No of the successive day of the calendar. Values must be integers and >= 0.
+#' @param freq Numeric. Frequencies of observations aimed to be accelerated. Values must be >= 0.
+#' @param freq_err Numeric. Frequencies of observations aimed to be decelerated. Values must be >= 0.
+#' @param phase Charactor. Phase of intervention. If none are provided, default phase is `"A"` for all observations. Note: Providing factor vector to be implemented.
+#' @param date Date. Dates of observations in the format "yyyy-mm-dd". If `date_zero` is not provided, the closest sunday before the first date will be used for `date_zero`.
+#' @param date_zero Date of length one. A date that correspond to day 0 in the format "yyyy-mm-dd".
+#' @param count Integer. Count of responses aimed to be accelerated. Values must be >= 0.
+#' @param count_err Integer. Count of responses aimed to be decelerated. Values must be >= 0.
+#' @param time Numeric. Number of minutes. Values must be > 0.
+#' @param count_floor Double. NOTE. Name may be changed...
+#' @param count_ceil Double. NOTE. Name may be changed...
+#' @param verbose Logical. Show informational messages. Default to `TRUE`.
 #' @param x An S3 object of class ptstat.
 #' @param ... Additional arguments.
 #'
