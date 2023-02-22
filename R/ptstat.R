@@ -83,25 +83,43 @@ ptstat <- function(data,
   }
 
 
+  # Conditions for sypplying time
+  if (is.null(time)) {
+    stop("! `time` must be supplied.")
+  }
+
+  # Condition for supplying freq, count, freq_err and count_err
+  if ( is.null(count_err) && is.null(count) && is.null(freq) && is.null(freq_err) ) {
+    stop("! One of these combinaisons must be supplied:\n    `freq`\n    `count`\n    `freq_err`\n    `count_err`")
+  }
+
   # Conditions for supplying freq, count and time
-  if (!is.null(count) & !is.null(time)) {
+  if (!is.null(count)) {
     data[["freq"]] <- calculate_freq(data[[count]], data[[time]])
+    data[["freq"]] <- recode_freq_when_zero(data[["freq"]], data[[time]])
     freq <- "freq"
     if (verbose == TRUE) message("i `count` and `time` were used to calculate `freq`")
   } else if (!is.null(freq)) {
-    if (verbose == TRUE) message("i `freq` was used to calculate `freq`")
-  } else {
-    stop("! One of these combinaisons must be supplied:\n    `freq`\n    `count` and `time`")
-  }
+    data[[freq]] <- recode_freq_when_zero(data[[freq]], data[[time]])
+    data[["count"]] <- calculate_count(data[[freq]], data[[time]])
+    count <- "count"
+    if (verbose == TRUE) message("i `freq` and `time` were used to calculate `count`")
+  } #else {
+    #stop("! One of these combinaisons must be supplied:\n    `freq`\n    `count` and `time`")
+  #}
 
 
   # Conditions for supplying freq_err, count_err and time
-  if (!is.null(count_err) & !is.null(time)) {
+  if (!is.null(count_err)) {
     data[["freq_err"]] <- calculate_freq(data[[count_err]], data[[time]])
+    data[["freq_err"]] <- recode_freq_when_zero(data[[count_err]], data[[time]])
     freq_err <- "freq_err"
     if (verbose == TRUE) message("i `count_err` and `time` were used to calculate `freq_err`")
   } else if (!is.null(freq_err)) {
-    if (verbose == TRUE) message("i `freq_err` was used to calculate `freq_err`")
+    data[[freq_err]] <- recode_freq_when_zero(data[[freq_err]], data[[time]])
+    data[["count_err"]] <- calculate_count(data[[freq_err]], data[[time]])
+    count_err <- "count_err"
+    if (verbose == TRUE) message("i `freq_err` and `time` were used to calculate `count_err`")
   } #else {
     #stop("! One of these combinaisons must be supplied:\n    `freq_err`\n    `count_err` and `time`")
   #}
