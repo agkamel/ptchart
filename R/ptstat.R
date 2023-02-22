@@ -115,11 +115,6 @@ ptstat <- function(data,
   }
 
 
-
-
-
-
-
   # Splitting data by phase
   splitted_data <- split(data, data[[phase]])
   unique_phase <- unique(data[[phase]])
@@ -165,10 +160,10 @@ ptstat <- function(data,
   for (i in seq_along(splitted_data)) {
 
     # Variable by phase - These ones must be calculated
-    iday <- splitted_data[[i]][[day]]
-    ilog10_freq <- log10(splitted_data[[i]][[freq]])
-    ifreq <- splitted_data[[i]][[freq]]
     iphase <- splitted_data[[i]][[phase]]
+    iday <- splitted_data[[i]][[day]]
+    ilog10_freq <- if (!is.null(freq)) log10(splitted_data[[i]][[freq]]) else rep(NA_real_, nrow(splitted_data[[i]]))
+    ifreq <- if (!is.null(freq)) splitted_data[[i]][[freq]] else rep(NA_real_, nrow(splitted_data[[i]]))
 
     idate <- if (!is.null(date)) splitted_data[[i]][[date]] else rep(NA_real_, nrow(splitted_data[[i]]))
     icount <- if (!is.null(count)) splitted_data[[i]][[count]] else rep(NA_real_, nrow(splitted_data[[i]]))
