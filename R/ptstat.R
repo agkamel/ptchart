@@ -75,7 +75,8 @@ ptstat <- function(data,
     date_zero <- first_sunday(data[[date]])
     data[["day"]] <- calculate_day(data[[date]], date_zero)
     day <- "day"
-    if (verbose == TRUE) message("i `date` was used to calculate `day`")
+    if (verbose == TRUE) message("i `date` was used to calculate `date_zero`")
+    if (verbose == TRUE) message("i `date` and calculated `date_zero` were used to calculate `day`")
   } else if (!is.null(day)) {
     if (verbose == TRUE) message("i `day` was used to calculate `day`")
   } else {
