@@ -43,7 +43,7 @@ pttable(object)
 A dataframe
 }
 \description{
-Extractor functions for ptstat object
+This a description of these extrators.
 }
 \section{Functions}{
 \itemize{

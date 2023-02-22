@@ -2,6 +2,8 @@
 #'
 #' @param object An object of class `ptstat`
 #'
+#' @description This a description of these extrators.
+#'
 #' @return A dataframe
 #'
 #' @examples
