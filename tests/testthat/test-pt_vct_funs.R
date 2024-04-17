@@ -1,0 +1,16 @@
+test_that("it works", {
+  x <- c(1,2,NA, 4)
+  y <- c(10, 15, 16, NA)
+  y_incor <- c(20, 15, 12, NA)
+
+  expect_equal(pt_vct_b1(x, y), NA)
+  expect_equal(pt_vct_b0(x, y), NA)
+  expect_equal(pt_vct_celeration(x, y), NA_real_)
+  expect_equal(pt_vct_accuracy_ratio(x, y, y_incor), NA)
+  expect_equal(pt_vct_accuracy(x, y, y_incor), NA)
+  expect_equal(pt_vct_predicted_values(x, y), NA)
+  expect_equal(pt_vct_errors(x, y), NA)
+  expect_equal(pt_vct_bounce_up(x, y), NA_real_)
+  expect_equal(pt_vct_bounce_down(x, y), NA_real_)
+  expect_equal(pt_vct_bounce_total(x, y), NA_real_)
+})
