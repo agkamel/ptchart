@@ -11,7 +11,7 @@
 \alias{pt_vct_bounce_up}
 \alias{pt_vct_bounce_down}
 \alias{pt_vct_bounce_total}
-\title{Functions for calculating pt values for two vectors}
+\title{Functions for calculating pt values with two vectors}
 \usage{
 pt_vct_b1(x, y)
 
@@ -46,7 +46,7 @@ pt_vct_bounce_total(x, y)
 A single value or a vector
 }
 \description{
-Functions for calculating pt values for two vectors
+Functions for calculating pt values with two vectors
 }
 \section{Functions}{
 \itemize{
@@ -71,6 +71,68 @@ Functions for calculating pt values for two vectors
 \item \code{pt_vct_bounce_total()}: Calculate bounce total
 
 }}
+\section{Slope}{
+The slope \eqn{b_1} obtained with \code{pt_vct_b1()} is calculated with
+
+\deqn{\frac{\sum (x - \bar{x})(\log_{10}(y) - \log_{10}(\bar{y}))}{\sum(x - \bar{x})^2}}
+
+where \eqn{x} is the day and \eqn{y} is the frequency.
+}
+
+\section{Intercept}{
+The intercept \eqn{b_0} obtained with \code{pt_vct_b0()} is calculated with
+
+\deqn{\log_{10}(\bar{y}) - b_1 \bar{x}}
+}
+
+\section{Predicted values}{
+The predicted values \eqn{\log_{10}(\hat{y})} obtained with \code{pt_vct_predicted_values()} is calculated with
+
+\deqn{b_0 + b_1 x}
+}
+
+\section{Residuals}{
+The residuals (errors) \eqn{\epsilon} obtained with \code{pt_vct_errors()} is calculated with
+
+\deqn{\log_{10}(y) - \log_{10}(\hat{y})}
+}
+
+\section{Celeration}{
+The celeration \eqn{\mathcal{C}} obtained with \code{pt_vct_celeration()} is calculated with
+
+\deqn{(10^{b_1})^7}
+}
+
+\section{Accuracy ratios}{
+The accuracy ratios \eqn{a} obtained with \code{pt_vct_accuracy_ratio()} is calculated with
+
+\deqn{\frac{y_{\text{correct}}}{y_{\text{incorrect}}}}
+}
+
+\section{Accuracy}{
+The accuracy \eqn{\mathcal{A}} obtained with \code{pt_vct_accuracy()} is calculated with
+
+\deqn{(10^{(\frac{\sum (x - \bar{x})(a - \bar{a})}{\sum(x - \bar{x})^2})})^7}
+}
+
+\section{Bounce up}{
+The bounce up \eqn{\mathcal{B}_{\text{up}}} obtained with \code{pt_vct_bounce_up()} is calculated with
+
+\deqn{10^{\max(\epsilon)}}
+}
+
+\section{Bounce down}{
+The bounce down \eqn{\mathcal{B}_{\text{down}}} obtained with \code{pt_vct_bounce_down()} is calculated with
+
+\deqn{10^{\min(\epsilon)}}
+}
+
+\section{Bounce total}{
+The bounce total \eqn{\mathcal{B}_{\text{total}}} obtained with \code{pt_vct_bounce_total()} is calculated with
+
+\deqn{\mathcal{B}_{\text{up}} \mathcal{B}_{\text{down}}}
+}
+
 \examples{
 # NOT YET
 

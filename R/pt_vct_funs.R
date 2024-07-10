@@ -1,4 +1,4 @@
-#' Functions for calculating pt values for two vectors
+#' Functions for calculating pt values with two vectors
 #'
 #' @param x Day of calendar
 #' @param y Frequency
@@ -6,6 +6,89 @@
 #' @param y_incor Incorrect frequency
 #'
 #' @return A single value or a vector
+#'
+#' @details
+#'
+#' # Slope
+#'
+#' The slope \eqn{b_1} obtained with `pt_vct_b1()` is calculated with
+#'
+#' \deqn{\frac{\sum (x - \bar{x})(\log_{10}(y) - \log_{10}(\bar{y}))}{\sum(x - \bar{x})^2}}
+#'
+#' where \eqn{x} is the day and \eqn{y} is the frequency.
+#'
+#'
+#'
+#' # Intercept
+#'
+#' The intercept \eqn{b_0} obtained with `pt_vct_b0()` is calculated with
+#'
+#' \deqn{\log_{10}(\bar{y}) - b_1 \bar{x}}
+#'
+#'
+#'
+#' # Predicted values
+#'
+#' The predicted values \eqn{\log_{10}(\hat{y})} obtained with `pt_vct_predicted_values()` is calculated with
+#'
+#' \deqn{b_0 + b_1 x}
+#'
+#'
+#'
+#' # Residuals
+#'
+#' The residuals (errors) \eqn{\epsilon} obtained with `pt_vct_errors()` is calculated with
+#'
+#' \deqn{\log_{10}(y) - \log_{10}(\hat{y})}
+#'
+#'
+#'
+#' # Celeration
+#'
+#' The celeration \eqn{\mathcal{C}} obtained with `pt_vct_celeration()` is calculated with
+#'
+#' \deqn{(10^{b_1})^7}
+#'
+#'
+#'
+#' # Accuracy ratios
+#'
+#' The accuracy ratios \eqn{a} obtained with `pt_vct_accuracy_ratio()` is calculated with
+#'
+#' \deqn{\frac{y_{\text{correct}}}{y_{\text{incorrect}}}}
+#'
+#'
+#'
+#' # Accuracy
+#'
+#' The accuracy \eqn{\mathcal{A}} obtained with `pt_vct_accuracy()` is calculated with
+#'
+#' \deqn{(10^{(\frac{\sum (x - \bar{x})(a - \bar{a})}{\sum(x - \bar{x})^2})})^7}
+#'
+#'
+#'
+#' # Bounce up
+#'
+#' The bounce up \eqn{\mathcal{B}_{\text{up}}} obtained with `pt_vct_bounce_up()` is calculated with
+#'
+#' \deqn{10^{\max(\epsilon)}}
+#'
+#'
+#' # Bounce down
+#'
+#' The bounce down \eqn{\mathcal{B}_{\text{down}}} obtained with `pt_vct_bounce_down()` is calculated with
+#'
+#' \deqn{10^{\min(\epsilon)}}
+#'
+#'
+#'
+#' # Bounce total
+#'
+#' The bounce total \eqn{\mathcal{B}_{\text{total}}} obtained with `pt_vct_bounce_total()` is calculated with
+#'
+#' \deqn{\mathcal{B}_{\text{up}} \mathcal{B}_{\text{down}}}
+#'
+#'
 #'
 #' @examples
 #' # NOT YET
@@ -142,5 +225,5 @@ pt_vct_bounce_down <- function(x, y) {
 #' @export
 #' @describeIn pt_vct_funs Calculate bounce total
 pt_vct_bounce_total <- function(x, y) {
-  pt_vct_bounce_up(x, y) * pt_vct_bounce_down(x, y)
+  pt_vct_bounce_up(x, y) * (1 / pt_vct_bounce_down(x, y))
 }
