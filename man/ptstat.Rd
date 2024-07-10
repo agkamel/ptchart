@@ -30,9 +30,9 @@ ptstat(
 
 \item{freq}{Numeric. Frequencies of observations aimed to be accelerated. Values must be >= 0.}
 
-\item{phase}{Charactor. Phase of intervention. If none are provided, default phase is `"A"` for all observations. Note: Providing factor vector to be implemented.}
+\item{phase}{Charactor. Phase of intervention. If none are provided, default phase is \code{"A"} for all observations. Note: Providing factor vector to be implemented.}
 
-\item{date}{Date. Dates of observations in the format "yyyy-mm-dd". If `date_zero` is not provided, the closest sunday before the first date will be used for `date_zero`.}
+\item{date}{Date. Dates of observations in the format "yyyy-mm-dd". If \code{date_zero} is not provided, the closest sunday before the first date will be used for \code{date_zero}.}
 
 \item{date_zero}{Date of length one. A date that correspond to day 0 in the format "yyyy-mm-dd".}
 
@@ -48,7 +48,7 @@ ptstat(
 
 \item{count_ceil}{Double. NOTE. Name may be changed...}
 
-\item{verbose}{Logical. Show informational messages. Default to `TRUE`.}
+\item{verbose}{Logical. Show informational messages. Default to \code{TRUE}.}
 
 \item{x}{An S3 object of class ptstat.}
 

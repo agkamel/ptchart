@@ -3,11 +3,11 @@
 \docType{data}
 \name{example_pt_date_zero}
 \alias{example_pt_date_zero}
-\title{Date zero, to be used with `example_pt_data`}
+\title{Date zero, to be used with \code{example_pt_data}}
 \format{
 A data frame with 20 rows and 7 variables:
 \describe{
-  \item{example_pt_date_zero}{date of the first sunday}
+\item{example_pt_date_zero}{date of the first sunday}
 }
 }
 \usage{

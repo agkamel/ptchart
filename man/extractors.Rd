@@ -37,7 +37,7 @@ terms(object)
 pttable(object)
 }
 \arguments{
-\item{object}{An object of class `ptstat`}
+\item{object}{An object of class \code{ptstat}}
 }
 \value{
 A dataframe
