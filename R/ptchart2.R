@@ -24,7 +24,10 @@ ptchart2 <- function(object,
                     show_accuracy_line = TRUE,
                     show_target_point = TRUE,
                     show_nontarget_point = TRUE,
-                    show_accuracy_point = TRUE
+                    show_accuracy_point = TRUE,
+                    color_acc_line = "#7CAE00",
+                    color_dec_line = "#F8766D",
+                    color_accuracy_line = "#00BFC4"
 ) {
 
   # To prevent note of "no visible binding for global variable 'x'" when building the package
@@ -160,7 +163,7 @@ ptchart2 <- function(object,
         method = "lm",
         se = FALSE,
         mapping = ggplot2::aes(x = day, y = freq, group = phase),
-        color = "#7CAE00"
+        color = color_acc_line
       )
 
 
@@ -174,7 +177,7 @@ ptchart2 <- function(object,
         method = "lm",
         se = FALSE,
         mapping = ggplot2::aes(x = day, y = freq_err, group = phase),
-        color = "#F8766D"
+        color = color_dec_line
       )
     }
 
@@ -188,7 +191,7 @@ ptchart2 <- function(object,
           method = "lm",
           se = FALSE,
           mapping = ggplot2::aes(x = day, y = acc_ratio_raw, group = phase),
-          color = "#00BFC4"
+          color = color_accuracy_line
         )
 
 
@@ -284,7 +287,7 @@ ptchart2 <- function(object,
         method = "lm",
         se = FALSE,
         mapping = ggplot2::aes(x = date, y = freq, group = phase),
-        color = "#7CAE00"
+        color = color_acc_line
       )
     }
 
@@ -295,7 +298,7 @@ ptchart2 <- function(object,
         method = "lm",
         se = FALSE,
         mapping = ggplot2::aes(x = date, y = freq_err, group = phase),
-        color = "#F8766D"
+        color = color_dec_line
       )
     }
 
@@ -309,7 +312,7 @@ ptchart2 <- function(object,
           method = "lm",
           se = FALSE,
           mapping = ggplot2::aes(x = date, y = acc_ratio_raw, group = phase),
-          color = "#00BFC4"
+          color = color_accuracy_line
         )
 
 
