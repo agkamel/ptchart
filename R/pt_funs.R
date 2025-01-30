@@ -3,10 +3,22 @@
 #   ~id, ~phase, ~time, ~x_aug, ~x_dim, ~y_aug, ~y_dim,
 #   1, "p01", 1, 1, 1, 50, 20,
 #   1, "p01", 1, NA, 2, NA, 10,
-#    1, "p01", 1, 3, 3, 60, 18,
-#   # 1, "p01", 1, 6, 6, 53, 5,
-#   # 1, "p01", 1, 7, 7, 69, 0.5,
-#   # 1, "p01", 1, 8, 8, 80, 0.5
+#    1, "p01", 1, 3, 3, NA, 18,
+#    1, "p01", 1, 6, 6, 53, 5,
+#    1, "p01", 1, 7, 7, 69, 0.5,
+#  1, "p01", 1, 8, 8, 80, 0.5,
+#  1, "p02", 1, 11, 11, 50, 20,
+#  # 1, "p02", 1, NA, 12, NA, 10,
+#  # 1, "p02", 1, 13, 13, 60, 18,
+#  # 1, "p02", 1, 16, 16, 53, 5,
+#  # 1, "p02", 1, 17, 17, 69, 0.5,
+#  # 1, "p02", 1, 18, 18, 80, 0.5,
+#  1, "p03", 1, 31, 31, 40, 20,
+#  1, "p03", 1, NA, 32, NA, 10,
+#  1, "p03", 1, 33, 33, 46, 18,
+#  1, "p03", 1, 36, 36, 38, 5,
+#  1, "p03", 1, 37, 37, 45, 0.5,
+#  1, "p03", 1, 38, 38, 39, 0.5
 # )
 #
 # test_data <- tibble::tribble(
@@ -78,6 +90,59 @@ pt_log10 <- function(x) {
 }
 
 
+.remove_NAs <- function(.df, x, y) {
+  .df_original <- .df |> dplyr::select(x = {{ x }}, y = {{ y }})
+  .df_no_NAs <- .df_original |> dplyr::filter(!is.na(x), !is.na(y))
+
+  if (nrow(.df_no_NAs) < 3) {
+    warning("Number of non NA rows are smaller than 3. Returning NA.")
+    return(NA)
+  }
+
+  .df_no_NAs
+}
+
+
+#' Get predicted values
+#'
+#' @param .df A dataframe.
+#' @param x Day of calendar.
+#' @param y Frequency.
+#'
+#' @return Predicted values
+#' @export
+#'
+#' @examples
+#' # NOT YET
+pt_predicted_values <- function(.df, x, y) {
+
+  .df_no_NAs <- .remove_NAs(.df, {{ x }}, {{ y }}) |> dplyr::mutate(log10_y = pt_log10(y))
+
+  b0 <- pt_b0(.df, {{ x }}, {{ y }})
+  b1 <- pt_b1(.df, {{ x }}, {{ y }})
+
+  b0 + b1 * .df_no_NAs$x
+}
+
+
+#' Get errors
+#'
+#' @param .df A dataframe.
+#' @param x Day of calendar.
+#' @param y Frequency.
+#'
+#' @return Errors
+#' @export
+#'
+#' @examples
+#' # NOT YET
+pt_errors <- function(.df, x, y) {
+
+  .df_no_NAs <- .remove_NAs(.df, {{ x }}, {{ y }}) |> dplyr::mutate(log10_y = pt_log10(y))
+  predicted_values <- pt_predicted_values(.df, {{ x }}, {{ y }})
+  .df_no_NAs$log10_y - predicted_values
+}
+
 #' Get b1
 #'
 #' @param .df A dataframe.
@@ -91,24 +156,43 @@ pt_log10 <- function(x) {
 #' #NOT YET
 pt_b1 <- function(.df, x, y) {
 
-  .df_original <- .df |> dplyr::select(x = {{ x }}, y = {{ y }})
-  .df_no_NAs <- .df_original |> dplyr::filter(!is.na(x), !is.na(y))
-
-  if (nrow(.df_no_NAs) < 3) {
-    warning("Number of non NA rows are smaller than 3. Returning NA.")
-    return(NA)
-  }
+  .df_no_NAs <- .remove_NAs(.df, {{ x }}, {{ y }}) |> dplyr::mutate(log10_y = pt_log10(y))
 
   .df_no_NAs <- .df_no_NAs |> dplyr::mutate(
     x = x,
     y = y,
-    log10_y = pt_log10(y),
     x_deviation_from_mean = x - mean(x),
     x_deviation_from_mean_squared = x_deviation_from_mean ^ 2,
     log10_y_deviation_from_mean = log10_y - mean(log10_y)
   )
 
   sum(.df_no_NAs$x_deviation_from_mean * .df_no_NAs$log10_y_deviation_from_mean) / sum(.df_no_NAs$x_deviation_from_mean_squared)
+}
+
+
+
+
+
+
+#' Get b0
+#'
+#' @param .df A dataframe.
+#' @param x Day of calendar.
+#' @param y Frequency.
+#'
+#' @return b0
+#' @export
+#'
+#' @examples
+#' # NOT YET
+pt_b0 <- function(.df, x, y) {
+
+  b1 <- pt_b1(.df, {{ x }}, {{ y }})
+
+  .df_no_NAs <- .remove_NAs(.df, {{ x }}, {{ y }}) |> dplyr::mutate(log10_y = pt_log10(y))
+  .df_means <- .df_no_NAs |> dplyr::summarise(mean_x = mean(x), mean_log10_y = mean(log10_y))
+
+  .df_means$mean_log10_y - (b1 * .df_means$mean_x)
 }
 
 
@@ -129,5 +213,134 @@ pt_celeration <- function(.df, x, y) {
 }
 
 #  load_all()
-#  pt_b1(test_data, x_dim, y_dim)
-#  pt_celeration(test_data, x_dim, y_dim)
+#  pt_b1(mini_test_data, x_aug, y_aug)
+#  pt_celeration(mini_test_data, x_aug, y_aug)
+#  pt_b0(mini_test_data, x_aug, y_aug)
+
+
+pt_antilog <- function(x, base = 10) {
+  base^x
+}
+
+#' Get bounce up.
+#'
+#' @param .df A dataframe.
+#' @param x Day of calendar.
+#' @param y Frequency.
+#'
+#' @return Bounce up
+#' @export
+#'
+#' @examples
+#' # NOT YET
+pt_bounce_up <- function(.df, x, y) {
+  errors <- pt_errors(.df, {{ x }}, {{ y }})
+  pt_antilog(max(errors))
+}
+
+#' Get bounce down.
+#'
+#' @param .df A dataframe.
+#' @param x Day of calendar.
+#' @param y Frequency.
+#'
+#' @return Bounce down
+#' @export
+#'
+#' @examples
+#' # NOT YET
+pt_bounce_down <- function(.df, x, y) {
+  errors <- pt_errors(.df, {{ x }}, {{ y }})
+  pt_antilog(min(errors))
+}
+
+#' Get bounce total.
+#'
+#' @param .df A dataframe.
+#' @param x Day of calendar.
+#' @param y Frequency.
+#'
+#' @return Bounce total
+#' @export
+#'
+#' @examples
+#' # NOT YET
+pt_bounce_total <- function(.df, x, y) {
+  pt_bounce_up(.df, {{ x }}, {{ y }}) * pt_bounce_down(.df, {{ x }}, {{ y }})
+}
+
+
+#' Get accuracy ratio
+#'
+#' @param .df A dataframe.
+#' @param y_cor Correct frequency.
+#' @param y_incor Incorrect frequency.
+#'
+#' @return Accuracy ratio
+#' @export
+#'
+#' @examples
+#' # NOT YET
+pt_accuracy_ratio <- function(.df, y_cor, y_incor) {
+  .df_no_NAs <- .remove_NAs(.df, {{ y_cor }}, {{ y_incor }}) |>
+    dplyr::rename(y_cor = x, y_incor = y)
+
+  .df_no_NAs$y_cor / .df_no_NAs$y_incor
+
+}
+
+
+#' Get accuracy
+#'
+#' @param .df A dataframe.
+#' @param x Day of calendar.
+#' @param y_cor Correct frequency.
+#' @param y_incor Incorrect frequency.
+#'
+#' @return Accuracy
+#' @export
+#'
+#' @examples
+#' # NOT YET
+pt_accuracy <- function(.df, x, y_cor, y_incor){
+
+  .df_original <- .df |> dplyr::select(x = {{ x }}, y_cor = {{ y_cor }}, y_incor = {{ y_incor }})
+  .df_no_NAs <- .df_original |> dplyr::filter(!is.na(x), !is.na(y_cor), !is.na(y_incor))
+
+  accuracy_ratio <- pt_accuracy_ratio(.df_no_NAs, y_cor, y_incor)
+
+  .df_no_NAs <- .df_no_NAs |> dplyr::mutate(accuracy_ratio = accuracy_ratio)
+
+  b1 <- pt_b1(.df_no_NAs, x, accuracy_ratio)
+
+  pt_antilog(b1)^7
+
+}
+
+pt_jump <- function(.df, x, y, phase) {
+
+  .df_original <- .df |> dplyr::select(x = {{ x }}, y = {{ y }}, phase = {{ phase }})
+  .df_no_NAs <- .df_original |> dplyr::filter(!is.na(x), !is.na(y), !is.na(phase))
+
+  print(.df_original)
+  print(.df_no_NAs)
+
+  .phase_list <- split(.df_no_NAs,
+  dplyr::select(.df_no_NAs, phase) |> dplyr::pull())
+
+  print(.phase_list)
+
+  jump_output <- vector(mode = "numeric", length = (length(.phase_list) - 1))
+
+  for (i in 1:(length(.phase_list) - 1)) {
+
+    jump_output[i] <- pt_antilog(
+      pt_predicted_values(.phase_list[[i + 1]], x, y) |> dplyr::first() -
+        pt_predicted_values(.phase_list[[i]], x, y) |> dplyr::last()
+    )
+  }
+
+  jump_output
+}
+
+
