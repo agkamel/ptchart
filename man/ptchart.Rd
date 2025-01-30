@@ -7,9 +7,9 @@
 ptchart(object, zoom_x = NULL, zoom_y = NULL, title = "ptchart output")
 }
 \arguments{
-\item{object}{An object of class `ptstat`.}
+\item{object}{An object of class \code{ptstat}.}
 
-\item{zoom_x}{A vector of class `Date` and of length 2 for setting limits for the x axis.}
+\item{zoom_x}{A vector of class \code{Date} and of length 2 for setting limits for the x axis.}
 
 \item{zoom_y}{A numerical vector of length 2 for setting limits for the y axes.}
 
