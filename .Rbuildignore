@@ -5,3 +5,4 @@
 ^package_en_developpement$
 ^data-raw$
 ^\.Rprofile$
+^_admin$
