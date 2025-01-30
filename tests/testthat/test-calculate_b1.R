@@ -19,11 +19,13 @@ test_that("function raises an error if `antilog` is a logical TRUE or FALSE", {
 
 test_that("function works correctly", {
   expect_equal(calculate_b1(day = c(1, 8),
-                            log10_freq = log10(c(1, 2))),
+                            log10_freq = log10(c(1, 2))) |>
+                 round(8),
                expected = 0.04300429)
 
   expect_equal(calculate_b1(day = c(1, 8),
-                            log10_freq = log10(c(1, 0.5))),
+                            log10_freq = log10(c(1, 0.5))) |>
+                 round(8),
                expected = -0.04300429)
 })
 
