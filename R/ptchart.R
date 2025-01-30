@@ -25,7 +25,7 @@ ptchart <- function(object,
   scale_x_params <- make_scale_x_params(object)
   scale_y_params <- make_scale_y_params()
 
-  ggplot2::ggplot(
+  output <- ggplot2::ggplot(
     data = pttable(object)
     ) +
 
@@ -47,11 +47,11 @@ ptchart <- function(object,
 
     ggplot2::scale_x_continuous(
       name = "Jour consécutif du calendrier",
-      breaks = scale_x_params[["date"]][(scale_x_params[["breaks"]])],
+      breaks = scale_x_params[["no_date"]][(scale_x_params[["breaks"]])],
       labels = scale_x_params[["labels"]][!is.na(scale_x_params[["labels"]])],
-      minor_breaks = scale_x_params[["date"]],
-      limits = c(scale_x_params[["date"]][[1]],
-                 scale_x_params[["date"]][[length(scale_x_params[["date"]])]])
+      minor_breaks = scale_x_params[["no_date"]],
+      limits = c(scale_x_params[["no_date"]][[1]],
+                 scale_x_params[["no_date"]][[length(scale_x_params[["no_date"]])]])
       ) +
 
     ggplot2::ggtitle(title) +
@@ -80,7 +80,65 @@ ptchart <- function(object,
     # Ligne séparant les phases
     ggplot2::geom_vline(
       xintercept = lubridate::ymd("2021-08-01")+0.5
+      )
+
+  if (is.na(object$arg_table$date)) {
+
+    output +
+
+    # Time floor
+    ggplot2::geom_point(
+      mapping = ggplot2::aes(x = day, y = time_floor),
+      shape = "\u2013", size = 5, color = "gray30"
+    ) +
+
+      # Count floor
+      ggplot2::geom_point(
+        mapping = ggplot2::aes(x = day, y = count_floor),
+        shape = "\u2012", size = 5, color = "gray20"
       ) +
+
+      # Count ceil
+      ggplot2::geom_point(
+        mapping = ggplot2::aes(x = day, y = count_ceil),
+        shape = "\u2013", size = 5, color = "gray10"
+      ) +
+
+
+
+
+
+
+      #Pente de régression
+      ggplot2::geom_smooth(
+        method = "lm",
+        se = FALSE,
+        mapping = ggplot2::aes(x = day, y = freq, group = phase)
+      ) +
+
+      ggplot2::geom_smooth(
+        method = "lm",
+        se = FALSE,
+        mapping = ggplot2::aes(x = day, y = freq_err, group = phase), color = "red"
+      ) +
+
+      #Point de fréquence cible et non-cible
+      ggplot2::geom_point(
+        mapping = ggplot2::aes(x = day, y = freq),
+        shape = 16#, size = 2
+      ) +
+
+      ggplot2::geom_point(
+        mapping = ggplot2::aes(x = day, y = freq_err),
+        shape = 4, size = 2.5,
+      )
+
+
+
+  } else {
+
+
+  output +
 
     # Plancher d'enregistrement
     #ggplot2::geom_segment(x = ymd("2021-07-20")-0.5,
@@ -149,6 +207,8 @@ ptchart <- function(object,
 
   #geom_abline(slope = object[["terms"]][["b1"]][[1]],
   #           intercept = object[["terms"]][["b0"]][[1]])
+
+  }
 }
 
 
@@ -179,7 +239,12 @@ make_scale_x_params <- function(object) {
   #  wday(first_sunday, week_start = 1) == 7
   #)
 
-  first_sunday <- first_sunday(pttable(object)[["date"]])
+  if (is.na(object$arg_table$date)) {
+    first_sunday <- as.Date(0)
+  } else {
+    first_sunday <- first_sunday(pttable(object)[["date"]])
+  }
+
 
   # Création de la base de données pour ggplot
   tibble::tibble(
