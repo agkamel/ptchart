@@ -156,6 +156,9 @@ pt_errors <- function(.df, x, y) {
 #' #NOT YET
 pt_b1 <- function(.df, x, y) {
 
+  # To prevent note of "no visible binding for global variable 'x'" when building the package
+  log10_y <- x_deviation_from_mean <- NULL
+
   .df_no_NAs <- .remove_NAs(.df, {{ x }}, {{ y }}) |> dplyr::mutate(log10_y = pt_log10(y))
 
   .df_no_NAs <- .df_no_NAs |> dplyr::mutate(
@@ -186,6 +189,9 @@ pt_b1 <- function(.df, x, y) {
 #' @examples
 #' # NOT YET
 pt_b0 <- function(.df, x, y) {
+
+  # To prevent note of "no visible binding for global variable 'x'" when building the package
+  log10_y <- NULL
 
   b1 <- pt_b1(.df, {{ x }}, {{ y }})
 
@@ -282,6 +288,10 @@ pt_bounce_total <- function(.df, x, y) {
 #' @examples
 #' # NOT YET
 pt_accuracy_ratio <- function(.df, y_cor, y_incor) {
+
+  # To prevent note of "no visible binding for global variable 'x'" when building the package
+  x <- y <- NULL
+
   .df_no_NAs <- .remove_NAs(.df, {{ y_cor }}, {{ y_incor }}) |>
     dplyr::rename(y_cor = x, y_incor = y)
 
