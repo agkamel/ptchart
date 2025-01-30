@@ -3,7 +3,29 @@
 #' @param object An object of class `ptstat`.
 #' @param zoom_x A vector of class `Date` and of length 2 for setting limits for the x axis.
 #' @param zoom_y A numerical vector of length 2 for setting limits for the y axes.
+#'
 #' @param title A character vector of length 1 for setting the title.
+#' @param xlab Character vector of length 1. Label of x-axis (default: `"Day"`).
+#' @param ylab Character vector of length 1. Label of y-axis (default: `"Rate"`).
+#'
+#' @param show_time_floor Logical vector of length 1. Is time floor showed (default: `TRUE`) or not (`FALSE`)?
+#' @param show_count_floor Logical vector of length 1. Is counting floor showed (default: `TRUE`) or not (`FALSE`)?
+#' @param show_count_ceil Logical vector of length 1. Is counting ceil showed (default: `TRUE`) or not (`FALSE`)?
+#'
+#' @param show_acc_line Logical vector of length 1. Is acceleration line showed (default: `TRUE`) or not (`FALSE`)?
+#' @param show_dec_line Logical vector of length 1. Is decerelation line showed (default: `TRUE`) or not (`FALSE`)?
+#' @param show_accuracy_line Logical vector of length 1. Is accuracy line showed (default: `TRUE`) or not (`FALSE`)?
+#'
+#' @param show_acc_bounce_lines Logical vector of length 1. Are bounce lines around acceleration showed (default: `TRUE`) or not (`FALSE`)?
+#' @param show_dec_bounce_lines Logical vector of length 1. Are bounce lines around deceleration showed (default: `TRUE`) or not (`FALSE`)?
+#'
+#' @param show_acc_point Logical vector of length 1. Are acceleration data points showed (default: `TRUE`) or not (`FALSE`)?
+#' @param show_dec_point Logical vector of length 1. Are deceleration data points showed (default: `TRUE`) or not (`FALSE`)?
+#' @param show_accuracy_point Logical vector of length 1. Are accuracy data points showed (default: `TRUE`) or not (`FALSE`)?
+#'
+#' @param color_acc_line Character vector of length 1. Color HEX values for acceleration line (default: `"#7CAE00"`).
+#' @param color_dec_line Character vector of length 1. Color HEX values for deceleration line (default: `"#F8766D"`).
+#' @param color_accuracy_line Character vector of length 1. Color HEX values for accuracy line (default: `"#00BFC4"`).
 #'
 #' @return A precision teaching chart.
 #' @export

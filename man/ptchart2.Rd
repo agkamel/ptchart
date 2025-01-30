@@ -17,9 +17,14 @@ ptchart2(
   show_acc_line = TRUE,
   show_dec_line = TRUE,
   show_accuracy_line = TRUE,
-  show_target_point = TRUE,
-  show_nontarget_point = TRUE,
-  show_accuracy_point = TRUE
+  show_acc_bounce_lines = TRUE,
+  show_dec_bounce_lines = TRUE,
+  show_acc_point = TRUE,
+  show_dec_point = TRUE,
+  show_accuracy_point = TRUE,
+  color_acc_line = "#7CAE00",
+  color_dec_line = "#F8766D",
+  color_accuracy_line = "#00BFC4"
 )
 }
 \arguments{
@@ -30,6 +35,38 @@ ptchart2(
 \item{zoom_y}{A numerical vector of length 2 for setting limits for the y axes.}
 
 \item{title}{A character vector of length 1 for setting the title.}
+
+\item{xlab}{Character vector of length 1. Label of x-axis (default: \code{"Day"}).}
+
+\item{ylab}{Character vector of length 1. Label of y-axis (default: \code{"Rate"}).}
+
+\item{show_time_floor}{Logical vector of length 1. Is time floor showed (default: \code{TRUE}) or not (\code{FALSE})?}
+
+\item{show_count_floor}{Logical vector of length 1. Is counting floor showed (default: \code{TRUE}) or not (\code{FALSE})?}
+
+\item{show_count_ceil}{Logical vector of length 1. Is counting ceil showed (default: \code{TRUE}) or not (\code{FALSE})?}
+
+\item{show_acc_line}{Logical vector of length 1. Is acceleration line showed (default: \code{TRUE}) or not (\code{FALSE})?}
+
+\item{show_dec_line}{Logical vector of length 1. Is decerelation line showed (default: \code{TRUE}) or not (\code{FALSE})?}
+
+\item{show_accuracy_line}{Logical vector of length 1. Is accuracy line showed (default: \code{TRUE}) or not (\code{FALSE})?}
+
+\item{show_acc_bounce_lines}{Logical vector of length 1. Are bounce lines around acceleration showed (default: \code{TRUE}) or not (\code{FALSE})?}
+
+\item{show_dec_bounce_lines}{Logical vector of length 1. Are bounce lines around deceleration showed (default: \code{TRUE}) or not (\code{FALSE})?}
+
+\item{show_acc_point}{Logical vector of length 1. Are acceleration data points showed (default: \code{TRUE}) or not (\code{FALSE})?}
+
+\item{show_dec_point}{Logical vector of length 1. Are deceleration data points showed (default: \code{TRUE}) or not (\code{FALSE})?}
+
+\item{show_accuracy_point}{Logical vector of length 1. Are accuracy data points showed (default: \code{TRUE}) or not (\code{FALSE})?}
+
+\item{color_acc_line}{Character vector of length 1. Color HEX values for acceleration line (default: \code{"#7CAE00"}).}
+
+\item{color_dec_line}{Character vector of length 1. Color HEX values for deceleration line (default: \code{"#F8766D"}).}
+
+\item{color_accuracy_line}{Character vector of length 1. Color HEX values for accuracy line (default: \code{"#00BFC4"}).}
 }
 \value{
 A precision teaching chart.
