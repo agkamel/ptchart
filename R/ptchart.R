@@ -46,7 +46,7 @@ ptchart <- function(object,
       ) +
 
     ggplot2::scale_x_continuous(
-      name = "Jour consécutif du calendrier",
+      name = "Jour cons\u00e9cutif du calendrier",
       breaks = scale_x_params[["no_date"]][(scale_x_params[["breaks"]])],
       labels = scale_x_params[["labels"]][!is.na(scale_x_params[["labels"]])],
       minor_breaks = scale_x_params[["no_date"]],
