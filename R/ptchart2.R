@@ -16,15 +16,20 @@ ptchart2 <- function(object,
                     title = "ptchart output",
                     xlab = "Day",
                     ylab = "Rate",
+
                     show_time_floor = TRUE,
                     show_count_floor = TRUE,
                     show_count_ceil = TRUE,
                     show_acc_line = TRUE,
                     show_dec_line = TRUE,
                     show_accuracy_line = TRUE,
-                    show_target_point = TRUE,
-                    show_nontarget_point = TRUE,
+                    show_acc_bounce_lines = TRUE,
+                    show_dec_bounce_lines = TRUE,
+
+                    show_acc_point = TRUE,
+                    show_dec_point = TRUE,
                     show_accuracy_point = TRUE,
+
                     color_acc_line = "#7CAE00",
                     color_dec_line = "#F8766D",
                     color_accuracy_line = "#00BFC4"
@@ -198,8 +203,56 @@ ptchart2 <- function(object,
     }
 
 
+    if (show_acc_bounce_lines) {
 
-    if (show_target_point) {
+      output <- output +
+
+        #Pente de régression
+        ggplot2::geom_smooth(
+          method = "lm",
+          se = FALSE,
+          mapping = ggplot2::aes(x = day, y = freq * 10^max(errors), group = phase),
+          color = color_acc_line,
+          linetype = 2
+        ) +
+        ggplot2::geom_smooth(
+          method = "lm",
+          se = FALSE,
+          mapping = ggplot2::aes(x = day, y = freq * 10^min(errors), group = phase),
+          color = color_acc_line,
+          linetype = 2
+        )
+
+
+    }
+
+    if (show_dec_bounce_lines) {
+
+      output <- output +
+
+        #Pente de régression
+        ggplot2::geom_smooth(
+          method = "lm",
+          se = FALSE,
+          mapping = ggplot2::aes(x = day, y = freq_err * 10^max(errors_err), group = phase),
+          color = color_dec_line,
+          linetype = 2
+        ) +
+        ggplot2::geom_smooth(
+          method = "lm",
+          se = FALSE,
+          mapping = ggplot2::aes(x = day, y = freq_err * 10^min(errors_err), group = phase),
+          color = color_dec_line,
+          linetype = 2
+        )
+
+
+    }
+
+
+
+
+    if (show_acc_point) {
 
       output <- output +
 
@@ -212,7 +265,7 @@ ptchart2 <- function(object,
     }
 
 
-    if (show_nontarget_point) {
+    if (show_dec_point) {
 
       output <- output +
 
@@ -319,7 +372,7 @@ ptchart2 <- function(object,
     }
 
 
-    if (show_target_point) {
+    if (show_acc_point) {
 
       output <- output +
       #Point de fréquence cible et non-cible
@@ -329,7 +382,7 @@ ptchart2 <- function(object,
       )
     }
 
-    if (show_nontarget_point) {
+    if (show_dec_point) {
 
       output <- output +
 
