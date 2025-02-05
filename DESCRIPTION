@@ -1,7 +1,7 @@
 Package: ptchart
 Type: Package
 Title: Generating graphs and calculating measures for precision teaching
-Version: 0.1.0
+Version: 0.1.0.9000
 Author: Alexandre Gellen-Kamel
 Maintainer: The package maintainer <yourself@somewhere.net>
 Description: More about what it does (maybe more than one line)
