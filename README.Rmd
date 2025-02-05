@@ -24,8 +24,8 @@ ptchart is an R package that helps behavior analysts to compute behavioral mesur
 
 There two main functions in ptchart: 
 
-  - `ptstat()` for computing behavioral mesures
-  - `ptchart()` for generating a standardized chart
+- `ptstat()` for computing behavioral mesures
+- `ptchart()` for generating a standardized chart
 
 Please note that this is a beta version.
 

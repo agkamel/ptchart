@@ -14,8 +14,8 @@ Standard Celeration Chart.
 
 There two main functions in ptchart:
 
--   `ptstat()` for computing behavioral mesures
--   `ptchart()` for generating a standardized chart
+- `ptstat()` for computing behavioral mesures
+- `ptchart()` for generating a standardized chart
 
 Please note that this is a beta version.
 
@@ -40,6 +40,11 @@ This is a basic example which shows you how to solve a common problem:
 
 ``` r
 library(ptchart)
+#> 
+#> Attachement du package : 'ptchart'
+#> L'objet suivant est masqué depuis 'package:stats':
+#> 
+#>     terms
 ## basic example code
 ```
 
