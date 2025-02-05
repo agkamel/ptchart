@@ -55,10 +55,26 @@ ptstat(
 \item{...}{Additional arguments.}
 }
 \value{
-An object of class S3 which is a list.
+An S3 object of class \code{ptstat}, a list of computation tables.
 }
 \description{
-ptstat
+Main function for computing main measures of behavior change.
+}
+\details{
+\code{ptchart()} returns a list that contains all calculations.
+More specifically:
+\itemize{
+\item \code{arg_table} is a data frame that contains the call values of the function.
+\item \code{pttable} is a data frame that contains all basic calculations like frequencies, logged frequencies, accuracy ratios, etc. This table can be extracted with \code{pttable()}.
+\item \code{pttables} is a list of data frames with same columns of \code{pttables} except they are splitted by phase.
+\item \code{desc} contains descriptives analysis.
+\item \code{terms} contains terms of a regression model.
+\item \code{a_table} contains accuracy values (or Accuracy Improvement Measure). This table can be extracted with \code{accuracy()}.
+\item \code{c_table} contains celeration values. This table can be extracted with \code{celeration()}.
+\item \code{b_table} contains bounce values. This table can be extracted with \code{bounce()}, \code{bounce_up()}, \code{bounce_down()} or \code{bounce_total()}.
+\item \code{j_table} contains jump values. This table can be extracted with \code{jump()}.
+\item \code{t_table} contains turn values. This table can be extracted with \code{turn()}.
+}
 }
 \section{Methods (by generic)}{
 \itemize{
@@ -66,5 +82,10 @@ ptstat
 
 }}
 \examples{
-# NOT RUN
+ptstat(example_pt_data,
+       day = "jour",
+       count = "reponse",
+       time = "minute",
+       phase = "phase"
+)
 }

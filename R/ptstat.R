@@ -1,5 +1,22 @@
 #' ptstat
 #'
+#' Main function for computing main measures of behavior change.
+#'
+#' @details
+#' `ptchart()` returns a list that contains all calculations.
+#' More specifically:
+#' - `arg_table` is a data frame that contains the call values of the function.
+#' - `pttable` is a data frame that contains all basic calculations like frequencies, logged frequencies, accuracy ratios, etc. This table can be extracted with `pttable()`.
+#' - `pttables` is a list of data frames with same columns of `pttables` except they are splitted by phase.
+#' - `desc` contains descriptives analysis.
+#' - `terms` contains terms of a regression model.
+#' - `a_table` contains accuracy values (or Accuracy Improvement Measure). This table can be extracted with `accuracy()`.
+#' - `c_table` contains celeration values. This table can be extracted with `celeration()`.
+#' - `b_table` contains bounce values. This table can be extracted with `bounce()`, `bounce_up()`, `bounce_down()` or `bounce_total()`.
+#' - `j_table` contains jump values. This table can be extracted with `jump()`.
+#' - `t_table` contains turn values. This table can be extracted with `turn()`.
+#'
+#'
 #' @param data Dataframe.
 #' @param day Numeric. No of the successive day of the calendar. Values must be integers and >= 0.
 #' @param freq Numeric. Frequencies of observations aimed to be accelerated. Values must be >= 0.
@@ -16,11 +33,16 @@
 #' @param x An S3 object of class ptstat.
 #' @param ... Additional arguments.
 #'
-#' @return An object of class S3 which is a list.
+#' @return An S3 object of class `ptstat`, a list of computation tables.
 #' @export
 #'
 #' @examples
-#' # NOT RUN
+#' ptstat(example_pt_data,
+#'        day = "jour",
+#'        count = "reponse",
+#'        time = "minute",
+#'        phase = "phase"
+#' )
 ptstat <- function(data,
                    day = NULL,
                    freq = NULL,
