@@ -97,8 +97,8 @@
 #' @describeIn pt_vct_funs Calculate b1
 pt_vct_b1 <- function(x, y) {
 
-  if (validate_xy_length(x, y)$value == FALSE) {
-    stop(validate_xy_length(x, y)$message)
+  if (validate_xy(x, y)$value == FALSE) {
+    stop(validate_xy(x, y)$message)
   }
 
   index_to_keep <- (!is.na(x) & !is.na(y))

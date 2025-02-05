@@ -108,7 +108,7 @@ validate_arg_time <- function(data, time) {
 
 
 
-validate_xy_length <- function(x, y) {
+validate_xy <- function(x, y) {
 
   if (!is.atomic(x)) {
     return(list(value = FALSE,
