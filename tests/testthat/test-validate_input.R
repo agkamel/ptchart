@@ -115,3 +115,16 @@ test_that("Arg `time` in `ptstat()` throw an error if is not greater than zero",
   expect_error(validate_arg_time(data = data.frame(x = c(-1, 0, 1)),
                                  time = "x"))
 })
+
+
+
+test_that("Arg `time` in `ptstat()` throw an error if is not greater than zero", {
+  expect_equal(validate_xy_length(x = c(1, 2, 3),
+                                  y = c("a", "b", "c")),
+               TRUE)
+
+  expect_equal(validate_xy_length(x = c(1, 2, 3),
+                                  y = c("a", "b")),
+               FALSE)
+
+})
