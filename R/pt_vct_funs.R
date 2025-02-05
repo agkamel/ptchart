@@ -189,6 +189,10 @@ pt_vct_celeration <- function(x, y) {
 #' @export
 #' @describeIn pt_vct_funs Calculate accuracy ratio
 pt_vct_accuracy_ratio <- function(x, y_cor, y_incor) {
+
+  if (validate_xy(x, y_cor)$value == FALSE) { stop(validate_xy(x, y_cor)$message) }
+  if (validate_xy(x, y_incor)$value == FALSE) { stop(validate_xy(x, y_incor)$message) }
+
   index_to_keep <- (!is.na(x) & !is.na(y_cor) & !is.na(y_incor))
   if (sum(index_to_keep) >= 3) {
     x <- x[index_to_keep]
@@ -205,6 +209,10 @@ pt_vct_accuracy_ratio <- function(x, y_cor, y_incor) {
 #' @export
 #' @describeIn pt_vct_funs Calculate accuracy
 pt_vct_accuracy <- function(x, y_cor, y_incor) {
+
+  if (validate_xy(x, y_cor)$value == FALSE) { stop(validate_xy(x, y_cor)$message) }
+  if (validate_xy(x, y_incor)$value == FALSE) { stop(validate_xy(x, y_incor)$message) }
+
   index_to_keep <- (!is.na(x) & !is.na(y_cor) & !is.na(y_incor))
   if (sum(index_to_keep) >= 3) {
     x <- x[index_to_keep]

@@ -110,21 +110,24 @@ validate_arg_time <- function(data, time) {
 
 validate_xy <- function(x, y) {
 
+  x_arg <- substitute(x)
+  y_arg <- substitute(y)
+
   if (!is.atomic(x)) {
     return(list(value = FALSE,
-                message = "`x` must be an atomic vector."))
+                message = paste0("`", x_arg, "` must be an atomic vector.")))
   } else if (!is.atomic(y)) {
     return(list(value = FALSE,
-                message = "`y` must be an atomic vector."))
+                message = paste0("`", y_arg, "` must be an atomic vector.")))
   } else if (!is.numeric(x)) {
     return(list(value = FALSE,
-                message = "`x` must be a numeric vector."))
+                message = paste0("`", x_arg, "` must be a numeric vector.")))
   } else if (!is.numeric(y)) {
     return(list(value = FALSE,
-                message = "`y` must be a numeric vector."))
-  } else if (length(x) != length(y)) {
+                message = paste0("`", y_arg, "` must be a numeric vector.")))
+  } else if (length(x) != length({{ y }})) {
     return(list(value = FALSE,
-                message = "`x` and `y` must have the same length."))
+                message = paste0("`", x_arg, "` and `", y_arg, "` must have the same length.")))
   } else {
     return(list(value = TRUE,
                 message = ""))
