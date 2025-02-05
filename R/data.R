@@ -16,3 +16,12 @@
 #'   \item{phase}{Phase of intervention.}
 #' }
 "example_pt_data"
+
+
+#' Date of day zero.
+#'
+#' Date of day zero. To be used with `example_pt_data`.
+#'
+#' @format ## `example_pt_date_zero`
+#' A vector of class `Date` with only one date: 2021-07-18.
+"example_pt_date_zero"
