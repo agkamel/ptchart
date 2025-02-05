@@ -97,9 +97,7 @@
 #' @describeIn pt_vct_funs Calculate b1
 pt_vct_b1 <- function(x, y) {
 
-  if (validate_xy(x, y)$value == FALSE) {
-    stop(validate_xy(x, y)$message)
-  }
+  if (validate_xy(x, y)$value == FALSE) { stop(validate_xy(x, y)$message) }
 
   index_to_keep <- (!is.na(x) & !is.na(y))
   if (sum(index_to_keep) >= 3) {
@@ -120,6 +118,9 @@ pt_vct_b1 <- function(x, y) {
 #' @export
 #' @describeIn pt_vct_funs Calculate b0
 pt_vct_b0 <- function(x, y) {
+
+  if (validate_xy(x, y)$value == FALSE) { stop(validate_xy(x, y)$message) }
+
   index_to_keep <- (!is.na(x) & !is.na(y))
   if (sum(index_to_keep) >= 3) {
     x <- x[index_to_keep]
@@ -136,6 +137,9 @@ pt_vct_b0 <- function(x, y) {
 #' @export
 #' @describeIn pt_vct_funs Calculate predicted values
 pt_vct_predicted_values <- function(x, y) {
+
+  if (validate_xy(x, y)$value == FALSE) { stop(validate_xy(x, y)$message) }
+
   index_to_keep <- (!is.na(x) & !is.na(y))
   if (sum(index_to_keep) >= 3) {
     x <- x[index_to_keep]
@@ -155,6 +159,9 @@ pt_vct_predicted_values <- function(x, y) {
 #' @export
 #' @describeIn pt_vct_funs Calculate errors
 pt_vct_errors <- function(x, y) {
+
+  if (validate_xy(x, y)$value == FALSE) { stop(validate_xy(x, y)$message) }
+
   index_to_keep <- (!is.na(x) & !is.na(y))
   if (sum(index_to_keep) >= 3) {
     x <- x[index_to_keep]
@@ -171,6 +178,8 @@ pt_vct_errors <- function(x, y) {
 #' @export
 #' @describeIn pt_vct_funs Calculate celeration
 pt_vct_celeration <- function(x, y) {
+
+  if (validate_xy(x, y)$value == FALSE) { stop(validate_xy(x, y)$message) }
 
   b1 <- pt_vct_b1(x, y)
   (10^b1)^7
@@ -216,6 +225,9 @@ pt_vct_accuracy <- function(x, y_cor, y_incor) {
 #' @export
 #' @describeIn pt_vct_funs Calculate bounce up
 pt_vct_bounce_up <- function(x, y) {
+
+  if (validate_xy(x, y)$value == FALSE) { stop(validate_xy(x, y)$message) }
+
   errors <- pt_vct_errors(x, y)
   10^(max(errors))
 }
@@ -223,6 +235,9 @@ pt_vct_bounce_up <- function(x, y) {
 #' @export
 #' @describeIn pt_vct_funs Calculate bounce down
 pt_vct_bounce_down <- function(x, y) {
+
+  if (validate_xy(x, y)$value == FALSE) { stop(validate_xy(x, y)$message) }
+
   errors <- pt_vct_errors(x, y)
   10^(min(errors))
 }
@@ -230,5 +245,8 @@ pt_vct_bounce_down <- function(x, y) {
 #' @export
 #' @describeIn pt_vct_funs Calculate bounce total
 pt_vct_bounce_total <- function(x, y) {
+
+  if (validate_xy(x, y)$value == FALSE) { stop(validate_xy(x, y)$message) }
+
   pt_vct_bounce_up(x, y) * (1 / pt_vct_bounce_down(x, y))
 }
