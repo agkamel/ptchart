@@ -107,6 +107,43 @@ validate_arg_time <- function(data, time) {
 
 
 
+validate_numeric_vctr <- function(x,
+                                  lower_lim_inc = -Inf,
+                                  upper_lim_inc = Inf,
+                                  lower_lim_exc = -Inf,
+                                  upper_lim_exc = Inf
+                                  ) {
+  x_arg <- substitute(x)
+  lower_lim_inc_val <- as.character(lower_lim_inc)
+  upper_lim_inc_val <- as.character(upper_lim_inc)
+  lower_lim_exc_val <- as.character(lower_lim_exc)
+  upper_lim_exc_val <- as.character(upper_lim_exc)
+
+  if (!is.atomic(x)) {
+    return(list(value = FALSE,
+                message = paste0("`", x_arg, "` must be an atomic vector.")))
+  } else if (!is.numeric(x)) {
+    return(list(value = FALSE,
+                message = paste0("`", x_arg, "` must be a numeric vector.")))
+  } else if (any(x < lower_lim_inc)) {
+    return(list(value = FALSE,
+                message = paste0("All values in `", x_arg, "` must be greater or equal than ", lower_lim_inc_val, ".")))
+  } else if (any(x > upper_lim_inc)) {
+    return(list(value = FALSE,
+                message = paste0("All values in `", x_arg, "` must be lower or equal than ", upper_lim_inc_val, ".")))
+  } else if (any(x <= lower_lim_exc)) {
+    return(list(value = FALSE,
+                message = paste0("All values in `", x_arg, "` must be strictly greater than ", lower_lim_exc_val, ".")))
+  } else if (any(x >= upper_lim_exc)) {
+    return(list(value = FALSE,
+                message = paste0("All values in `", x_arg, "` must be strictly lower than ", upper_lim_exc_val, ".")))
+  }  else {
+    return(list(value = TRUE,
+                message = ""))
+  }
+
+
+}
 
 validate_xy <- function(x, y) {
 
