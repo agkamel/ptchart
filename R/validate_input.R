@@ -103,3 +103,15 @@ validate_arg_time <- function(data, time) {
     stop("`time` must be greater than 0`")
   }
 }
+
+
+
+
+
+validate_xy_length <- function(x, y) {
+  if (length(x) != length(y)) {
+    FALSE
+  } else {
+    TRUE
+  }
+}
