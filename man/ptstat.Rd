@@ -3,6 +3,7 @@
 \name{ptstat}
 \alias{ptstat}
 \alias{print.ptstat}
+\alias{is_ptstat}
 \title{ptstat}
 \usage{
 ptstat(
@@ -22,6 +23,8 @@ ptstat(
 )
 
 \method{print}{ptstat}(x, ...)
+
+is_ptstat(x)
 }
 \arguments{
 \item{data}{Dataframe.}
@@ -50,15 +53,19 @@ ptstat(
 
 \item{verbose}{Logical. Show informational messages. Default to \code{TRUE}.}
 
-\item{x}{An S3 object of class ptstat.}
+\item{x}{An R object.}
 
 \item{...}{Additional arguments.}
 }
 \value{
-An S3 object of class \code{ptstat}, a list of computation tables.
+\code{ptstat()} returns an S3 object of class \code{ptstat}, a list of computation tables.
+
+\code{is_ptstat()} returns a boolean scalar.
 }
 \description{
-Main function for computing main measures of behavior change.
+\code{ptchart()} is the main function for computing measures of behavioral change.
+
+\code{is_ptstat()} tests if the object is an S3 object of class \code{"ptstat"} (\code{TRUE}) or not (\code{FALSE}).
 }
 \details{
 \code{ptchart()} returns a list that contains all calculations.
@@ -78,7 +85,7 @@ More specifically:
 }
 \section{Methods (by generic)}{
 \itemize{
-\item \code{print(ptstat)}: Print method for ptstat
+\item \code{print(ptstat)}: Print method for \code{ptstat()}.
 
 }}
 \examples{
@@ -88,4 +95,5 @@ ptstat(example_pt_data,
        time = "minute",
        phase = "phase"
 )
+# TODO
 }

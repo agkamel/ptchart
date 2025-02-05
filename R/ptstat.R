@@ -1,6 +1,6 @@
 #' ptstat
 #'
-#' Main function for computing main measures of behavior change.
+#' `ptchart()` is the main function for computing measures of behavioral change.
 #'
 #' @details
 #' `ptchart()` returns a list that contains all calculations.
@@ -33,7 +33,7 @@
 #' @param x An S3 object of class ptstat.
 #' @param ... Additional arguments.
 #'
-#' @return An S3 object of class `ptstat`, a list of computation tables.
+#' @return `ptstat()` returns an S3 object of class `ptstat`, a list of computation tables.
 #' @export
 #'
 #' @examples
@@ -431,10 +431,26 @@ validate_ptstat <- function(x) { # Validateur S3
 }
 
 #' @export
-#' @describeIn ptstat Print method for ptstat
+#' @describeIn ptstat Print method for `ptstat()`.
 print.ptstat <- function(x, ...) { # Method print.ptstat()
   cat("", sep = "\n")
   cat("PT Tables", sep = "\n")
   print(x$pttables, ...)
   return(invisible(x))
 }
+
+
+
+#' @description `is_ptstat()` tests if the object is an S3 object of class `"ptstat"` (`TRUE`) or not (`FALSE`).
+#'
+#' @param x An R object.
+#'
+#' @return `is_ptstat()` returns a boolean scalar.
+#' @export
+#' @rdname ptstat
+#' @examples
+#' # TODO
+is_ptstat <- function(x) {
+  return(inherits(x, "ptstat"))
+}
+
