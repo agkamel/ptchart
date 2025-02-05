@@ -109,9 +109,24 @@ validate_arg_time <- function(data, time) {
 
 
 validate_xy_length <- function(x, y) {
-  if (length(x) != length(y)) {
-    FALSE
+
+  if (!is.atomic(x)) {
+    return(list(value = FALSE,
+                message = "`x` must be an atomic vector."))
+  } else if (!is.atomic(y)) {
+    return(list(value = FALSE,
+                message = "`y` must be an atomic vector."))
+  } else if (!is.numeric(x)) {
+    return(list(value = FALSE,
+                message = "`x` must be a numeric vector."))
+  } else if (!is.numeric(y)) {
+    return(list(value = FALSE,
+                message = "`y` must be a numeric vector."))
+  } else if (length(x) != length(y)) {
+    return(list(value = FALSE,
+                message = "`x` and `y` must have the same length."))
   } else {
-    TRUE
+    return(list(value = TRUE,
+                message = ""))
   }
 }

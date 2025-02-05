@@ -120,11 +120,11 @@ test_that("Arg `time` in `ptstat()` throw an error if is not greater than zero",
 
 test_that("Arg `time` in `ptstat()` throw an error if is not greater than zero", {
   expect_equal(validate_xy_length(x = c(1, 2, 3),
-                                  y = c("a", "b", "c")),
+                                  y = c(1, 4, 5))$value,
                TRUE)
 
   expect_equal(validate_xy_length(x = c(1, 2, 3),
-                                  y = c("a", "b")),
+                                  y = c("a", "b"))$value,
                FALSE)
 
 })
