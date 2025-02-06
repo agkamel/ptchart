@@ -1,4 +1,4 @@
-#' ptstat
+#' Computing measures of behavioral change.
 #'
 #' `ptchart()` is the main function for computing measures of behavioral change.
 #'
