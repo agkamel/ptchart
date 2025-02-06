@@ -106,7 +106,7 @@ ptstat <- function(data,
   }
 
 
-  # Conditions for sypplying time
+  # Conditions for supplying time
   if (is.null(time)) {
     stop("! `time` must be supplied.")
   }
