@@ -6,3 +6,4 @@
 ^data-raw$
 ^\.Rprofile$
 ^_admin$
+^R\_development$
