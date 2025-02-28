@@ -4,20 +4,23 @@
 # ptchart
 
 <!-- badges: start -->
+
+[![Lifecycle:
+experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
 <!-- badges: end -->
 
 ## Overview
 
-ptchart is an R package that helps behavior analysts to compute
-behavioral mesures and/or generate standardized charts based on the
-Standard Celeration Chart.
+**ptchart** is an R package that provides precision teachers and
+behavior analysts tools to compute and work behavioral mesures, to
+generate standardized charts.
 
 There two main functions in ptchart:
 
 - `ptstat()` for computing behavioral mesures
 - `ptchart()` for generating a standardized chart
 
-Please note that this is a beta version.
+Please note that this package is in active developpement.
 
 ## Installation
 
@@ -34,7 +37,7 @@ Install the development version via GitHub:
 devtools::install_github("agkamel/ptchart")
 ```
 
-## Example
+## Computing measures with `ptchart`
 
 This is a basic example which shows you how to solve a common problem:
 
