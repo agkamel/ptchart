@@ -13,28 +13,28 @@
 #' #TODO
 
 #' @export
-#' @describeIn extractors Extract accuracy table
+#' @describeIn deprec_extractors Extract accuracy table
 extract_accuracy <- function(object) {
   stopifnot("! `object` must be of class `ptstat`" = is_ptstat(object))
   object[["a_table"]]
 }
 
 #' @export
-#' @describeIn extractors Extract celeration table
+#' @describeIn deprec_extractors Extract celeration table
 extract_celeration <- function(object) {
   stopifnot("! `object` must be of class `ptstat`" = is_ptstat(object))
   object[["c_table"]]
 }
 
 #' @export
-#' @describeIn extractors Extract bounce table
+#' @describeIn deprec_extractors Extract bounce table
 extract_bounce <- function(object) {
   stopifnot("! `object` must be of class `ptstat`" = is_ptstat(object))
   object[["b_table"]]
 }
 
 #' @export
-#' @describeIn extractors Extract only bounce up
+#' @describeIn deprec_extractors Extract only bounce up
 extract_bounce_up <- function(object) {
   stopifnot("! `object` must be of class `ptstat`" = is_ptstat(object))
   ptobject <- extract_bounce(object)
@@ -42,7 +42,7 @@ extract_bounce_up <- function(object) {
 }
 
 #' @export
-#' @describeIn extractors Extract only bounce down
+#' @describeIn deprec_extractors Extract only bounce down
 extract_bounce_down <- function(object) {
   stopifnot("! `object` must be of class `ptstat`" = is_ptstat(object))
   ptobject <- extract_bounce(object)
@@ -50,7 +50,7 @@ extract_bounce_down <- function(object) {
 }
 
 #' @export
-#' @describeIn extractors Extract only bounce total
+#' @describeIn deprec_extractors Extract only bounce total
 extract_bounce_total <- function(object) {
   stopifnot("! `object` must be of class `ptstat`" = is_ptstat(object))
   ptobject <- extract_bounce(object)
@@ -58,35 +58,35 @@ extract_bounce_total <- function(object) {
 }
 
 #' @export
-#' @describeIn extractors Extract jump table
+#' @describeIn deprec_extractors Extract jump table
 extract_jump <- function(object) {
   stopifnot("! `object` must be of class `ptstat`" = is_ptstat(object))
   object[["j_table"]]
 }
 
 #' @export
-#' @describeIn extractors Extract turn table
+#' @describeIn deprec_extractors Extract turn table
 extract_turn <- function(object) {
   stopifnot("! `object` must be of class `ptstat`" = is_ptstat(object))
   object[["t_table"]]
 }
 
 #' @export
-#' @describeIn extractors Extract descriptive statistics table
+#' @describeIn deprec_extractors Extract descriptive statistics table
 extract_describe <- function(object) {
   stopifnot("! `object` must be of class `ptstat`" = is_ptstat(object))
   object[["desc"]]
 }
 
 #' @export
-#' @describeIn extractors Extract regression terms table
+#' @describeIn deprec_extractors Extract regression terms table
 extract_terms <- function(object) {
   stopifnot("! `object` must be of class `ptstat`" = is_ptstat(object))
   object[["terms"]]
 }
 
 #' @export
-#' @describeIn extractors Extract pttable table
+#' @describeIn deprec_extractors Extract pttable table
 extract_pttable <- function(object) {
   stopifnot("! `object` must be of class `ptstat`" = is_ptstat(object))
   object[["pttable"]]
