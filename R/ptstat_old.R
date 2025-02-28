@@ -1,9 +1,17 @@
 #' Computing measures of behavioral change.
 #'
-#' `ptchart()` is the main function for computing measures of behavioral change.
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' This function was deprecated because the code was hard to read and maintain.
+#' Use `ptchart()` instead.
+#'
+#' `ptstat_old()` is the main function for computing measures of behavioral change.
+#'
 #'
 #' @details
-#' `ptchart()` returns a list that contains all calculations.
+#' `ptstat_old()` returns a list that contains all calculations.
 #' More specifically:
 #' - `arg_table` is a data frame that contains the call values of the function.
 #' - `pttable` is a data frame that contains all basic calculations like frequencies, logged frequencies, accuracy ratios, etc. This table can be extracted with `pttable()`.
@@ -31,6 +39,7 @@
 #' @param count_ceil Double. NOTE. Name may be changed...
 #' @param verbose Logical. Show informational messages. Default to `TRUE`.
 #'
+#' @keywords internal
 #' @return `ptstat_old()` returns an S3 object of class `ptstat`, a list of computation tables.
 #' @rdname ptstat_old
 #' @export
@@ -56,6 +65,8 @@ ptstat_old <- function(data,
                    count_ceil = NULL,
                    verbose = TRUE
                    ) {
+
+  lifecycle::deprecate_warn("0.1.0.9000", "ptstat_old()", "ptstat()")
 
   # Validate input
   validate_arg_data(data)

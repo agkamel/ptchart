@@ -51,10 +51,15 @@ ptstat_old(
 \code{ptstat_old()} returns an S3 object of class \code{ptstat}, a list of computation tables.
 }
 \description{
-\code{ptchart()} is the main function for computing measures of behavioral change.
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
+
+This function was deprecated because the code was hard to read and maintain.
+Use \code{ptchart()} instead.
+
+\code{ptstat_old()} is the main function for computing measures of behavioral change.
 }
 \details{
-\code{ptchart()} returns a list that contains all calculations.
+\code{ptstat_old()} returns a list that contains all calculations.
 More specifically:
 \itemize{
 \item \code{arg_table} is a data frame that contains the call values of the function.
@@ -77,3 +82,4 @@ ptstat_old(example_pt_data,
        phase = "phase"
 )
 }
+\keyword{internal}
