@@ -1,4 +1,29 @@
-ptstat2 <- function(.df,
+#' New ptstat function in development.
+#'
+#' @param .df Dataframe.
+#' @param day Integer.
+#' @param freq Double.
+#' @param phase Character.
+#' @param date Date class.
+#' @param date_zero Scalar date class.
+#' @param count Integer.
+#' @param time Double.
+#' @param count_err Integer.
+#' @param freq_err Double.
+#' @param count_floor Double.
+#' @param count_ceil Double.
+#' @param verbose Logical scalar.
+#' @param x An S3 object of class ptstat.
+#' @param ... Additional arguments.
+#'
+#' @returns An S3 object of class `ptstat`, which is a list.
+#' @export
+#'
+#' @examples
+#' ptstat(example_pt_data,
+#'        day = jour, freq = frequence, phase = phase,
+#'        freq_err = frequence_nc)
+ptstat <- function(.df,
                    day = NULL,
                    freq = NULL,
                    phase = NULL,
@@ -97,5 +122,56 @@ ptstat2 <- function(.df,
       jump = ptvalue::as_ptvalue(jump)
     )
 
+
+  ptstat_list <- list(
+    main_df = main_df,
+    single_phase_table = single_phase_table
+  )
+
+  validate_ptstat(new_ptstat(ptstat_list))
+
 }
+
+
+
+
+new_ptstat <- function(x = list()) { # Constructeur S3
+  stopifnot(is.list(x))
+  structure(x,
+            class = "ptstat"
+  )
+}
+
+validate_ptstat <- function(x) { # Validateur S3
+  values <- unclass(x)
+  x
+}
+
+#' @export
+#' @describeIn ptstat Print method for `ptstat()`.
+print.ptstat <- function(x, ...) { # Method print.ptstat()
+  cat("", sep = "\n")
+  cat("PT Tables", sep = "\n")
+  print(x$pttables, ...)
+  return(invisible(x))
+}
+
+
+
+#' @description `is_ptstat()` tests if the object is an S3 object of class `"ptstat"` (`TRUE`) or not (`FALSE`).
+#'
+#' @param x An R object.
+#'
+#' @return `is_ptstat()` returns a boolean scalar.
+#' @export
+#' @rdname ptstat
+#' @examples
+#' # TODO
+is_ptstat <- function(x) {
+  return(inherits(x, "ptstat"))
+}
+
+
+
+
 

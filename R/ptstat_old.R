@@ -30,8 +30,6 @@
 #' @param count_floor Double. NOTE. Name may be changed...
 #' @param count_ceil Double. NOTE. Name may be changed...
 #' @param verbose Logical. Show informational messages. Default to `TRUE`.
-#' @param x An S3 object of class ptstat.
-#' @param ... Additional arguments.
 #'
 #' @return `ptstat_old()` returns an S3 object of class `ptstat`, a list of computation tables.
 #' @rdname ptstat_old
@@ -419,39 +417,4 @@ ptstat_old <- function(data,
   validate_ptstat(new_ptstat(ptstat_list))
 }
 
-new_ptstat <- function(x = list()) { # Constructeur S3
-  stopifnot(is.list(x))
-  structure(x,
-            class = "ptstat"
-  )
-}
-
-validate_ptstat <- function(x) { # Validateur S3
-  values <- unclass(x)
-  x
-}
-
-#' @export
-#' @describeIn ptstat_old Print method for `ptstat()`.
-print.ptstat <- function(x, ...) { # Method print.ptstat()
-  cat("", sep = "\n")
-  cat("PT Tables", sep = "\n")
-  print(x$pttables, ...)
-  return(invisible(x))
-}
-
-
-
-#' @description `is_ptstat()` tests if the object is an S3 object of class `"ptstat"` (`TRUE`) or not (`FALSE`).
-#'
-#' @param x An R object.
-#'
-#' @return `is_ptstat()` returns a boolean scalar.
-#' @export
-#' @rdname ptstat_old
-#' @examples
-#' # TODO
-is_ptstat <- function(x) {
-  return(inherits(x, "ptstat"))
-}
 

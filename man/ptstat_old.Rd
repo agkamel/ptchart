@@ -2,8 +2,6 @@
 % Please edit documentation in R/ptstat_old.R
 \name{ptstat_old}
 \alias{ptstat_old}
-\alias{print.ptstat}
-\alias{is_ptstat}
 \title{Computing measures of behavioral change.}
 \usage{
 ptstat_old(
@@ -21,10 +19,6 @@ ptstat_old(
   count_ceil = NULL,
   verbose = TRUE
 )
-
-\method{print}{ptstat}(x, ...)
-
-is_ptstat(x)
 }
 \arguments{
 \item{data}{Dataframe.}
@@ -52,20 +46,12 @@ is_ptstat(x)
 \item{count_ceil}{Double. NOTE. Name may be changed...}
 
 \item{verbose}{Logical. Show informational messages. Default to \code{TRUE}.}
-
-\item{x}{An R object.}
-
-\item{...}{Additional arguments.}
 }
 \value{
 \code{ptstat_old()} returns an S3 object of class \code{ptstat}, a list of computation tables.
-
-\code{is_ptstat()} returns a boolean scalar.
 }
 \description{
 \code{ptchart()} is the main function for computing measures of behavioral change.
-
-\code{is_ptstat()} tests if the object is an S3 object of class \code{"ptstat"} (\code{TRUE}) or not (\code{FALSE}).
 }
 \details{
 \code{ptchart()} returns a list that contains all calculations.
@@ -83,11 +69,6 @@ More specifically:
 \item \code{t_table} contains turn values. This table can be extracted with \code{turn()}.
 }
 }
-\section{Functions}{
-\itemize{
-\item \code{print(ptstat)}: Print method for \code{ptstat()}.
-
-}}
 \examples{
 ptstat_old(example_pt_data,
        day = "jour",
@@ -95,5 +76,4 @@ ptstat_old(example_pt_data,
        time = "minute",
        phase = "phase"
 )
-# TODO
 }
