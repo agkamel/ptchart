@@ -4,7 +4,7 @@
 \alias{ptstat}
 \alias{print.ptstat}
 \alias{is_ptstat}
-\title{New ptstat function in development.}
+\title{Computing measures of behavioral change.}
 \usage{
 ptstat(
   .df,
@@ -63,6 +63,8 @@ An S3 object of class \code{ptstat}, which is a list.
 \code{is_ptstat()} returns a boolean scalar.
 }
 \description{
+\code{ptstat_old()} is the main function for computing measures of behavioral change.
+
 \code{is_ptstat()} tests if the object is an S3 object of class \code{"ptstat"} (\code{TRUE}) or not (\code{FALSE}).
 }
 \section{Methods (by generic)}{

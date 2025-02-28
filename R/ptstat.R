@@ -1,4 +1,9 @@
-#' New ptstat function in development.
+#' Computing measures of behavioral change.
+#'
+#' @description
+#'
+#'
+#' `ptstat_old()` is the main function for computing measures of behavioral change.
 #'
 #' @param .df Dataframe.
 #' @param day Integer.
