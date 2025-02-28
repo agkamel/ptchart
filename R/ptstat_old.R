@@ -4,8 +4,9 @@
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' This function was deprecated because the code was hard to read and maintain.
-#' Use `ptchart()` instead.
+#' This function was deprecated and renamed from `ptstat()` to `ptstat_old()`
+#' because the code was hard to read and maintain.
+#' Use the new `ptchart()` instead.
 #'
 #' `ptstat_old()` is the main function for computing measures of behavioral change.
 #'
