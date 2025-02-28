@@ -33,17 +33,18 @@
 #' @param x An S3 object of class ptstat.
 #' @param ... Additional arguments.
 #'
-#' @return `ptstat()` returns an S3 object of class `ptstat`, a list of computation tables.
+#' @return `ptstat_old()` returns an S3 object of class `ptstat`, a list of computation tables.
+#' @rdname ptstat_old
 #' @export
 #'
 #' @examples
-#' ptstat(example_pt_data,
+#' ptstat_old(example_pt_data,
 #'        day = "jour",
 #'        count = "reponse",
 #'        time = "minute",
 #'        phase = "phase"
 #' )
-ptstat <- function(data,
+ptstat_old <- function(data,
                    day = NULL,
                    freq = NULL,
                    phase = NULL,
@@ -431,7 +432,7 @@ validate_ptstat <- function(x) { # Validateur S3
 }
 
 #' @export
-#' @describeIn ptstat Print method for `ptstat()`.
+#' @describeIn ptstat_old Print method for `ptstat()`.
 print.ptstat <- function(x, ...) { # Method print.ptstat()
   cat("", sep = "\n")
   cat("PT Tables", sep = "\n")
@@ -447,7 +448,7 @@ print.ptstat <- function(x, ...) { # Method print.ptstat()
 #'
 #' @return `is_ptstat()` returns a boolean scalar.
 #' @export
-#' @rdname ptstat
+#' @rdname ptstat_old
 #' @examples
 #' # TODO
 is_ptstat <- function(x) {
