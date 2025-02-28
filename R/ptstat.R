@@ -18,7 +18,6 @@
 #'
 #' @returns An S3 object of class `ptstat`, which is a list.
 #' @export
-#'
 #' @examples
 #' ptstat(example_pt_data,
 #'        day = jour, freq = frequence, phase = phase,
@@ -38,7 +37,7 @@ ptstat <- function(.df,
                    verbose = TRUE
                    ) {
 
-  .count <- .count_ceil <- .count_err <- .count_floor <- .date <- .day <- .freq <- .freq_err <- .phase <- .time <- b0 <- b1 <- b_down <- b_total <- b_up <- cel <- first_day <- first_freq <- lag_freq <- lead_day <- new_freq <- NULL
+  .count <- .count_ceil <- .count_err <- .count_floor <- .date <- .day <- .freq <- .freq_err <- .phase <- .time <- b0 <- b1 <- b_down <- b_total <- b_up <- cel <- first_day <- first_freq <- lag_freq <- lead_day <- new_freq <- turn <- jump <-  NULL
 
   # First scenario
   # date, count, time are provided
