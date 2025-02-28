@@ -120,7 +120,7 @@ ptchart2 <- function(object,
     )
 
   output <- ggplot2::ggplot(
-    data = pttable(object)
+    data = extract_pttable(object)
   ) +
     gg_scale_y_log10 +
     gg_scale_x_continuous +
@@ -475,7 +475,7 @@ make_scale_x_params2 <- function(object) {
   if (is.na(object$arg_table$date)) {
     first_sunday <- as.Date(0)
   } else {
-    first_sunday <- first_sunday(pttable(object)[["date"]])
+    first_sunday <- first_sunday(extract_pttable(object)[["date"]])
   }
 
 

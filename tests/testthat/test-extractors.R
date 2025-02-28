@@ -1,25 +1,25 @@
 test_that("object is of class ptstat", {
-  expect_error(celeration("x"))
+  expect_error(extract_celeration("x"))
 })
 
 test_that("object is of class ptstat", {
-  expect_error(bounce("x"))
+  expect_error(extract_bounce("x"))
 })
 
 test_that("object is of class ptstat", {
-  expect_error(bounce_up("x"))
+  expect_error(extract_bounce_up("x"))
 })
 
 test_that("object is of class ptstat", {
-  expect_error(bounce_down("x"))
+  expect_error(extract_bounce_down("x"))
 })
 
 test_that("object is of class ptstat", {
-  expect_error(bounce_total("x"))
+  expect_error(extract_bounce_total("x"))
 })
 
 test_that("object is of class ptstat", {
-  expect_error(jump("x"))
+  expect_error(extract_jump("x"))
 })
 
 test_that("object is of class ptstat", {
@@ -35,5 +35,5 @@ test_that("object is of class ptstat", {
 })
 
 test_that("object is of class ptstat", {
-  expect_error(pttable("x"))
+  expect_error(extract_pttable("x"))
 })
