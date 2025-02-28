@@ -53,8 +53,9 @@ ptstat_old(
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-This function was deprecated because the code was hard to read and maintain.
-Use \code{ptchart()} instead.
+This function was deprecated and renamed from \code{ptstat()} to \code{ptstat_old()}
+because the code was hard to read and maintain.
+Use the new \code{ptchart()} instead.
 
 \code{ptstat_old()} is the main function for computing measures of behavioral change.
 }

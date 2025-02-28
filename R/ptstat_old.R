@@ -41,7 +41,7 @@
 #'
 #' @keywords internal
 #' @return `ptstat_old()` returns an S3 object of class `ptstat`, a list of computation tables.
-#' @rdname ptstat_old
+#' @rdname deprec_ptstat_old
 #' @export
 #'
 #' @examples
