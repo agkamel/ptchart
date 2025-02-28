@@ -1,9 +1,12 @@
 Package: ptchart
 Type: Package
-Title: Generating graphs and calculating measures for precision teaching
+Title: Computing Precision Teaching graphs and measures with Precision Teaching data
+Authors@R: c(
+    person(, role = "ctb"),
+    person("Alexandre", "Gellen-Kamel", role = c("aut", "cre"),
+           comment = c(ORCID = "0000-0002-0382-2478"))
+  )
 Version: 0.1.0.9000
-Author: Alexandre Gellen-Kamel
-Maintainer: The package maintainer <yourself@somewhere.net>
 Description: More about what it does (maybe more than one line)
     Use four spaces when indenting paragraphs within the Description.
 License: CC BY 4.0
