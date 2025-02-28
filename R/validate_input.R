@@ -106,7 +106,6 @@ validate_arg_time <- function(data, time) {
 
 
 
-
 validate_numeric_vctr <- function(x,
                                   lower_lim = -Inf,
                                   upper_lim = Inf,
@@ -153,6 +152,12 @@ validate_numeric_vctr <- function(x,
                   message = ""))
 }
 
+
+# TODO ?
+#validate_logical_vctr
+#validate_character_vctr
+
+
 validate_xy <- function(x, y) {
 
   x_arg <- substitute(x)
@@ -178,3 +183,18 @@ validate_xy <- function(x, y) {
                 message = ""))
   }
 }
+
+
+
+
+
+
+# For testing validator
+a_generic_function <- function(some_arg) {
+
+  if (validate_numeric_vctr(some_arg)$value == FALSE) { stop(validate_numeric_vctr(some_arg)$message) }
+
+  TRUE
+
+}
+#a_generic_function(c(1, 2,3,Inf))
