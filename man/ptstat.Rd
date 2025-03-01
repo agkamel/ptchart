@@ -10,13 +10,13 @@ ptstat(
   .df,
   day = NULL,
   freq = NULL,
+  freq_err = NULL,
   phase = NULL,
   date = NULL,
   date_zero = NULL,
   count = NULL,
-  time = NULL,
   count_err = NULL,
-  freq_err = NULL,
+  time = NULL,
   count_floor = NULL,
   count_ceil = NULL,
   verbose = TRUE
@@ -29,29 +29,29 @@ is_ptstat(x)
 \arguments{
 \item{.df}{Dataframe.}
 
-\item{day}{Integer.}
+\item{day}{Integer. No of the successive day of the calendar. Values must be integers and >= 0.}
 
-\item{freq}{Double.}
+\item{freq}{Double. Frequencies of observations aimed to be accelerated. Values must be >= 0.}
 
-\item{phase}{Character.}
+\item{freq_err}{Double. Frequencies of observations aimed to be decelerated. Values must be >= 0.}
 
-\item{date}{Date class.}
+\item{phase}{Character. Phase of intervention. If none are provided, default phase is \code{"A"} for all observations. Note: Providing factor vector to be implemented.}
 
-\item{date_zero}{Scalar date class.}
+\item{date}{Date. Dates of observations in the format "yyyy-mm-dd". If \code{date_zero} is not provided, the closest sunday before the first date will be used for \code{date_zero}.}
 
-\item{count}{Integer.}
+\item{date_zero}{Date scalar. Date of length one. A date that correspond to day 0 in the format "yyyy-mm-dd".}
 
-\item{time}{Double.}
+\item{count}{Integer. Count of responses aimed to be accelerated. Values must be >= 0.}
 
-\item{count_err}{Integer.}
+\item{count_err}{Integer. Count of responses aimed to be decelerated. Values must be >= 0.}
 
-\item{freq_err}{Double.}
+\item{time}{Double. Number of minutes. Values must be > 0.}
 
-\item{count_floor}{Double.}
+\item{count_floor}{Double. NOTE. Name may be changed...}
 
-\item{count_ceil}{Double.}
+\item{count_ceil}{Double. NOTE. Name may be changed...}
 
-\item{verbose}{Logical scalar.}
+\item{verbose}{Logical scalar. Show informational messages. Default to \code{TRUE}.}
 
 \item{x}{An R object.}
 

@@ -6,18 +6,18 @@
 #' `ptstat_old()` is the main function for computing measures of behavioral change.
 #'
 #' @param .df Dataframe.
-#' @param day Integer.
-#' @param freq Double.
-#' @param phase Character.
-#' @param date Date class.
-#' @param date_zero Scalar date class.
-#' @param count Integer.
-#' @param time Double.
-#' @param count_err Integer.
-#' @param freq_err Double.
-#' @param count_floor Double.
-#' @param count_ceil Double.
-#' @param verbose Logical scalar.
+#' @param day Integer. No of the successive day of the calendar. Values must be integers and >= 0.
+#' @param freq Double. Frequencies of observations aimed to be accelerated. Values must be >= 0.
+#' @param freq_err Double. Frequencies of observations aimed to be decelerated. Values must be >= 0.
+#' @param phase Character. Phase of intervention. If none are provided, default phase is `"A"` for all observations. Note: Providing factor vector to be implemented.
+#' @param date Date. Dates of observations in the format "yyyy-mm-dd". If `date_zero` is not provided, the closest sunday before the first date will be used for `date_zero`.
+#' @param date_zero Date scalar. Date of length one. A date that correspond to day 0 in the format "yyyy-mm-dd".
+#' @param count Integer. Count of responses aimed to be accelerated. Values must be >= 0.
+#' @param count_err Integer. Count of responses aimed to be decelerated. Values must be >= 0.
+#' @param time Double. Number of minutes. Values must be > 0.
+#' @param count_floor Double. NOTE. Name may be changed...
+#' @param count_ceil Double. NOTE. Name may be changed...
+#' @param verbose Logical scalar. Show informational messages. Default to `TRUE`.
 #' @param x An S3 object of class ptstat.
 #' @param ... Additional arguments.
 #'
@@ -30,13 +30,13 @@
 ptstat <- function(.df,
                    day = NULL,
                    freq = NULL,
+                   freq_err = NULL,
                    phase = NULL,
                    date = NULL,
                    date_zero = NULL,
                    count = NULL,
-                   time = NULL,
                    count_err = NULL,
-                   freq_err = NULL,
+                   time = NULL,
                    count_floor = NULL,
                    count_ceil = NULL,
                    verbose = TRUE
