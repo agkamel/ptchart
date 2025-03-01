@@ -3,50 +3,44 @@
 \name{pt_vct_b1}
 \alias{pt_vct_b1}
 \alias{pt_vct_b0}
-\alias{pt_vct_predicted_values}
-\alias{pt_vct_errors}
 \alias{pt_vct_celeration}
-\alias{pt_vct_accuracy_ratio}
-\alias{pt_vct_accuracy}
+\alias{pt_vct_celeration_0}
 \alias{pt_vct_bounce_up}
 \alias{pt_vct_bounce_down}
 \alias{pt_vct_bounce_total}
-\title{Functions for calculating pt values with two vectors}
+\alias{pt_vct_accuracy}
+\title{Vectorized functions for summary PT measures}
 \usage{
 pt_vct_b1(x, y)
 
 pt_vct_b0(x, y)
 
-pt_vct_predicted_values(x, y)
-
-pt_vct_errors(x, y)
-
 pt_vct_celeration(x, y)
 
-pt_vct_accuracy_ratio(x, y_cor, y_incor)
-
-pt_vct_accuracy(x, y_cor, y_incor)
+pt_vct_celeration_0(x, y)
 
 pt_vct_bounce_up(x, y)
 
 pt_vct_bounce_down(x, y)
 
 pt_vct_bounce_total(x, y)
+
+pt_vct_accuracy(x, y_cor, y_incor)
 }
 \arguments{
-\item{x}{Day of calendar}
+\item{x}{Integer. Day of calendar}
 
-\item{y}{Frequency}
+\item{y}{Double. Frequency}
 
-\item{y_cor}{Correct frequency}
+\item{y_cor}{Double. Correct frequency}
 
-\item{y_incor}{Incorrect frequency}
+\item{y_incor}{Double. Incorrect frequency}
 }
 \value{
-A single value or a vector
+A single value as a double scalar.
 }
 \description{
-Functions for calculating pt values with two vectors
+These funtions are summary PT measures that returns only a single value.
 }
 \section{Functions}{
 \itemize{
@@ -54,21 +48,17 @@ Functions for calculating pt values with two vectors
 
 \item \code{pt_vct_b0()}: Calculate b0
 
-\item \code{pt_vct_predicted_values()}: Calculate predicted values
-
-\item \code{pt_vct_errors()}: Calculate errors
-
 \item \code{pt_vct_celeration()}: Calculate celeration
 
-\item \code{pt_vct_accuracy_ratio()}: Calculate accuracy ratio
-
-\item \code{pt_vct_accuracy()}: Calculate accuracy
+\item \code{pt_vct_celeration_0()}: Calculate celeration intercept
 
 \item \code{pt_vct_bounce_up()}: Calculate bounce up
 
 \item \code{pt_vct_bounce_down()}: Calculate bounce down
 
 \item \code{pt_vct_bounce_total()}: Calculate bounce total
+
+\item \code{pt_vct_accuracy()}: Calculate accuracy
 
 }}
 \section{Slope}{

@@ -1,11 +1,14 @@
-#' Functions for calculating pt values with two vectors
+#' Vectorized functions for summary PT measures
 #'
-#' @param x Day of calendar
-#' @param y Frequency
-#' @param y_cor Correct frequency
-#' @param y_incor Incorrect frequency
+#' @description
+#' These funtions are summary PT measures that returns only a single value.
 #'
-#' @return A single value or a vector
+#' @param x Integer. Day of calendar
+#' @param y Double. Frequency
+#' @param y_cor Double. Correct frequency
+#' @param y_incor Double. Incorrect frequency
+#'
+#' @return A single value as a double scalar.
 #'
 #' @details
 #'
@@ -94,7 +97,7 @@
 #' # NOT YET
 #'
 #' @export
-#' @describeIn pt_vct_funs Calculate b1
+#' @describeIn summary_funs Calculate b1
 pt_vct_b1 <- function(x, y) {
 
   if (validate_xy(x, y)$value == FALSE) { stop(validate_xy(x, y)$message) }
@@ -116,7 +119,7 @@ pt_vct_b1 <- function(x, y) {
 }
 
 #' @export
-#' @describeIn pt_vct_funs Calculate b0
+#' @describeIn summary_funs Calculate b0
 pt_vct_b0 <- function(x, y) {
 
   if (validate_xy(x, y)$value == FALSE) { stop(validate_xy(x, y)$message) }
@@ -134,49 +137,10 @@ pt_vct_b0 <- function(x, y) {
   mean(log10_y) - (b1 * mean(x))
 }
 
-#' @export
-#' @describeIn pt_vct_funs Calculate predicted values
-pt_vct_predicted_values <- function(x, y) {
 
-  if (validate_xy(x, y)$value == FALSE) { stop(validate_xy(x, y)$message) }
-
-  index_to_keep <- (!is.na(x) & !is.na(y))
-  if (sum(index_to_keep) >= 3) {
-    x <- x[index_to_keep]
-    y <- y[index_to_keep]
-    log10_y <- log10(y)
-  } else {
-    return(NA)
-  }
-
-  b0 <- pt_vct_b0(x, y)
-  b1 <- pt_vct_b1(x, y)
-
-  b0 + b1 * x
-
-}
 
 #' @export
-#' @describeIn pt_vct_funs Calculate errors
-pt_vct_errors <- function(x, y) {
-
-  if (validate_xy(x, y)$value == FALSE) { stop(validate_xy(x, y)$message) }
-
-  index_to_keep <- (!is.na(x) & !is.na(y))
-  if (sum(index_to_keep) >= 3) {
-    x <- x[index_to_keep]
-    y <- y[index_to_keep]
-    log10_y <- log10(y)
-  } else {
-    return(NA)
-  }
-
-  predicted_values <- pt_vct_predicted_values(x, y)
-  log10_y - predicted_values
-}
-
-#' @export
-#' @describeIn pt_vct_funs Calculate celeration
+#' @describeIn summary_funs Calculate celeration
 pt_vct_celeration <- function(x, y) {
 
   if (validate_xy(x, y)$value == FALSE) { stop(validate_xy(x, y)$message) }
@@ -186,28 +150,56 @@ pt_vct_celeration <- function(x, y) {
 
 }
 
+
+
 #' @export
-#' @describeIn pt_vct_funs Calculate accuracy ratio
-pt_vct_accuracy_ratio <- function(x, y_cor, y_incor) {
+#' @describeIn summary_funs Calculate celeration intercept
+pt_vct_celeration_0 <- function(x, y) {
 
-  if (validate_xy(x, y_cor)$value == FALSE) { stop(validate_xy(x, y_cor)$message) }
-  if (validate_xy(x, y_incor)$value == FALSE) { stop(validate_xy(x, y_incor)$message) }
+  if (validate_xy(x, y)$value == FALSE) { stop(validate_xy(x, y)$message) }
 
-  index_to_keep <- (!is.na(x) & !is.na(y_cor) & !is.na(y_incor))
-  if (sum(index_to_keep) >= 3) {
-    x <- x[index_to_keep]
-    y_cor <- y_cor[index_to_keep]
-    y_incor <- y_incor[index_to_keep]
-  } else {
-    return(NA)
-  }
-
-  y_cor / y_incor
+  b0 <- pt_vct_b0(x, y)
+  10^b0
 
 }
 
+
+
 #' @export
-#' @describeIn pt_vct_funs Calculate accuracy
+#' @describeIn summary_funs Calculate bounce up
+pt_vct_bounce_up <- function(x, y) {
+
+  if (validate_xy(x, y)$value == FALSE) { stop(validate_xy(x, y)$message) }
+
+  errors <- pt_vct_errors(x, y)
+  10^(max(errors))
+}
+
+#' @export
+#' @describeIn summary_funs Calculate bounce down
+pt_vct_bounce_down <- function(x, y) {
+
+  if (validate_xy(x, y)$value == FALSE) { stop(validate_xy(x, y)$message) }
+
+  errors <- pt_vct_errors(x, y)
+  10^(min(errors))
+}
+
+
+
+#' @export
+#' @describeIn summary_funs Calculate bounce total
+pt_vct_bounce_total <- function(x, y) {
+
+  if (validate_xy(x, y)$value == FALSE) { stop(validate_xy(x, y)$message) }
+
+  pt_vct_bounce_up(x, y) * (1 / pt_vct_bounce_down(x, y))
+}
+
+
+
+#' @export
+#' @describeIn summary_funs Calculate accuracy
 pt_vct_accuracy <- function(x, y_cor, y_incor) {
 
   if (validate_xy(x, y_cor)$value == FALSE) { stop(validate_xy(x, y_cor)$message) }
@@ -230,31 +222,87 @@ pt_vct_accuracy <- function(x, y_cor, y_incor) {
 
 }
 
+
+
+
+
+
+
+
+#' Vectorized functions for PT measures
+#'
+#' @description
+#' These funtions are summary PT measures that returns a vector of multiple values.
+#'
+#' @param x Integer. Day of calendar
+#' @param y Double. Frequency
+#' @param y_cor Double. Correct frequency
+#' @param y_incor Double. Incorrect frequency
+#'
+#' @return A vector of values.
 #' @export
-#' @describeIn pt_vct_funs Calculate bounce up
-pt_vct_bounce_up <- function(x, y) {
+#' @describeIn vct_funs Calculate accuracy ratio
+pt_vct_accuracy_ratio <- function(x, y_cor, y_incor) {
+
+  if (validate_xy(x, y_cor)$value == FALSE) { stop(validate_xy(x, y_cor)$message) }
+  if (validate_xy(x, y_incor)$value == FALSE) { stop(validate_xy(x, y_incor)$message) }
+
+  index_to_keep <- (!is.na(x) & !is.na(y_cor) & !is.na(y_incor))
+  if (sum(index_to_keep) >= 3) {
+    x <- x[index_to_keep]
+    y_cor <- y_cor[index_to_keep]
+    y_incor <- y_incor[index_to_keep]
+  } else {
+    return(NA)
+  }
+
+  y_cor / y_incor
+
+}
+
+
+
+#' @export
+#' @describeIn vct_funs Calculate predicted values
+pt_vct_predicted_values <- function(x, y) {
 
   if (validate_xy(x, y)$value == FALSE) { stop(validate_xy(x, y)$message) }
 
-  errors <- pt_vct_errors(x, y)
-  10^(max(errors))
+  index_to_keep <- (!is.na(x) & !is.na(y))
+  if (sum(index_to_keep) >= 3) {
+    x <- x[index_to_keep]
+    y <- y[index_to_keep]
+    log10_y <- log10(y)
+  } else {
+    return(NA)
+  }
+
+  b0 <- pt_vct_b0(x, y)
+  b1 <- pt_vct_b1(x, y)
+
+  b0 + b1 * x
+
 }
 
 #' @export
-#' @describeIn pt_vct_funs Calculate bounce down
-pt_vct_bounce_down <- function(x, y) {
+#' @describeIn vct_funs Calculate errors
+pt_vct_errors <- function(x, y) {
 
   if (validate_xy(x, y)$value == FALSE) { stop(validate_xy(x, y)$message) }
 
-  errors <- pt_vct_errors(x, y)
-  10^(min(errors))
+  index_to_keep <- (!is.na(x) & !is.na(y))
+  if (sum(index_to_keep) >= 3) {
+    x <- x[index_to_keep]
+    y <- y[index_to_keep]
+    log10_y <- log10(y)
+  } else {
+    return(NA)
+  }
+
+  predicted_values <- pt_vct_predicted_values(x, y)
+  log10_y - predicted_values
 }
 
-#' @export
-#' @describeIn pt_vct_funs Calculate bounce total
-pt_vct_bounce_total <- function(x, y) {
 
-  if (validate_xy(x, y)$value == FALSE) { stop(validate_xy(x, y)$message) }
 
-  pt_vct_bounce_up(x, y) * (1 / pt_vct_bounce_down(x, y))
-}
+
