@@ -1,9 +1,7 @@
 #' Computing measures of behavioral change.
 #'
 #' @description
-#'
-#'
-#' `ptstat_old()` is the main function for computing measures of behavioral change.
+#' `ptstat()` is the main function for computing measures of behavioral change.
 #'
 #' @param .df Dataframe.
 #' @param day Integer. No of the successive day of the calendar. Values must be integers and >= 0.
@@ -21,7 +19,7 @@
 #' @param x An S3 object of class ptstat.
 #' @param ... Additional arguments.
 #'
-#' @returns An S3 object of class `ptstat`, which is a list.
+#' @returns A S3 object of class `ptstat`, a list.
 #' @export
 #' @examples
 #' ptstat(example_pt_data,
@@ -81,7 +79,7 @@ ptstat <- function(.df,
            count_ceil = .count_ceil)
 
   main_df <- main_df |>
-    dplyr::mutate(acc_ratio = pt_vct_accuracy_ratio(day, freq, freq_err))
+    dplyr::mutate(acc_ratio = accuracy_ratio(day, freq, freq_err))
 
   print(main_df)
 
@@ -89,14 +87,14 @@ ptstat <- function(.df,
   single_phase_table <- main_df |>
     dplyr::group_by(phase) |>
     dplyr::summarise(
-      b0 = pt_vct_b0(day, freq),
-      b1 = pt_vct_b1(day, freq),
-      cel0 = pt_vct_celeration_0(day, freq),
-      cel = pt_vct_celeration(day, freq),
-      b_up = pt_vct_bounce_up(day, freq),
-      b_down = pt_vct_bounce_down(day, freq),
-      b_total = pt_vct_bounce_total(day, freq),
-      acc = pt_vct_accuracy(day, freq, freq_err),
+      b0 = b0(day, freq),
+      b1 = b1(day, freq),
+      cel0 = celeration_0(day, freq),
+      cel = celeration(day, freq),
+      b_up = bounce_up(day, freq),
+      b_down = bounce_down(day, freq),
+      b_total = bounce_total(day, freq),
+      acc = accuracy(day, freq, freq_err),
       first_day = dplyr::first(day),
       first_freq = dplyr::first(freq)) |>
     dplyr::mutate(turn = dplyr::lag(cel) / cel)

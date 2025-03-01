@@ -10,14 +10,14 @@ test_that("all works properly", {
   expect_equal(df_b1(df_test, day, freq_cor),
                lm(df_log10(freq_cor) ~ day, data = df_test)$coefficients[[2]])
 
-  expect_equal(pt_vct_b1(df_test$day, df_test$freq_cor),
+  expect_equal(b1(df_test$day, df_test$freq_cor),
                lm(df_log10(freq_cor) ~ day, data = df_test)$coefficients[[2]])
 
   # b0
   expect_equal(df_b0(df_test, day, freq_cor),
                lm(df_log10(freq_cor) ~ day, data = df_test)$coefficients[[1]])
 
-  expect_equal(pt_vct_b0(df_test$day, df_test$freq_cor),
+  expect_equal(b0(df_test$day, df_test$freq_cor),
                lm(df_log10(freq_cor) ~ day, data = df_test)$coefficients[[1]])
 
   # celeration
@@ -30,14 +30,14 @@ test_that("all works properly", {
   expect_equal(df_predicted_values(df_test, day, freq_cor),
                lm(df_log10(freq_cor) ~ day, data = df_test) |> predict() |> unname())
 
-  expect_equal(pt_vct_predicted_values(df_test$day, df_test$freq_cor),
+  expect_equal(predicted_values(df_test$day, df_test$freq_cor),
                lm(df_log10(freq_cor) ~ day, data = df_test) |> predict() |> unname())
 
   # errors
   expect_equal(df_errors(df_test, day, freq_cor),
                lm(df_log10(freq_cor) ~ day, data = df_test) |> residuals() |> unname())
 
-  expect_equal(pt_vct_errors(df_test$day, df_test$freq_cor),
+  expect_equal(errors(df_test$day, df_test$freq_cor),
                lm(df_log10(freq_cor) ~ day, data = df_test) |> residuals() |> unname())
 
 
