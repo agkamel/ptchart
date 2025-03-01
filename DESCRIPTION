@@ -19,7 +19,8 @@ Suggests:
     testthat (>= 3.0.0),
     dplyr,
     lubridate,
-    ggplot2
+    ggplot2,
+    withr
 Depends: 
     R (>= 2.10)
 Roxygen: list(markdown = TRUE)

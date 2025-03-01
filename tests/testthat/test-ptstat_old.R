@@ -1,4 +1,5 @@
 test_that("function return a s3 class 'ptstat'", {
+  withr::local_options(lifecycle_verbosity = "quiet")
   expect_s3_class(
     ptstat_old(example_pt_data,
            day = "jour",
@@ -10,6 +11,7 @@ test_that("function return a s3 class 'ptstat'", {
 
 # Conditions for supplying day, date and date_zero
 test_that("function return an error because of day or date", {
+  withr::local_options(lifecycle_verbosity = "quiet")
   expect_error(
     ptstat_old(example_pt_data,
            #day = "jour",
@@ -34,6 +36,7 @@ test_that("function return an error because of day or date", {
 
 # Conditions for supplying time
 test_that("function return an error because of time", {
+  withr::local_options(lifecycle_verbosity = "quiet")
   expect_error(
     ptstat_old(example_pt_data,
            day = "jour",
@@ -46,6 +49,7 @@ test_that("function return an error because of time", {
 
 # Conditions for supplying freq, count, freq_err and count_err
 test_that("function return an error because of freq or count", {
+  withr::local_options(lifecycle_verbosity = "quiet")
   expect_error(
     ptstat_old(example_pt_data,
            day = "jour",
@@ -60,6 +64,7 @@ test_that("function return an error because of freq or count", {
 
 # Condition if not supplying phase
 test_that("function return phase = a if not supplied", {
+  withr::local_options(lifecycle_verbosity = "quiet")
   expect_message(
     ptstat_old(example_pt_data,
            day = "jour",
@@ -69,3 +74,4 @@ test_that("function return phase = a if not supplied", {
            ), regexp = "i `phase` not supplied. Default phase set to `A` for all observation"
   )
 })
+
