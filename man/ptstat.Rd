@@ -58,7 +58,7 @@ is_ptstat(x)
 \item{...}{Additional arguments.}
 }
 \value{
-An S3 object of class \code{ptstat}, which is a list.
+A S3 object of class \code{ptstat}, a list.
 
 \code{is_ptstat()} returns a boolean scalar.
 }
