@@ -81,11 +81,12 @@
 #' @param x A numeric vector.
 #'
 #' @return A numeric Vector.
+#' @rdname df_funs
 #' @export
 #'
 #' @examples
 #' #NOT YET
-pt_log10 <- function(x) {
+df_log10 <- function(x) {
   log10(x)
 }
 
@@ -110,16 +111,17 @@ pt_log10 <- function(x) {
 #' @param y Frequency.
 #'
 #' @return Predicted values
+#' @rdname df_funs
 #' @export
 #'
 #' @examples
 #' # NOT YET
-pt_predicted_values <- function(.df, x, y) {
+df_predicted_values <- function(.df, x, y) {
 
-  .df_no_NAs <- .remove_NAs(.df, {{ x }}, {{ y }}) |> dplyr::mutate(log10_y = pt_log10(y))
+  .df_no_NAs <- .remove_NAs(.df, {{ x }}, {{ y }}) |> dplyr::mutate(log10_y = df_log10(y))
 
-  b0 <- pt_b0(.df, {{ x }}, {{ y }})
-  b1 <- pt_b1(.df, {{ x }}, {{ y }})
+  b0 <- df_b0(.df, {{ x }}, {{ y }})
+  b1 <- df_b1(.df, {{ x }}, {{ y }})
 
   b0 + b1 * .df_no_NAs$x
 }
@@ -132,14 +134,15 @@ pt_predicted_values <- function(.df, x, y) {
 #' @param y Frequency.
 #'
 #' @return Errors
+#' @rdname df_funs
 #' @export
 #'
 #' @examples
 #' # NOT YET
-pt_errors <- function(.df, x, y) {
+df_errors <- function(.df, x, y) {
 
-  .df_no_NAs <- .remove_NAs(.df, {{ x }}, {{ y }}) |> dplyr::mutate(log10_y = pt_log10(y))
-  predicted_values <- pt_predicted_values(.df, {{ x }}, {{ y }})
+  .df_no_NAs <- .remove_NAs(.df, {{ x }}, {{ y }}) |> dplyr::mutate(log10_y = df_log10(y))
+  predicted_values <- df_predicted_values(.df, {{ x }}, {{ y }})
   .df_no_NAs$log10_y - predicted_values
 }
 
@@ -150,16 +153,17 @@ pt_errors <- function(.df, x, y) {
 #' @param y Frequency.
 #'
 #' @return b1
+#' @rdname df_funs
 #' @export
 #'
 #' @examples
 #' #NOT YET
-pt_b1 <- function(.df, x, y) {
+df_b1 <- function(.df, x, y) {
 
   # To prevent note of "no visible binding for global variable 'x'" when building the package
   log10_y <- x_deviation_from_mean <- NULL
 
-  .df_no_NAs <- .remove_NAs(.df, {{ x }}, {{ y }}) |> dplyr::mutate(log10_y = pt_log10(y))
+  .df_no_NAs <- .remove_NAs(.df, {{ x }}, {{ y }}) |> dplyr::mutate(log10_y = df_log10(y))
 
   .df_no_NAs <- .df_no_NAs |> dplyr::mutate(
     x = x,
@@ -184,18 +188,19 @@ pt_b1 <- function(.df, x, y) {
 #' @param y Frequency.
 #'
 #' @return b0
+#' @rdname df_funs
 #' @export
 #'
 #' @examples
 #' # NOT YET
-pt_b0 <- function(.df, x, y) {
+df_b0 <- function(.df, x, y) {
 
   # To prevent note of "no visible binding for global variable 'x'" when building the package
   log10_y <- NULL
 
-  b1 <- pt_b1(.df, {{ x }}, {{ y }})
+  b1 <- df_b1(.df, {{ x }}, {{ y }})
 
-  .df_no_NAs <- .remove_NAs(.df, {{ x }}, {{ y }}) |> dplyr::mutate(log10_y = pt_log10(y))
+  .df_no_NAs <- .remove_NAs(.df, {{ x }}, {{ y }}) |> dplyr::mutate(log10_y = df_log10(y))
   .df_means <- .df_no_NAs |> dplyr::summarise(mean_x = mean(x), mean_log10_y = mean(log10_y))
 
   .df_means$mean_log10_y - (b1 * .df_means$mean_x)
@@ -209,22 +214,23 @@ pt_b0 <- function(.df, x, y) {
 #' @param y Frequency.
 #'
 #' @return A dataframe.
+#' @rdname df_funs
 #' @export
 #'
 #' @examples
 #' # NOT YET
-pt_celeration <- function(.df, x, y) {
-  b1 <- pt_b1(.df, {{ x }}, {{ y }})
+df_celeration <- function(.df, x, y) {
+  b1 <- df_b1(.df, {{ x }}, {{ y }})
   (10^b1)^7
 }
 
 #  load_all()
-#  pt_b1(mini_test_data, x_aug, y_aug)
-#  pt_celeration(mini_test_data, x_aug, y_aug)
-#  pt_b0(mini_test_data, x_aug, y_aug)
+#  df_b1(mini_test_data, x_aug, y_aug)
+#  df_celeration(mini_test_data, x_aug, y_aug)
+#  df_b0(mini_test_data, x_aug, y_aug)
 
 
-pt_antilog <- function(x, base = 10) {
+df_antilog <- function(x, base = 10) {
   base^x
 }
 
@@ -235,13 +241,14 @@ pt_antilog <- function(x, base = 10) {
 #' @param y Frequency.
 #'
 #' @return Bounce up
+#' @rdname df_funs
 #' @export
 #'
 #' @examples
 #' # NOT YET
-pt_bounce_up <- function(.df, x, y) {
-  errors <- pt_errors(.df, {{ x }}, {{ y }})
-  pt_antilog(max(errors))
+df_bounce_up <- function(.df, x, y) {
+  errors <- df_errors(.df, {{ x }}, {{ y }})
+  df_antilog(max(errors))
 }
 
 #' Get bounce down.
@@ -251,13 +258,14 @@ pt_bounce_up <- function(.df, x, y) {
 #' @param y Frequency.
 #'
 #' @return Bounce down
+#' @rdname df_funs
 #' @export
 #'
 #' @examples
 #' # NOT YET
-pt_bounce_down <- function(.df, x, y) {
-  errors <- pt_errors(.df, {{ x }}, {{ y }})
-  pt_antilog(min(errors))
+df_bounce_down <- function(.df, x, y) {
+  errors <- df_errors(.df, {{ x }}, {{ y }})
+  df_antilog(min(errors))
 }
 
 #' Get bounce total.
@@ -267,12 +275,13 @@ pt_bounce_down <- function(.df, x, y) {
 #' @param y Frequency.
 #'
 #' @return Bounce total
+#' @rdname df_funs
 #' @export
 #'
 #' @examples
 #' # NOT YET
-pt_bounce_total <- function(.df, x, y) {
-  pt_bounce_up(.df, {{ x }}, {{ y }}) * pt_bounce_down(.df, {{ x }}, {{ y }})
+df_bounce_total <- function(.df, x, y) {
+  df_bounce_up(.df, {{ x }}, {{ y }}) * df_bounce_down(.df, {{ x }}, {{ y }})
 }
 
 
@@ -283,11 +292,12 @@ pt_bounce_total <- function(.df, x, y) {
 #' @param y_incor Incorrect frequency.
 #'
 #' @return Accuracy ratio
+#' @rdname df_funs
 #' @export
 #'
 #' @examples
 #' # NOT YET
-pt_accuracy_ratio <- function(.df, y_cor, y_incor) {
+df_accuracy_ratio <- function(.df, y_cor, y_incor) {
 
   # To prevent note of "no visible binding for global variable 'x'" when building the package
   x <- y <- NULL
@@ -308,28 +318,29 @@ pt_accuracy_ratio <- function(.df, y_cor, y_incor) {
 #' @param y_incor Incorrect frequency.
 #'
 #' @return Accuracy
+#' @rdname df_funs
 #' @export
 #'
 #' @examples
 #' # NOT YET
-pt_accuracy <- function(.df, x, y_cor, y_incor){
+df_accuracy <- function(.df, x, y_cor, y_incor){
 
   .df_original <- .df |> dplyr::select(x = {{ x }}, y_cor = {{ y_cor }}, y_incor = {{ y_incor }})
   .df_no_NAs <- .df_original |> dplyr::filter(!is.na(x), !is.na(y_cor), !is.na(y_incor))
 
-  accuracy_ratio <- pt_accuracy_ratio(.df_no_NAs, y_cor, y_incor)
+  accuracy_ratio <- df_accuracy_ratio(.df_no_NAs, y_cor, y_incor)
 
   .df_no_NAs <- .df_no_NAs |> dplyr::mutate(accuracy_ratio = accuracy_ratio)
 
-  b1 <- pt_b1(.df_no_NAs, x, accuracy_ratio)
+  b1 <- df_b1(.df_no_NAs, x, accuracy_ratio)
 
-  pt_antilog(b1)^7
+  df_antilog(b1)^7
 
 }
 
 
 
-pt_jump <- function(.df, x, y, phase) {
+df_jump <- function(.df, x, y, phase) {
 
   .df_original <- .df |> dplyr::select(x = {{ x }}, y = {{ y }}, phase = {{ phase }})
   .df_no_NAs <- .df_original |> dplyr::filter(!is.na(x), !is.na(y), !is.na(phase))
@@ -346,9 +357,9 @@ pt_jump <- function(.df, x, y, phase) {
 
   for (i in 1:(length(.phase_list) - 1)) {
 
-    jump_output[i] <- pt_antilog(
-      pt_predicted_values(.phase_list[[i + 1]], x, y) |> dplyr::first() -
-        pt_predicted_values(.phase_list[[i]], x, y) |> dplyr::last()
+    jump_output[i] <- df_antilog(
+      df_predicted_values(.phase_list[[i + 1]], x, y) |> dplyr::first() -
+        df_predicted_values(.phase_list[[i]], x, y) |> dplyr::last()
     )
   }
 
