@@ -11,14 +11,14 @@ ptchart2(
   title = "ptchart output",
   xlab = "Day",
   ylab = "Rate",
-  show_time_floor = TRUE,
+  show_record_floor = TRUE,
   show_count_floor = TRUE,
   show_count_ceil = TRUE,
   show_acc_line = TRUE,
   show_dec_line = TRUE,
   show_accuracy_line = TRUE,
-  show_acc_bounce_lines = TRUE,
-  show_dec_bounce_lines = TRUE,
+  show_acc_bounce_lines = FALSE,
+  show_dec_bounce_lines = FALSE,
   show_acc_point = TRUE,
   show_dec_point = TRUE,
   show_accuracy_point = TRUE,
@@ -40,7 +40,7 @@ ptchart2(
 
 \item{ylab}{Character vector of length 1. Label of y-axis (default: \code{"Rate"}).}
 
-\item{show_time_floor}{Logical vector of length 1. Is time floor showed (default: \code{TRUE}) or not (\code{FALSE})?}
+\item{show_record_floor}{Logical vector of length 1. Is time floor showed (default: \code{TRUE}) or not (\code{FALSE})?}
 
 \item{show_count_floor}{Logical vector of length 1. Is counting floor showed (default: \code{TRUE}) or not (\code{FALSE})?}
 

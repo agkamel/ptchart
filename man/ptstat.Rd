@@ -17,7 +17,7 @@ ptstat(
   count = NULL,
   count_err = NULL,
   time = NULL,
-  count_floor = NULL,
+  record_floor = NULL,
   count_ceil = NULL,
   verbose = TRUE
 )
@@ -47,7 +47,7 @@ is_ptstat(x)
 
 \item{time}{Double. Number of minutes. Values must be > 0.}
 
-\item{count_floor}{Double. NOTE. Name may be changed...}
+\item{record_floor}{Double. NOTE. Name may be changed...}
 
 \item{count_ceil}{Double. NOTE. Name may be changed...}
 
@@ -63,7 +63,7 @@ A S3 object of class \code{ptstat}, a list.
 \code{is_ptstat()} returns a boolean scalar.
 }
 \description{
-\code{ptstat_old()} is the main function for computing measures of behavioral change.
+\code{ptstat()} is the main function for computing measures of behavioral change.
 
 \code{is_ptstat()} tests if the object is an S3 object of class \code{"ptstat"} (\code{TRUE}) or not (\code{FALSE}).
 }
@@ -74,7 +74,7 @@ A S3 object of class \code{ptstat}, a list.
 }}
 \examples{
 ptstat(example_pt_data,
-       day = jour, freq = frequence, phase = phase,
+       day = jour, freq = frequence, phase = phase, time = minute,
        freq_err = frequence_nc)
 # TODO
 }
