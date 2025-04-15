@@ -326,8 +326,8 @@ validate_ptstat <- function(x) { # Validateur S3
 #' @describeIn ptstat Print method for `ptstat()`.
 print.ptstat <- function(x, ...) { # Method print.ptstat()
   cat("", sep = "\n")
-  cat("PT Tables", sep = "\n")
-  print(x$pttables, ...)
+  #cat("PT Tables", sep = "\n")
+  print(x$pt_measures, ...)
   return(invisible(x))
 }
 
