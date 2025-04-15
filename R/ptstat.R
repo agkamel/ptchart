@@ -13,7 +13,7 @@
 #' @param count Integer. Count of responses aimed to be accelerated. Values must be >= 0.
 #' @param count_err Integer. Count of responses aimed to be decelerated. Values must be >= 0.
 #' @param time Double. Number of minutes. Values must be > 0.
-#' @param count_floor Double. NOTE. Name may be changed...
+#' @param record_floor Double. NOTE. Name may be changed...
 #' @param count_ceil Double. NOTE. Name may be changed...
 #' @param verbose Logical scalar. Show informational messages. Default to `TRUE`.
 #' @param x An S3 object of class ptstat.
@@ -35,7 +35,7 @@ ptstat <- function(.df,
                    count = NULL,
                    count_err = NULL,
                    time = NULL,
-                   count_floor = NULL,
+                   record_floor = NULL,
                    count_ceil = NULL,
                    verbose = TRUE
                    ) {
@@ -75,7 +75,7 @@ ptstat <- function(.df,
            time = .time,
            count_err = .count_err,
            freq_err = .freq_err,
-           count_floor = .count_floor,
+           record_floor = .record_floor,
            count_ceil = .count_ceil)
 
 
