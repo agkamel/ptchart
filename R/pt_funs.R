@@ -314,6 +314,84 @@ res <- function(x, y) {
 
 
 
+record_floor <- function(time, type = "minute") {
+
+  if (!(type %in% c("minute", "second", "hour"))) {
+    rlang::abort("Type must be one of `minute`, `second` or `hour`.")
+  }
+
+  output <- dplyr::case_when(
+    type == "minute" ~ 1 / time,
+    type == "second" ~ 1 / (time / 60),
+    type == "hour" ~ 1 / (time * 60)
+  )
+
+  index_to_check <- !is.na(output)
+
+  if (any(output[index_to_check] < (1 / (24*60))) || any(output[index_to_check] > 1000)) {
+    rlang::abort("Some output values in time floor are lower than 1 response per day or greater than 1000 response per minute. Check time input values.")
+  }
+
+  output
+}
+
+
+record_floor_to_time <- function(record_floor) {
+  1 / record_floor
+}
+
+
+
+
+date_to_day <- function(date, date_zero) {
+  if (is_sunday(date_zero) == FALSE) {
+    current_wday <- lubridate::wday(date_zero, week_start = 1, label = TRUE, abbr = FALSE)
+    stop(paste0("`date_zero` must be a sunday. This date, ", as.character(date_zero), ", is a: ", as.character(current_wday)))
+  }
+  as.integer(date - date_zero)
+}
+
+
+first_sunday <- function(date){
+  seven_previous_dates <- min(date) - lubridate::days(0:6)
+  seven_previous_dates[is_sunday(seven_previous_dates)]
+}
+
+is_sunday <- function(date) {
+  lubridate::wday(date, week_start = 1) == 7
+}
+
+
+
+day_to_date <- function(day, date_zero) {
+  date_zero + day
+}
+
+count_to_freq <- function(count, time) {
+  count / time
+}
+
+freq_to_count <- function(freq, time) {
+  freq * time
+}
+
+count_and_freq_to_time <- function(count, freq) {
+  count / freq
+}
+
+
+
+recode_zero_freq <- function(y, time) {
+
+  record_floor <- record_floor(time)
+
+  dplyr::case_when(
+    y == 0 ~ record_floor / 2,
+    .default = y
+  )
+
+}
+
 
 
 
