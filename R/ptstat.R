@@ -352,5 +352,11 @@ is_ptstat <- function(x) {
 
 
 
+is_missing <- function(x) {
+  all(is.na(x))
+  }
 
+is_provided <- function(x) {
+  !all(is.na(x))
+}
 
