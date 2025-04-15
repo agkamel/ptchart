@@ -37,7 +37,7 @@ test_that("all works properly", {
   expect_equal(df_errors(df_test, day, freq_cor),
                lm(df_log10(freq_cor) ~ day, data = df_test) |> residuals() |> unname())
 
-  expect_equal(errors(df_test$day, df_test$freq_cor),
+  expect_equal(res(df_test$day, df_test$freq_cor),
                lm(df_log10(freq_cor) ~ day, data = df_test) |> residuals() |> unname())
 
 

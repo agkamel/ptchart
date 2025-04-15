@@ -40,7 +40,7 @@
 #'
 #' # Residuals
 #'
-#' The residuals (errors) \eqn{\epsilon} obtained with `errors()` is calculated with
+#' The residual errors \eqn{\epsilon} obtained with `res()` is calculated with
 #'
 #' \deqn{\log_{10}(y) - \log_{10}(\hat{y})}
 #'
@@ -171,8 +171,8 @@ bounce_up <- function(x, y) {
 
   if (validate_xy(x, y)$value == FALSE) { stop(validate_xy(x, y)$message) }
 
-  errors <- errors(x, y)
-  10^(max(errors))
+  res <- res(x, y)
+  10^(max(res))
 }
 
 #' @export
@@ -181,8 +181,8 @@ bounce_down <- function(x, y) {
 
   if (validate_xy(x, y)$value == FALSE) { stop(validate_xy(x, y)$message) }
 
-  errors <- errors(x, y)
-  10^(min(errors))
+  res <- res(x, y)
+  10^(min(res))
 }
 
 
@@ -285,8 +285,8 @@ predicted_values <- function(x, y) {
 }
 
 #' @export
-#' @describeIn vct_funs Calculate errors
-errors <- function(x, y) {
+#' @describeIn vct_funs Calculate residual errors
+res <- function(x, y) {
 
   if (validate_xy(x, y)$value == FALSE) { stop(validate_xy(x, y)$message) }
 
