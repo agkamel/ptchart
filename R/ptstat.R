@@ -23,7 +23,7 @@
 #' @export
 #' @examples
 #' ptstat(example_pt_data,
-#'        day = jour, freq = frequence, phase = phase,
+#'        day = jour, freq = frequence, phase = phase, time = minute,
 #'        freq_err = frequence_nc)
 ptstat <- function(.df,
                    day = NULL,
