@@ -317,10 +317,14 @@ new_ptstat <- function(x = list()) { # Constructeur S3
   )
 }
 
+
+
 validate_ptstat <- function(x) { # Validateur S3
   values <- unclass(x)
   x
 }
+
+
 
 #' @export
 #' @describeIn ptstat Print method for `ptstat()`.
