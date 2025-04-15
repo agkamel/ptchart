@@ -8,7 +8,7 @@
 #' @param xlab Character vector of length 1. Label of x-axis (default: `"Day"`).
 #' @param ylab Character vector of length 1. Label of y-axis (default: `"Rate"`).
 #'
-#' @param show_time_floor Logical vector of length 1. Is time floor showed (default: `TRUE`) or not (`FALSE`)?
+#' @param show_record_floor Logical vector of length 1. Is time floor showed (default: `TRUE`) or not (`FALSE`)?
 #' @param show_count_floor Logical vector of length 1. Is counting floor showed (default: `TRUE`) or not (`FALSE`)?
 #' @param show_count_ceil Logical vector of length 1. Is counting ceil showed (default: `TRUE`) or not (`FALSE`)?
 #'
@@ -39,14 +39,14 @@ ptchart2 <- function(object,
                     xlab = "Day",
                     ylab = "Rate",
 
-                    show_time_floor = TRUE,
+                    show_record_floor = TRUE,
                     show_count_floor = TRUE,
                     show_count_ceil = TRUE,
                     show_acc_line = TRUE,
                     show_dec_line = TRUE,
                     show_accuracy_line = TRUE,
-                    show_acc_bounce_lines = TRUE,
-                    show_dec_bounce_lines = TRUE,
+                    show_acc_bounce_lines = FALSE,
+                    show_dec_bounce_lines = FALSE,
 
                     show_acc_point = TRUE,
                     show_dec_point = TRUE,
@@ -58,12 +58,13 @@ ptchart2 <- function(object,
 ) {
 
   # To prevent note of "no visible binding for global variable 'x'" when building the package
-  day <- acc_ratio_raw <- errors <- errors_err <- freq <- freq_err <- phase <- time_floor <- count_ceil <- count_floor <- NULL
-
+  day <- accu_ratio <- res_freq <- res_freq_err <- freq <- freq_err <- phase <- record_floor <- count_ceil <- count_floor <- NULL
 
   stopifnot("`object` must be of class `ptstat`" = is_ptstat(object))
 
-  scale_x_params <- make_scale_x_params2(object)
+  main_df <- object[["main_df"]]
+
+  scale_x_params <- make_scale_x_params2(main_df)
   scale_y_params <- make_scale_y_params2()
 
   gg_scale_y_log10 <- ggplot2::scale_y_log10(
@@ -120,7 +121,7 @@ ptchart2 <- function(object,
     )
 
   output <- ggplot2::ggplot(
-    data = extract_pttable(object)
+    data = main_df
   ) +
     gg_scale_y_log10 +
     gg_scale_x_continuous +
@@ -138,16 +139,16 @@ ptchart2 <- function(object,
 
 
 
-  if (is.na(object$arg_table$date)) {
+  if (is_missing(main_df$date)) {
 
 
-    if (show_time_floor) {
+    if (show_record_floor) {
 
       output <- output +
 
         # Time floor
         ggplot2::geom_point(
-          mapping = ggplot2::aes(x = day, y = time_floor),
+          mapping = ggplot2::aes(x = day, y = record_floor),
           shape = "\u2013",
           size = 5,
           color = "gray30"
@@ -217,7 +218,7 @@ ptchart2 <- function(object,
         ggplot2::geom_smooth(
           method = "lm",
           se = FALSE,
-          mapping = ggplot2::aes(x = day, y = acc_ratio_raw, group = phase),
+          mapping = ggplot2::aes(x = day, y = accu_ratio, group = phase),
           color = color_accuracy_line
         )
 
@@ -233,14 +234,14 @@ ptchart2 <- function(object,
         ggplot2::geom_smooth(
           method = "lm",
           se = FALSE,
-          mapping = ggplot2::aes(x = day, y = freq * 10^max(errors), group = phase),
+          mapping = ggplot2::aes(x = day, y = freq * 10^max(res_freq), group = phase),
           color = color_acc_line,
           linetype = 2
         ) +
         ggplot2::geom_smooth(
           method = "lm",
           se = FALSE,
-          mapping = ggplot2::aes(x = day, y = freq * 10^min(errors), group = phase),
+          mapping = ggplot2::aes(x = day, y = freq * 10^min(res_freq), group = phase),
           color = color_acc_line,
           linetype = 2
         )
@@ -256,14 +257,14 @@ ptchart2 <- function(object,
         ggplot2::geom_smooth(
           method = "lm",
           se = FALSE,
-          mapping = ggplot2::aes(x = day, y = freq_err * 10^max(errors_err), group = phase),
+          mapping = ggplot2::aes(x = day, y = freq_err * 10^max(res_freq_err), group = phase),
           color = color_dec_line,
           linetype = 2
         ) +
         ggplot2::geom_smooth(
           method = "lm",
           se = FALSE,
-          mapping = ggplot2::aes(x = day, y = freq_err * 10^min(errors_err), group = phase),
+          mapping = ggplot2::aes(x = day, y = freq_err * 10^min(res_freq_err), group = phase),
           color = color_dec_line,
           linetype = 2
         )
@@ -302,7 +303,7 @@ ptchart2 <- function(object,
       output <- output +
 
         ggplot2::geom_point(
-          mapping = ggplot2::aes(x = day, y = acc_ratio_raw),
+          mapping = ggplot2::aes(x = day, y = accu_ratio),
           shape = 2, size = 2.5,
         )
     }
@@ -319,11 +320,11 @@ ptchart2 <- function(object,
       #             ) +
 
 
-    if (show_time_floor) {
+    if (show_record_floor) {
       output <- output +
         # Time floor
         ggplot2::geom_point(
-          mapping = ggplot2::aes(x = date, y = time_floor),
+          mapping = ggplot2::aes(x = date, y = record_floor),
           shape = "\u2013",
           size = 5,
           color = "gray30"
@@ -386,7 +387,7 @@ ptchart2 <- function(object,
         ggplot2::geom_smooth(
           method = "lm",
           se = FALSE,
-          mapping = ggplot2::aes(x = date, y = acc_ratio_raw, group = phase),
+          mapping = ggplot2::aes(x = date, y = accu_ratio, group = phase),
           color = color_accuracy_line
         )
 
@@ -419,7 +420,7 @@ ptchart2 <- function(object,
       output <- output +
 
         ggplot2::geom_point(
-          mapping = ggplot2::aes(x = date, y = acc_ratio_raw),
+          mapping = ggplot2::aes(x = date, y = accu_ratio),
           shape = 2, size = 2.5,
         )
     }
@@ -462,7 +463,7 @@ make_scale_y_params2 <- function() {
 }
 
 
-make_scale_x_params2 <- function(object) {
+make_scale_x_params2 <- function(main_df) {
 
   #if(is.character(first_sunday)) {first_sunday <- ymd(first_sunday)}
 
@@ -472,10 +473,10 @@ make_scale_x_params2 <- function(object) {
   #  wday(first_sunday, week_start = 1) == 7
   #)
 
-  if (is.na(object$arg_table$date)) {
+  if (is_missing(main_df$date)) {
     first_sunday <- as.Date(0)
   } else {
-    first_sunday <- first_sunday(extract_pttable(object)[["date"]])
+    first_sunday <- first_sunday(main_df$date)
   }
 
 
