@@ -82,7 +82,7 @@ The predicted values \eqn{\log_{10}(\hat{y})} obtained with \code{predicted_valu
 }
 
 \section{Residuals}{
-The residuals (errors) \eqn{\epsilon} obtained with \code{errors()} is calculated with
+The residual errors \eqn{\epsilon} obtained with \code{res()} is calculated with
 
 \deqn{\log_{10}(y) - \log_{10}(\hat{y})}
 }

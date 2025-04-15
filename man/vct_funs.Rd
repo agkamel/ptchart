@@ -3,14 +3,14 @@
 \name{accuracy_ratio}
 \alias{accuracy_ratio}
 \alias{predicted_values}
-\alias{errors}
+\alias{res}
 \title{Vectorized functions for PT measures}
 \usage{
 accuracy_ratio(x, y_cor, y_incor)
 
 predicted_values(x, y)
 
-errors(x, y)
+res(x, y)
 }
 \arguments{
 \item{x}{Integer. Day of calendar}
@@ -33,6 +33,6 @@ These funtions are summary PT measures that returns a vector of multiple values.
 
 \item \code{predicted_values()}: Calculate predicted values
 
-\item \code{errors()}: Calculate errors
+\item \code{res()}: Calculate residual errors
 
 }}
