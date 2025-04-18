@@ -1,15 +1,18 @@
-# df_test <- ptstat(example_pt_data,
-#        #date = date,
-#        day = jour,
-#        #freq = frequence,
-#        #freq_err = frequence_nc,
-#        count = reponse,
-#        count_err = reponse_nc,
-#        time = minute,
-#        phase = phase,
-#        )
-# df_test$main_df
-# df_test |> ptchart2()
+df_test <- ptstat(example_pt_data,
+       #date = date,
+       day = jour,
+       #freq = frequence,
+       #freq_err = frequence_nc,
+       count = reponse,
+       count_err = reponse_nc,
+       time = minute,
+       phase = phase,
+       )
+
+df_test$main_df
+
+df_test |>
+  ptchart2(zoom_x = c(0, 28), zoom_y = c(0.4, 20))
 
 test_that("a S3 object of class ptstat is returned", {
   expect_s3_class(ptstat(example_pt_data,
