@@ -14,7 +14,8 @@
 #' @param count_err Integer. Count of responses aimed to be decelerated. Values must be >= 0.
 #' @param time Double. Number of minutes. Values must be > 0.
 #' @param record_floor Double. NOTE. Name may be changed...
-#' @param count_ceil Double. NOTE. Name may be changed...
+#' @param behavior_floor Double. NOTE. Name may be changed...
+#' @param record_ceil Double. NOTE. Name may be changed...
 #' @param verbose Logical scalar. Show informational messages. Default to `TRUE`.
 #' @param x An S3 object of class ptstat.
 #' @param ... Additional arguments.
@@ -36,20 +37,21 @@ ptstat <- function(.df,
                    count_err = NULL,
                    time = NULL,
                    record_floor = NULL,
-                   count_ceil = NULL,
+                   behavior_floor = NULL,
+                   record_ceil = NULL,
                    verbose = TRUE
                    ) {
 
-  .count <- .count_ceil <- .count_err <- .record_floor <- .date <- .day <- .freq <- .freq_err <- .phase <- .time <- b0 <- b1 <- b_down <- b_total <- b_up <- cel <- first_day <- first_freq <- lag_freq <- lead_day <- new_freq <- turn <- jump <-  NULL
+  .count <- .record_ceil <- .count_err <- .behavior_floor <- .record_floor <- .date <- .day <- .freq <- .freq_err <- .phase <- .time <- b0 <- b1 <- b_down <- b_total <- b_up <- cel <- first_day <- first_freq <- lag_freq <- lead_day <- new_freq <- turn <- jump <-  NULL
   cel_e <- accu <- first_day_e <- b0_e <- b1_e <- lead_day_e <- new_freq_e <- first_freq_e <- lag_freq_e <- b_up_e <- b_down_e <- b_total_e <- turn_e <- jump_e <- last_col <- NULL
   # First scenario
   # date, count, time are provided
 
   if (any(names(.df) %in% c(".day", ".freq", ".phase", ".date", ".count",
-                            ".time", ".count_err", ".freq_err", ".record_floor",
-                            ".count_ceil"))) {
+                            ".time", ".count_err", ".freq_err", ".record_floor", ".behavior_floor",
+                            ".record_ceil"))) {
     stop("These are reserved colnames: .day, .freq, .phase,
-         .date, .count, .time, .count_err, .freq_err, .record_floor and .count_ceil.",
+         .date, .count, .time, .count_err, .freq_err, .record_floor and .record_ceil.",
          call. = FALSE)
   }
 
@@ -63,7 +65,8 @@ ptstat <- function(.df,
                   .count_err = if (is.null({{ count_err }})) NA_integer_ else {{ count_err }},
                   .freq_err = if (is.null({{ freq_err }})) NA_real_ else {{ freq_err }},
                   .record_floor = if (is.null({{ record_floor }})) NA else {{ record_floor }},
-                  .count_ceil = if (is.null({{ count_ceil }})) NA else {{ count_ceil }})
+                  .behavior_floor = if (is.null({{ behavior_floor }})) NA else {{ behavior_floor }},
+                  .record_ceil = if (is.null({{ record_ceil }})) NA else {{ record_ceil }})
 
   main_df <- main_df |>
     dplyr::select(dplyr::starts_with(".")) |>
@@ -76,7 +79,8 @@ ptstat <- function(.df,
            count_err = .count_err,
            freq_err = .freq_err,
            record_floor = .record_floor,
-           count_ceil = .count_ceil)
+           behavior_floor = .behavior_floor,
+           record_ceil = .record_ceil)
 
 
   # Scenario conditions --------------------------------------------------------

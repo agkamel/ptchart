@@ -8,9 +8,9 @@
 #' @param xlab Character vector of length 1. Label of x-axis (default: `"Day"`).
 #' @param ylab Character vector of length 1. Label of y-axis (default: `"Rate"`).
 #'
-#' @param show_record_floor Logical vector of length 1. Is time floor showed (default: `TRUE`) or not (`FALSE`)?
-#' @param show_count_floor Logical vector of length 1. Is counting floor showed (default: `TRUE`) or not (`FALSE`)?
-#' @param show_count_ceil Logical vector of length 1. Is counting ceil showed (default: `TRUE`) or not (`FALSE`)?
+#' @param show_record_floor Logical vector of length 1. Is recording floor showed (default: `TRUE`) or not (`FALSE`)?
+#' @param show_behavior_floor Logical vector of length 1. Is behavior floor showed (default: `TRUE`) or not (`FALSE`)?
+#' @param show_record_ceil Logical vector of length 1. Is recording ceiling showed (default: `TRUE`) or not (`FALSE`)?
 #'
 #' @param show_acc_line Logical vector of length 1. Is acceleration line showed (default: `TRUE`) or not (`FALSE`)?
 #' @param show_dec_line Logical vector of length 1. Is decerelation line showed (default: `TRUE`) or not (`FALSE`)?
@@ -40,8 +40,8 @@ ptchart2 <- function(object,
                     ylab = "Rate",
 
                     show_record_floor = TRUE,
-                    show_count_floor = TRUE,
-                    show_count_ceil = TRUE,
+                    show_behavior_floor = TRUE,
+                    show_record_ceil = TRUE,
                     show_acc_line = TRUE,
                     show_dec_line = TRUE,
                     show_accuracy_line = TRUE,
@@ -58,7 +58,7 @@ ptchart2 <- function(object,
 ) {
 
   # To prevent note of "no visible binding for global variable 'x'" when building the package
-  day <- accu_ratio <- res_freq <- res_freq_err <- freq <- freq_err <- phase <- record_floor <- count_ceil <- count_floor <- NULL
+  day <- accu_ratio <- res_freq <- res_freq_err <- freq <- freq_err <- phase <- record_floor <- record_ceil <- behavior_floor <- NULL
 
   stopifnot("`object` must be of class `ptstat`" = is_ptstat(object))
 
@@ -146,7 +146,7 @@ ptchart2 <- function(object,
 
       output <- output +
 
-        # Time floor
+        # Recording floor
         ggplot2::geom_point(
           mapping = ggplot2::aes(x = day, y = record_floor),
           shape = "\u2013",
@@ -157,25 +157,25 @@ ptchart2 <- function(object,
     }
 
 
-    if (show_count_floor) {
+    if (show_behavior_floor) {
 
       output <- output +
 
-      # Count floor
+      # Behavior floor
       ggplot2::geom_point(
-        mapping = ggplot2::aes(x = day, y = count_floor),
+        mapping = ggplot2::aes(x = day, y = behavior_floor),
         shape = "\u2012", size = 5, color = "gray20"
       )
     }
 
 
-    if (show_count_ceil) {
+    if (show_record_ceil) {
 
       output <- output +
 
-      # Count ceil
+      # Record ceil
       ggplot2::geom_point(
-        mapping = ggplot2::aes(x = day, y = count_ceil),
+        mapping = ggplot2::aes(x = day, y = record_ceil),
         shape = "\u2013", size = 5, color = "gray10"
       )
 
@@ -322,7 +322,8 @@ ptchart2 <- function(object,
 
     if (show_record_floor) {
       output <- output +
-        # Time floor
+
+        # Record floor
         ggplot2::geom_point(
           mapping = ggplot2::aes(x = date, y = record_floor),
           shape = "\u2013",
@@ -331,24 +332,24 @@ ptchart2 <- function(object,
         )
     }
 
-    if (show_count_floor) {
+    if (show_behavior_floor) {
 
       output <- output +
 
-      # Count floor
+      # Behavior floor
       ggplot2::geom_point(
-        mapping = ggplot2::aes(x = date, y = count_floor),
+        mapping = ggplot2::aes(x = date, y = behavior_floor),
         shape = "\u2012", size = 5, color = "gray20"
       )
     }
 
-    if (show_count_ceil) {
+    if (show_record_ceil) {
 
       output <- output +
 
-      # Count ceil
+      # Record ceil
       ggplot2::geom_point(
-        mapping = ggplot2::aes(x = date, y = count_ceil),
+        mapping = ggplot2::aes(x = date, y = record_ceil),
         shape = "\u2013", size = 5, color = "gray10"
       )
 
