@@ -1,4 +1,4 @@
-#' ptchart2
+#' Generate a graph with Standard Celeration Chart conventions
 #'
 #' @param object An object of class `ptstat`.
 #' @param zoom_x A vector of class `Date` and of length 2 for setting limits for the x axis.
@@ -32,7 +32,7 @@
 #'
 #' @examples
 #' #TODO
-ptchart2 <- function(object,
+ptchart <- function(object,
                     zoom_x = NULL,
                     zoom_y = NULL,
                     title = "ptchart output",
@@ -64,8 +64,8 @@ ptchart2 <- function(object,
 
   main_df <- object[["main_df"]]
 
-  scale_x_params <- make_scale_x_params2(main_df)
-  scale_y_params <- make_scale_y_params2()
+  scale_x_params <- make_scale_x_params(main_df)
+  scale_y_params <- make_scale_y_params()
 
   gg_scale_y_log10 <- ggplot2::scale_y_log10(
       name = ylab,
@@ -234,14 +234,14 @@ ptchart2 <- function(object,
         ggplot2::geom_smooth(
           method = "lm",
           se = FALSE,
-          mapping = ggplot2::aes(x = day, y = freq * 10^max(res_freq), group = phase),
+          mapping = ggplot2::aes(x = day, y = pred_freq / 10^max(res_freq), group = phase),
           color = color_acc_line,
           linetype = 2
         ) +
         ggplot2::geom_smooth(
           method = "lm",
           se = FALSE,
-          mapping = ggplot2::aes(x = day, y = freq * 10^min(res_freq), group = phase),
+          mapping = ggplot2::aes(x = day, y = pred_freq / 10^min(res_freq), group = phase),
           color = color_acc_line,
           linetype = 2
         )
@@ -257,14 +257,14 @@ ptchart2 <- function(object,
         ggplot2::geom_smooth(
           method = "lm",
           se = FALSE,
-          mapping = ggplot2::aes(x = day, y = freq_err * 10^max(res_freq_err), group = phase),
+          mapping = ggplot2::aes(x = day, y = pred_freq_err * 10^max(res_freq_err), group = phase),
           color = color_dec_line,
           linetype = 2
         ) +
         ggplot2::geom_smooth(
           method = "lm",
           se = FALSE,
-          mapping = ggplot2::aes(x = day, y = freq_err * 10^min(res_freq_err), group = phase),
+          mapping = ggplot2::aes(x = day, y = pred_freq_err * 10^min(res_freq_err), group = phase),
           color = color_dec_line,
           linetype = 2
         )
@@ -447,7 +447,7 @@ ptchart2 <- function(object,
 }
 
 
-make_scale_y_params2 <- function() {
+make_scale_y_params <- function() {
   # To prevent note of "no visible binding for global variable 'x'" when building the package
   base <- exponent <- sub_unit <- NULL
 
@@ -464,7 +464,7 @@ make_scale_y_params2 <- function() {
 }
 
 
-make_scale_x_params2 <- function(main_df) {
+make_scale_x_params <- function(main_df) {
 
   #if(is.character(first_sunday)) {first_sunday <- ymd(first_sunday)}
 
@@ -509,12 +509,12 @@ make_scale_x_params2 <- function(main_df) {
   )
 }
 
-first_date2 <- function(date){
+first_date <- function(date){
   date[[1]]
 }
 
 
-last_date2 <- function(date){
+last_date <- function(date){
   date[[length(date)]]
 }
 
