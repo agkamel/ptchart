@@ -317,7 +317,7 @@ res <- function(x, y) {
 record_floor <- function(time, type = "minute") {
 
   if (!(type %in% c("minute", "second", "hour"))) {
-    rlang::abort("Type must be one of `minute`, `second` or `hour`.")
+    cli::cli_abort("Type must be one of `minute`, `second` or `hour`.")
   }
 
   output <- dplyr::case_when(
@@ -329,7 +329,7 @@ record_floor <- function(time, type = "minute") {
   index_to_check <- !is.na(output)
 
   if (any(output[index_to_check] < (1 / (24*60))) || any(output[index_to_check] > 1000)) {
-    rlang::abort("Some output values in time floor are lower than 1 response per day or greater than 1000 response per minute. Check time input values.")
+    cli::cli_abort("Some output values in time floor are lower than 1 response per day or greater than 1000 response per minute. Check time input values.")
   }
 
   output
