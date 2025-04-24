@@ -12,8 +12,8 @@ ptchart2(
   xlab = "Day",
   ylab = "Rate",
   show_record_floor = TRUE,
-  show_count_floor = TRUE,
-  show_count_ceil = TRUE,
+  show_behavior_floor = TRUE,
+  show_record_ceil = TRUE,
   show_acc_line = TRUE,
   show_dec_line = TRUE,
   show_accuracy_line = TRUE,
@@ -40,11 +40,11 @@ ptchart2(
 
 \item{ylab}{Character vector of length 1. Label of y-axis (default: \code{"Rate"}).}
 
-\item{show_record_floor}{Logical vector of length 1. Is time floor showed (default: \code{TRUE}) or not (\code{FALSE})?}
+\item{show_record_floor}{Logical vector of length 1. Is recording floor showed (default: \code{TRUE}) or not (\code{FALSE})?}
 
-\item{show_count_floor}{Logical vector of length 1. Is counting floor showed (default: \code{TRUE}) or not (\code{FALSE})?}
+\item{show_behavior_floor}{Logical vector of length 1. Is behavior floor showed (default: \code{TRUE}) or not (\code{FALSE})?}
 
-\item{show_count_ceil}{Logical vector of length 1. Is counting ceil showed (default: \code{TRUE}) or not (\code{FALSE})?}
+\item{show_record_ceil}{Logical vector of length 1. Is recording ceiling showed (default: \code{TRUE}) or not (\code{FALSE})?}
 
 \item{show_acc_line}{Logical vector of length 1. Is acceleration line showed (default: \code{TRUE}) or not (\code{FALSE})?}
 
