@@ -772,6 +772,9 @@ antilog <- function(x, base = 10) {
 
 #' ptchart
 #'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
 #' @param object An object of class `ptstat`.
 #' @param zoom_x A vector of class `Date` and of length 2 for setting limits for the x axis.
 #' @param zoom_y A numerical vector of length 2 for setting limits for the y axes.
