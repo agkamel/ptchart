@@ -18,7 +18,8 @@ ptstat(
   count_err = NULL,
   time = NULL,
   record_floor = NULL,
-  count_ceil = NULL,
+  behavior_floor = NULL,
+  record_ceil = NULL,
   verbose = TRUE
 )
 
@@ -49,7 +50,9 @@ is_ptstat(x)
 
 \item{record_floor}{Double. NOTE. Name may be changed...}
 
-\item{count_ceil}{Double. NOTE. Name may be changed...}
+\item{behavior_floor}{Double. NOTE. Name may be changed...}
+
+\item{record_ceil}{Double. NOTE. Name may be changed...}
 
 \item{verbose}{Logical scalar. Show informational messages. Default to \code{TRUE}.}
 
