@@ -1,13 +1,14 @@
 Package: ptchart
 Type: Package
-Title: Computing Precision Teaching graphs and measures with Precision Teaching data
+Title: Computing precision teaching measures and charts
 Authors@R: c(
     person("Alexandre", "Gellen-Kamel", email = "agkamel@outlook.com", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0002-0382-2478"))
   )
 Version: 0.1.0.9000
-Description: Tools for generating SCC, calculating celeration, bounce, turn
-    jump and accuracy, and others useful tools for working with logarithmic values.
+Description: A set of tools for computing precision teaching measures like
+    (i.e., celeration, bounce) and for generating a standardized chart in
+    in accordance with the Standard Celeration Society conventions.
 License: CC BY 4.0 + file LICENSE
 Encoding: UTF-8
 LazyData: true

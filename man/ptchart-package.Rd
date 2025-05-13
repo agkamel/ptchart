@@ -3,9 +3,9 @@
 \docType{package}
 \name{ptchart-package}
 \alias{ptchart-package}
-\title{ptchart: Computing Precision Teaching graphs and measures with Precision Teaching data}
+\title{ptchart: Computing precision teaching measures and charts}
 \description{
-Tools for generating SCC, calculating celeration, bounce, turn jump and accuracy, and others useful tools for working with logarithmic values.
+A set of tools for computing precision teaching measures like (i.e., celeration, bounce) and for generating a standardized chart in in accordance with the Standard Celeration Society conventions.
 }
 \seealso{
 Useful links:
