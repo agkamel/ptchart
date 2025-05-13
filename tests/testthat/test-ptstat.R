@@ -12,7 +12,7 @@ df_test <- ptstat(example_pt_data,
 df_test$main_df
 
 df_test |>
-  ptchart2(zoom_x = c(0, 28), zoom_y = c(0.4, 20))
+  ptchart(zoom_x = c(0, 28), zoom_y = c(0.4, 20))
 
 test_that("a S3 object of class ptstat is returned", {
   expect_s3_class(ptstat(example_pt_data,
