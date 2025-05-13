@@ -7,24 +7,35 @@
 
 [![Lifecycle:
 experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
+
 <!-- badges: end -->
 
 ## Overview
 
 **ptchart** is an R package that provides precision teachers and
-behavior analysts tools to compute and work behavioral mesures, to
-generate standardized charts.
+behavior analysts tools to compute and work behavioral measures related
+to precision teaching and to generate standardized charts.
 
-There two main functions in ptchart:
+There are two main and more global functions for quick computations:
 
-- `ptstat()` for computing behavioral mesures
-- `ptchart()` for generating a standardized chart
+- `ptstat()` for computing all behavioral measures.
+- `ptchart()` for generating a Standardized Celeration Chart.
 
-Please note that this package is in active developpement.
+There are multiple smaller but specialized functions to be used with
+vectors, which some are used within `ptstat()`:
+
+- `celeration()`
+- `bounce_total()`
+- `accuracy_ratio()`
+- etc.
+
+Please note that this package is currently in active development. If you
+find any bug or if you have a specific request, you can open a new
+issue.
 
 ## Installation
 
-Install the ptchart package via CRAN:
+Install the **ptchart** package via CRAN:
 
 ``` r
 install.packages("ptchart")
@@ -33,47 +44,104 @@ install.packages("ptchart")
 Install the development version via GitHub:
 
 ``` r
-# intstall.packages("devtools")
+# install.packages("devtools")
 devtools::install_github("agkamel/ptchart")
 ```
 
-## Computing measures with `ptchart`
+## A basic example
 
-This is a basic example which shows you how to solve a common problem:
+First, we first need to load the package.
 
 ``` r
 library(ptchart)
-#> 
-#> Attachement du package : 'ptchart'
-#> L'objet suivant est masqué depuis 'package:stats':
-#> 
-#>     terms
-## basic example code
 ```
 
-What is special about using `README.Rmd` instead of just `README.md`?
-You can include R chunks like so:
+To help the user understand the package, the fictional dataset
+`example_pt_data` is provided with the package.
 
 ``` r
-summary(cars)
-#>      speed           dist       
-#>  Min.   : 4.0   Min.   :  2.00  
-#>  1st Qu.:12.0   1st Qu.: 26.00  
-#>  Median :15.0   Median : 36.00  
-#>  Mean   :15.4   Mean   : 42.98  
-#>  3rd Qu.:19.0   3rd Qu.: 56.00  
-#>  Max.   :25.0   Max.   :120.00
+example_pt_data
 ```
 
-You’ll still need to render `README.Rmd` regularly, to keep `README.md`
-up-to-date. `devtools::build_readme()` is handy for this. You could also
-use GitHub Actions to re-render `README.Rmd` every time you push. An
-example workflow can be found here:
-<https://github.com/r-lib/actions/tree/v1/examples>.
+To calculate behavioral measures of behavior, we provide the relevant
+information into the `ptstat()` function.
 
-You can also embed plots, for example:
+``` r
+measures <- ptstat(example_pt_data,
+                   day = jour,
+                   freq = frequence,
+                   phase = phase)
+```
 
-<img src="man/figures/README-pressure-1.png" width="100%" />
+The output of `ptstat()` is a S3 object that contains a lot of useful
+information like celeration, bounce, jump, turn and accuracy values.
+Other variables like time floor are also calculated.
 
-In that case, don’t forget to commit and push the resulting figure
-files, so they display on GitHub and CRAN.
+``` r
+measures
+```
+
+Now, we may want to see the data on a chart that respect the
+Standardized Celeration Chart conventions. To do so, we use the
+`ptchart()` function.
+
+``` r
+ptchart(measures)
+```
+
+## More details on computing measures with `ptstat()`
+
+### Dates and days input scenarios
+
+There are multiple input scenarios when using `ptstat()` depending of
+the data you have.
+
+If you have observation dates, you can provide them to the argument
+`date`. Dates are be automatically converted to days using the earliest
+date available. If a specific `date_zero` is provided, dates are
+converted using this date as the day 0.
+
+If you don’t have observations dates, you can provide days number to the
+argument `day`. Because dates contains more information than days, if
+inputs are provided for both `date` and `day`, the priority is given to
+`date` and `day` is ignored.
+
+### Count of response, timing and frequency input scenarios
+
+If you have count of responses and observation timings, you can provide
+them to arguments `count` and `time`. Both argument contains the most
+information: time floors and frequencies are automatically calculated
+with these variables. The same reasoning is applied if you have the
+count of non-target responses provided to the argument `count_err`.
+
+If you directly have frequencies of a target behavior, you can provide
+it to the argument `freq` (or `freq_err` for a non-target behavior).
+Because `count` and `time` contain more information, if they are already
+provided, the priority is given to them and `freq` (or `freq_err`) is
+ignored.
+
+### Phases
+
+If your data contains multiple intervention phases, you can provide them
+to the argument `phase`. Calculations will then be made by grouping data
+by phases of intervention. If argument `phase` is not provided, data
+will be considered as a single phase and calculation will be made on all
+data.
+
+## More details on generating chart with `ptchart()`
+
+This section is currently in work. More details are coming.
+
+## More details on specialized functions
+
+There are three types of specialized functions: (a) those that return a
+single value, (b) those that return an atomic vector (or multiple
+values). If you are familiar with the **dplyr** package, the former can
+be used within `summarise()` and the latter within `mutate()`.
+
+| Scalar output | Vector output |
+|----|----|
+| `b1()`, `b0()` | `predicted_values()`, `res()` |
+| `accuracy()` | `accuracy_ratio()` |
+| `bounce_up()`, `bounce_down()`, `bounce_total()` |  |
+| `celeration()`, `celeration_0()` |  |
