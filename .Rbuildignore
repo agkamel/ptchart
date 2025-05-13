@@ -7,3 +7,4 @@
 ^\.Rprofile$
 ^_admin$
 ^R\_development$
+^cran-comments\.md$
