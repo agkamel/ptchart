@@ -58,7 +58,7 @@ ptchart <- function(object,
 ) {
 
   # To prevent note of "no visible binding for global variable 'x'" when building the package
-  day <- accu_ratio <- res_freq <- res_freq_err <- freq <- freq_err <- phase <- record_floor <- record_ceil <- behavior_floor <- NULL
+  day <- accu_ratio <- res_freq <- res_freq_err <- freq <- freq_err <- phase <- record_floor <- record_ceil <- behavior_floor <- pred_freq <- pred_freq_err <- NULL
 
   stopifnot("`object` must be of class `ptstat`" = is_ptstat(object))
 
