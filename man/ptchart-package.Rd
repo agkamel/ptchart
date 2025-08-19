@@ -3,7 +3,7 @@
 \docType{package}
 \name{ptchart-package}
 \alias{ptchart-package}
-\title{ptchart: Computing Precision Teaching Measures And Charts}
+\title{ptchart: Computing Precision Teaching Measures and Charts}
 \description{
 A set of tools for computing precision teaching measures like (i.e., celeration, bounce) and for generating a standardized chart in in accordance with the Standard Celeration Society conventions.
 }
