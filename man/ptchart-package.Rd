@@ -16,7 +16,7 @@ Useful links:
 
 }
 \author{
-\strong{Maintainer}: Alexandre Gellen-Kamel \email{agkamel@outlook.com} (\href{https://orcid.org/0000-0002-0382-2478}{ORCID})
+\strong{Maintainer}: Alexandre Gellen-Kamel \email{agkamel@outlook.com} (\href{https://orcid.org/0000-0002-0382-2478}{ORCID}) [copyright holder]
 
 }
 \keyword{internal}
