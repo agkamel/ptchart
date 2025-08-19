@@ -2,7 +2,7 @@ Package: ptchart
 Type: Package
 Title: Computing precision teaching measures and charts
 Authors@R: c(
-    person("Alexandre", "Gellen-Kamel", email = "agkamel@outlook.com", role = c("aut", "cre"),
+    person("Alexandre", "Gellen-Kamel", email = "agkamel@outlook.com", role = c("aut", "cre", "cph"),
            comment = c(ORCID = "0000-0002-0382-2478"))
   )
 Version: 0.1.0.9000
