@@ -6,7 +6,7 @@
 
 ## Minor
 
-* Add specialized funtions for summaring measures.
+* Add specialized funtions for summarising measures.
 
 # ptchart 0.1.0
 
