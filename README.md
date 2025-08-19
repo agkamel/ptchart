@@ -19,7 +19,7 @@ to precision teaching and to generate standardized charts.
 There are two main and more global functions for quick computations:
 
 - `ptstat()` for computing all behavioral measures.
-- `ptchart()` for generating a Standardized Celeration Chart.
+- `ptchart()` for generating a standardized chart.
 
 There are multiple smaller but specialized functions to be used with
 vectors, which some are used within `ptstat()`:
@@ -30,7 +30,7 @@ vectors, which some are used within `ptstat()`:
 - etc.
 
 Please note that this package is currently in active development. If you
-find any bug or if you have a specific request, you can open a new
+find any bug, or if you have a specific request, you can open a new
 issue.
 
 ## Installation
@@ -82,8 +82,8 @@ measures
 ```
 
 Now, we may want to see the data on a chart that respect the
-Standardized Celeration Chart conventions. To do so, we use the
-`ptchart()` function.
+Standardized Celeration Chart conventions (Standard Celeration Society,
+2022). To do so, we use the `ptchart()` function.
 
 ``` r
 ptchart(measures)
