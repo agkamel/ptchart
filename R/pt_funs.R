@@ -319,7 +319,7 @@ res <- function(x, y) {
 
 
 
-
+# This section are functions in work - Not exported yet
 
 record_floor <- function(time, type = "minute") {
 
