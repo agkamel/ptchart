@@ -252,7 +252,9 @@ accuracy_ratio <- function(x, y_cor, y_incor) {
   if (validate_xy(x, y_cor)$value == FALSE) { stop(validate_xy(x, y_cor)$message) }
   if (validate_xy(x, y_incor)$value == FALSE) { stop(validate_xy(x, y_incor)$message) }
 
-  index_to_keep <- (!is.na(x) & !is.na(y_cor) & !is.na(y_incor))
+  index_to_keep <- (!is.na(x) | !is.na(y_cor) | !is.na(y_incor))
+  #index_to_keep <- (!is.na(x) & !is.na(y_cor) & !is.na(y_incor)) # To be checked
+
   if (sum(index_to_keep) >= 3) {
     x <- x[index_to_keep]
     y_cor <- y_cor[index_to_keep]
