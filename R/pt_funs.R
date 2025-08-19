@@ -388,17 +388,28 @@ count_and_freq_to_time <- function(count, freq) {
 
 
 
-recode_zero_freq <- function(y, time) {
+recode_zero_freq <- function(y, time, method = "div2") {
 
   record_floor <- record_floor(time)
 
-  dplyr::case_when(
-    y == 0 ~ record_floor / 2,
-    .default = y
-  )
+  if (!(method %in% c("div2", "remove"))) {
+    cli::cli_abort("`method` must have one of the following: 'div2', 'remove'")
+  }
+
+  if (method == "div2") {
+    output <- dplyr::case_when(
+      y == 0 ~ record_floor / 2,
+      .default = y
+    )
+  } else if (method == "remove") {
+    output <- dplyr::case_when(
+      y == 0 ~ NA_real_,
+      .default = y
+    )
+  }
+
+  output
 
 }
-
-
 
 
