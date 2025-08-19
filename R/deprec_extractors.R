@@ -10,7 +10,7 @@
 #' @return A dataframe
 #'
 #' @examples
-#' #TODO
+#' # Deprecated
 
 #' @export
 #' @describeIn deprec_extractors Extract accuracy table

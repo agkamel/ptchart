@@ -31,7 +31,13 @@
 #' @export
 #'
 #' @examples
-#' #TODO
+#' measures <- ptstat(example_pt_data,
+#'             day = jour,
+#'             freq = frequence,
+#'             phase = phase,
+#'             time = minute,
+#'             freq_err = frequence_nc)
+#' ptchart(measures)
 ptchart <- function(object,
                     zoom_x = NULL,
                     zoom_y = NULL,

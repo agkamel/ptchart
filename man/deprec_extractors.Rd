@@ -73,5 +73,5 @@ This a description of these extrators.
 
 }}
 \examples{
-#TODO
+# Deprecated
 }

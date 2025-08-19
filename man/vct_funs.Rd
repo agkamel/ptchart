@@ -36,3 +36,8 @@ These funtions are summary PT measures that returns a vector of multiple values.
 \item \code{res()}: Calculate residual errors
 
 }}
+\examples{
+df <- example_pt_data
+accuracy_ratio(df$jour, df$frequence, df$frequence_nc)
+
+}

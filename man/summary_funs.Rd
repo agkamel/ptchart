@@ -124,6 +124,7 @@ The bounce total \eqn{\mathcal{B}_{\text{total}}} obtained with \code{bounce_tot
 }
 
 \examples{
-# NOT YET
+df <- example_pt_data
+celeration(df$jour, df$frequence)
 
 }

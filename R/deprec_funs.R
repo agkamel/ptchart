@@ -784,7 +784,7 @@ antilog <- function(x, base = 10) {
 #' @export
 #'
 #' @examples
-#' #TODO
+#' # Deprecated
 ptchart_old <- function(object,
                     zoom_x = NULL,
                     zoom_y = NULL,
