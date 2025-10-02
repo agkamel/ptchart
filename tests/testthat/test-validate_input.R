@@ -36,17 +36,17 @@ test_that("Arg `freq` in `ptstat_old()` throw an error if contains Inf values", 
 })
 
 
-test_that("Arg `freq_err` in `ptstat_old()` throw an error if is not numeric", {
-  expect_error(validate_arg_freq_err(data = data.frame(x = c("a", "b", "c")),
-                                 freq_err = "x"))
+test_that("Arg `freq_e` in `ptstat_old()` throw an error if is not numeric", {
+  expect_error(validate_arg_freq_e(data = data.frame(x = c("a", "b", "c")),
+                                 freq_e = "x"))
 })
-test_that("Arg `freq_err` in `ptstat_old()` throw an error if is not greater of equal than zero", {
-  expect_error(validate_arg_freq_err(data = data.frame(x = c(-1, 0, 1)),
-                                 freq_err = "x"))
+test_that("Arg `freq_e` in `ptstat_old()` throw an error if is not greater of equal than zero", {
+  expect_error(validate_arg_freq_e(data = data.frame(x = c(-1, 0, 1)),
+                                 freq_e = "x"))
 })
-test_that("Arg `freq_err` in `ptstat_old()` throw an error if contains Inf values", {
-  expect_error(validate_arg_freq_err(data = data.frame(x = c(0, 1, Inf)),
-                                 freq_err = "x"))
+test_that("Arg `freq_e` in `ptstat_old()` throw an error if contains Inf values", {
+  expect_error(validate_arg_freq_e(data = data.frame(x = c(0, 1, Inf)),
+                                 freq_e = "x"))
 })
 
 
@@ -93,17 +93,17 @@ test_that("Arg `count` in `ptstat_old()` throw an error if is not an integer", {
 })
 
 
-test_that("Arg `count_err` in `ptstat_old()` throw an error if is not numeric", {
-  expect_error(validate_arg_count_err(data = data.frame(x = c("a", "b", "c")),
-                                  count_err = "x"))
+test_that("Arg `count_e` in `ptstat_old()` throw an error if is not numeric", {
+  expect_error(validate_arg_count_e(data = data.frame(x = c("a", "b", "c")),
+                                  count_e = "x"))
 })
-test_that("Arg `count_err` in `ptstat_old()` throw an error if is not greater than zero", {
-  expect_error(validate_arg_count_err(data = data.frame(x = c(-1, 0, 1)),
-                                  count_err = "x"))
+test_that("Arg `count_e` in `ptstat_old()` throw an error if is not greater than zero", {
+  expect_error(validate_arg_count_e(data = data.frame(x = c(-1, 0, 1)),
+                                  count_e = "x"))
 })
-test_that("Arg `count_err` in `ptstat_old()` throw an error if is not an integer", {
-  expect_error(validate_arg_count_err(data = data.frame(x = c(0.1, 1)),
-                                  count_err = "x"))
+test_that("Arg `count_e` in `ptstat_old()` throw an error if is not an integer", {
+  expect_error(validate_arg_count_e(data = data.frame(x = c(0.1, 1)),
+                                  count_e = "x"))
 })
 
 

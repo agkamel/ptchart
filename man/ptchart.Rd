@@ -80,6 +80,6 @@ measures <- ptstat(example_pt_data,
             freq = frequence,
             phase = phase,
             time = minute,
-            freq_err = frequence_nc)
+            freq_e = frequence_nc)
 ptchart(measures)
 }

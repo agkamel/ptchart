@@ -80,15 +80,15 @@ validate_arg_count <- function(data, count) {
   }
 }
 
-validate_arg_count_err <- function(data, count_err) {
-  if (is.numeric(data[[count_err]]) == FALSE) {
-    stop("`count_err` must be numeric")
+validate_arg_count_e <- function(data, count_e) {
+  if (is.numeric(data[[count_e]]) == FALSE) {
+    stop("`count_e` must be numeric")
   }
-  if ((FALSE %in% (data[[count_err]] >= 0)) == TRUE) {
-    stop("`count_err` must be greater or equal than 0`")
+  if ((FALSE %in% (data[[count_e]] >= 0)) == TRUE) {
+    stop("`count_e` must be greater or equal than 0`")
   }
-  if ((sum(data[[count_err]] %% 1) > 0) == TRUE) {
-    stop("`count_err` must be a integer")
+  if ((sum(data[[count_e]] %% 1) > 0) == TRUE) {
+    stop("`count_e` must be a integer")
   }
 }
 

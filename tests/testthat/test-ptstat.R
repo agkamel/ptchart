@@ -2,9 +2,9 @@ df_test <- ptstat(example_pt_data,
        #date = date,
        day = jour,
        #freq = frequence,
-       #freq_err = frequence_nc,
+       #freq_e = frequence_nc,
        count = reponse,
-       count_err = reponse_nc,
+       count_e = reponse_nc,
        time = minute,
        phase = phase,
        )
@@ -19,7 +19,7 @@ test_that("a S3 object of class ptstat is returned", {
                          day = jour,
                          freq = frequence,
                          phase = phase,
-                         #freq_err = frequence_nc
+                         #freq_e = frequence_nc
                          ),
                   "ptstat")
 })
@@ -29,7 +29,7 @@ test_that("an error is raised because day, date, or date and date_zero is missin
                          # day, date, or day and date missing
                          freq = frequence,
                          phase = phase,
-                         freq_err = frequence_nc
+                         freq_e = frequence_nc
                       ))
 })
 
@@ -37,13 +37,13 @@ test_that("an error is raised because day, date, or date and date_zero is missin
 
 
 
-test_that("an error is raised because count, freq, count_err, or freq_err is missing.", {
+test_that("an error is raised because count, freq, count_e, or freq_e is missing.", {
   expect_error(ptstat(example_pt_data,
                       day = jour,
                       #freq = frequence,
                       #count = reponse,
-                      #count_err = reponse_nc,
-                      #freq_err = frequence_nc,
+                      #count_e = reponse_nc,
+                      #freq_e = frequence_nc,
                       #time = minute,
                       phase = phase
   ))
@@ -52,8 +52,8 @@ test_that("an error is raised because count, freq, count_err, or freq_err is mis
                       day = jour,
                       #freq = frequence,
                       #count = reponse,
-                      #count_err = reponse_nc,
-                      #freq_err = frequence_nc,
+                      #count_e = reponse_nc,
+                      #freq_e = frequence_nc,
                       time = minute,
                       phase = phase
   ))

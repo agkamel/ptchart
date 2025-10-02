@@ -6,12 +6,12 @@
 #' @param .df Dataframe.
 #' @param day Integer. No of the successive day of the calendar. Values must be integers and >= 0.
 #' @param freq Double. Frequencies of observations aimed to be accelerated. Values must be >= 0.
-#' @param freq_err Double. Frequencies of observations aimed to be decelerated. Values must be >= 0.
+#' @param freq_e Double. Frequencies of observations aimed to be decelerated. Values must be >= 0.
 #' @param phase Character. Phase of intervention. If none are provided, default phase is `"A"` for all observations. Note: Providing factor vector to be implemented.
 #' @param date Date. Dates of observations in the format "yyyy-mm-dd". If `date_zero` is not provided, the closest sunday before the first date will be used for `date_zero`.
 #' @param date_zero Date scalar. Date of length one. A date that correspond to day 0 in the format "yyyy-mm-dd".
 #' @param count Integer. Count of responses aimed to be accelerated. Values must be >= 0.
-#' @param count_err Integer. Count of responses aimed to be decelerated. Values must be >= 0.
+#' @param count_e Integer. Count of responses aimed to be decelerated. Values must be >= 0.
 #' @param time Double. Number of minutes. Values must be > 0.
 #' @param record_floor Double. NOTE. Name may be changed...
 #' @param behavior_floor Double. NOTE. Name may be changed...
@@ -28,16 +28,16 @@
 #'        freq = frequence,
 #'        phase = phase,
 #'        time = minute,
-#'        freq_err = frequence_nc)
+#'        freq_e = frequence_nc)
 ptstat <- function(.df,
                    day = NULL,
                    freq = NULL,
-                   freq_err = NULL,
+                   freq_e = NULL,
                    phase = NULL,
                    date = NULL,
                    date_zero = NULL,
                    count = NULL,
-                   count_err = NULL,
+                   count_e = NULL,
                    time = NULL,
                    record_floor = NULL,
                    behavior_floor = NULL,
@@ -45,16 +45,16 @@ ptstat <- function(.df,
                    verbose = TRUE
                    ) {
 
-  .count <- .record_ceil <- .count_err <- .behavior_floor <- .record_floor <- .date <- .day <- .freq <- .freq_err <- .phase <- .time <- b0 <- b1 <- b_down <- b_total <- b_up <- cel <- first_day <- first_freq <- lag_freq <- lead_day <- new_freq <- turn <- jump <-  NULL
+  .count <- .record_ceil <- .count_e <- .behavior_floor <- .record_floor <- .date <- .day <- .freq <- .freq_e <- .phase <- .time <- b0 <- b1 <- b_down <- b_total <- b_up <- cel <- first_day <- first_freq <- lag_freq <- lead_day <- new_freq <- turn <- jump <-  NULL
   cel_e <- accu <- first_day_e <- b0_e <- b1_e <- lead_day_e <- new_freq_e <- first_freq_e <- lag_freq_e <- b_up_e <- b_down_e <- b_total_e <- turn_e <- jump_e <- last_col <- NULL
   # First scenario
   # date, count, time are provided
 
   if (any(names(.df) %in% c(".day", ".freq", ".phase", ".date", ".count",
-                            ".time", ".count_err", ".freq_err", ".record_floor", ".behavior_floor",
+                            ".time", ".count_e", ".freq_e", ".record_floor", ".behavior_floor",
                             ".record_ceil"))) {
     stop("These are reserved colnames: .day, .freq, .phase,
-         .date, .count, .time, .count_err, .freq_err, .record_floor and .record_ceil.",
+         .date, .count, .time, .count_e, .freq_e, .record_floor and .record_ceil.",
          call. = FALSE)
   }
 
@@ -65,8 +65,8 @@ ptstat <- function(.df,
                   .date = if (is.null({{ date }})) NA_real_ else {{ date }},
                   .count = if (is.null({{ count }})) NA_integer_ else {{ count }},
                   .time = if (is.null({{ time }})) NA_real_ else {{ time }},
-                  .count_err = if (is.null({{ count_err }})) NA_integer_ else {{ count_err }},
-                  .freq_err = if (is.null({{ freq_err }})) NA_real_ else {{ freq_err }},
+                  .count_e = if (is.null({{ count_e }})) NA_integer_ else {{ count_e }},
+                  .freq_e = if (is.null({{ freq_e }})) NA_real_ else {{ freq_e }},
                   .record_floor = if (is.null({{ record_floor }})) NA else {{ record_floor }},
                   .behavior_floor = if (is.null({{ behavior_floor }})) NA else {{ behavior_floor }},
                   .record_ceil = if (is.null({{ record_ceil }})) NA else {{ record_ceil }})
@@ -79,8 +79,8 @@ ptstat <- function(.df,
            date = .date,
            count = .count,
            time = .time,
-           count_err = .count_err,
-           freq_err = .freq_err,
+           count_e = .count_e,
+           freq_e = .freq_e,
            record_floor = .record_floor,
            behavior_floor = .behavior_floor,
            record_ceil = .record_ceil)
@@ -128,32 +128,32 @@ ptstat <- function(.df,
   }
 
 
-  ## Count_err and time, and freq_err priority ----
-  if (is_provided(main_df$count_err) && is_provided(main_df$time)) {
-    if (is_provided(main_df$freq_err)) {
-      cli::cli_warn("Provided `freq_err` is dropped since `count_err` and `time` are supplied.")
+  ## Count_e and time, and freq_e priority ----
+  if (is_provided(main_df$count_e) && is_provided(main_df$time)) {
+    if (is_provided(main_df$freq_e)) {
+      cli::cli_warn("Provided `freq_e` is dropped since `count_e` and `time` are supplied.")
     }
-    main_df$freq_err <- count_to_freq(main_df$count_err, main_df$time)
-    if (verbose == TRUE) cli::cli_alert_info("i `count_err` and `time` are used to calculate `freq_err`.")
+    main_df$freq_e <- count_to_freq(main_df$count_e, main_df$time)
+    if (verbose == TRUE) cli::cli_alert_info("i `count_e` and `time` are used to calculate `freq_e`.")
 
-  } else if (is_provided(main_df$freq_err) && is_provided(main_df$time)){
-    main_df$freq_err <- main_df$freq_err
-    main_df$count_err <- freq_to_count(main_df$freq_err, main_df$time)
-    if (verbose == TRUE) cli::cli_alert_info("i `freq_err` and `time` are used to calculate `count_err`.")
+  } else if (is_provided(main_df$freq_e) && is_provided(main_df$time)){
+    main_df$freq_e <- main_df$freq_e
+    main_df$count_e <- freq_to_count(main_df$freq_e, main_df$time)
+    if (verbose == TRUE) cli::cli_alert_info("i `freq_e` and `time` are used to calculate `count_e`.")
 
-    # Warning if count_err is provided but time is missing when freq_err is also missing.
-  } else if (is_provided(main_df$count_err) && is_missing(main_df$time) &&
-             is_missing(main_df$freq_err)) {
-    cli::cli_alert_warning("`count_err` is provided, but not `time`. Returning {.code NA}s.")
+    # Warning if count_e is provided but time is missing when freq_e is also missing.
+  } else if (is_provided(main_df$count_e) && is_missing(main_df$time) &&
+             is_missing(main_df$freq_e)) {
+    cli::cli_alert_warning("`count_e` is provided, but not `time`. Returning {.code NA}s.")
   }
 
 
 
-  ## Error if count, freq, count_err or freq_err are missing ----
+  ## Error if count, freq, count_e or freq_e are missing ----
   if (
-    is_missing(main_df$count) && is_missing(main_df$freq) && is_missing(main_df$count_err) && is_missing(main_df$freq_err)
+    is_missing(main_df$count) && is_missing(main_df$freq) && is_missing(main_df$count_e) && is_missing(main_df$freq_e)
   ) {
-    cli::cli_abort("One of these arguments must be supplied: `count`, `freq`, `count_err`, or `freq_err`.")
+    cli::cli_abort("One of these arguments must be supplied: `count`, `freq`, `count_e`, or `freq_e`.")
   }
 
 
@@ -177,9 +177,9 @@ ptstat <- function(.df,
   }
 
 
-  ## freq_err ----
-  if (is_provided(main_df$freq_err) && any(main_df$freq_err == 0)) {
-    cli::cli_alert_warning("At least one zero is found in `freq_err`:")
+  ## freq_e ----
+  if (is_provided(main_df$freq_e) && any(main_df$freq_e == 0)) {
+    cli::cli_alert_warning("At least one zero is found in `freq_e`:")
 
     if (is_provided(main_df$time)) {
       cli::cli_ul("Recoding zero to \u00f72 under record floor.")
@@ -190,7 +190,7 @@ ptstat <- function(.df,
     }
 
     main_df <- main_df |>
-      dplyr::mutate(freq_err = recode_zero_freq(freq_err, time))
+      dplyr::mutate(freq_e = recode_zero_freq(freq_e, time))
 
   }
 
@@ -199,12 +199,13 @@ ptstat <- function(.df,
   # Main computations ----------------------------------------------------------
 
   main_df <- main_df |>
-    dplyr::mutate(accu_ratio = accuracy_ratio(day, freq, freq_err),
+    dplyr::group_by(phase) |>
+    dplyr::mutate(accu_ratio = accuracy_ratio(day, freq, freq_e),
                   record_floor = record_floor(time),
                   res_freq = res(day, freq),
                   pred_freq = predicted_values(day, freq),
-                  res_freq_err = res(day, freq_err),
-                  pred_freq_err = predicted_values(day, freq_err)
+                  res_freq_e = res(day, freq_e),
+                  pred_freq_e = predicted_values(day, freq_e)
                   )
 
   # For testing only
@@ -223,17 +224,17 @@ ptstat <- function(.df,
       first_day = dplyr::first(day),
       first_freq = dplyr::first(freq),
 
-      b0_e = b0(day, freq_err),
-      b1_e = b1(day, freq_err),
-      cel0_e = celeration_0(day, freq_err),
-      cel_e = celeration(day, freq_err),
-      b_up_e = bounce_up(day, freq_err),
-      b_down_e = bounce_down(day, freq_err),
-      b_total_e = bounce_total(day, freq_err),
+      b0_e = b0(day, freq_e),
+      b1_e = b1(day, freq_e),
+      cel0_e = celeration_0(day, freq_e),
+      cel_e = celeration(day, freq_e),
+      b_up_e = bounce_up(day, freq_e),
+      b_down_e = bounce_down(day, freq_e),
+      b_total_e = bounce_total(day, freq_e),
       first_day_e = dplyr::first(day),
-      first_freq_e = dplyr::first(freq_err),
+      first_freq_e = dplyr::first(freq_e),
 
-      accu = accuracy(day, freq, freq_err),
+      accu = accuracy(day, freq, freq_e),
 
 
 

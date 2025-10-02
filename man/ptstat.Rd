@@ -10,12 +10,12 @@ ptstat(
   .df,
   day = NULL,
   freq = NULL,
-  freq_err = NULL,
+  freq_e = NULL,
   phase = NULL,
   date = NULL,
   date_zero = NULL,
   count = NULL,
-  count_err = NULL,
+  count_e = NULL,
   time = NULL,
   record_floor = NULL,
   behavior_floor = NULL,
@@ -34,7 +34,7 @@ is_ptstat(x)
 
 \item{freq}{Double. Frequencies of observations aimed to be accelerated. Values must be >= 0.}
 
-\item{freq_err}{Double. Frequencies of observations aimed to be decelerated. Values must be >= 0.}
+\item{freq_e}{Double. Frequencies of observations aimed to be decelerated. Values must be >= 0.}
 
 \item{phase}{Character. Phase of intervention. If none are provided, default phase is \code{"A"} for all observations. Note: Providing factor vector to be implemented.}
 
@@ -44,7 +44,7 @@ is_ptstat(x)
 
 \item{count}{Integer. Count of responses aimed to be accelerated. Values must be >= 0.}
 
-\item{count_err}{Integer. Count of responses aimed to be decelerated. Values must be >= 0.}
+\item{count_e}{Integer. Count of responses aimed to be decelerated. Values must be >= 0.}
 
 \item{time}{Double. Number of minutes. Values must be > 0.}
 
@@ -81,6 +81,6 @@ ptstat(example_pt_data,
        freq = frequence,
        phase = phase,
        time = minute,
-       freq_err = frequence_nc)
+       freq_e = frequence_nc)
 # TODO
 }

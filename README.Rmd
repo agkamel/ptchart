@@ -125,12 +125,12 @@ If you have count of responses and observation timings, you can provide
 them to arguments `count` and `time`. Both argument contains the most
 information: time floors and frequencies are automatically calculated
 with these variables. The same reasoning is applied if you have the
-count of non-target responses provided to the argument `count_err`.
+count of non-target responses provided to the argument `count_e`.
 
 If you directly have frequencies of a target behavior, you can provide
-it to the argument `freq` (or `freq_err` for a non-target behavior).
+it to the argument `freq` (or `freq_e` for a non-target behavior).
 Because `count` and `time` contain more information, if they are already
-provided, the priority is given to them and `freq` (or `freq_err`) is
+provided, the priority is given to them and `freq` (or `freq_e`) is
 ignored.
 
 ### Phases

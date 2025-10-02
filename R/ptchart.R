@@ -36,7 +36,7 @@
 #'             freq = frequence,
 #'             phase = phase,
 #'             time = minute,
-#'             freq_err = frequence_nc)
+#'             freq_e = frequence_nc)
 #' ptchart(measures)
 ptchart <- function(object,
                     zoom_x = NULL,
@@ -64,7 +64,7 @@ ptchart <- function(object,
 ) {
 
   # To prevent note of "no visible binding for global variable 'x'" when building the package
-  day <- accu_ratio <- res_freq <- res_freq_err <- freq <- freq_err <- phase <- record_floor <- record_ceil <- behavior_floor <- pred_freq <- pred_freq_err <- NULL
+  day <- accu_ratio <- res_freq <- res_freq_e <- freq <- freq_e <- phase <- record_floor <- record_ceil <- behavior_floor <- pred_freq <- pred_freq_e <- NULL
 
   stopifnot("`object` must be of class `ptstat`" = is_ptstat(object))
 
@@ -210,7 +210,7 @@ ptchart <- function(object,
       ggplot2::geom_smooth(
         method = "lm",
         se = FALSE,
-        mapping = ggplot2::aes(x = day, y = freq_err, group = phase),
+        mapping = ggplot2::aes(x = day, y = freq_e, group = phase),
         color = color_dec_line
       )
     }
@@ -299,7 +299,7 @@ ptchart <- function(object,
       output <- output +
 
       ggplot2::geom_point(
-        mapping = ggplot2::aes(x = day, y = freq_err),
+        mapping = ggplot2::aes(x = day, y = freq_e),
         shape = 4, size = 2.5,
       )
     }
@@ -380,7 +380,7 @@ ptchart <- function(object,
       ggplot2::geom_smooth(
         method = "lm",
         se = FALSE,
-        mapping = ggplot2::aes(x = date, y = freq_err, group = phase),
+        mapping = ggplot2::aes(x = date, y = freq_e, group = phase),
         color = color_dec_line
       )
     }
@@ -417,7 +417,7 @@ ptchart <- function(object,
       output <- output +
 
       ggplot2::geom_point(
-        mapping = ggplot2::aes(x = date, y = freq_err),
+        mapping = ggplot2::aes(x = date, y = freq_e),
         shape = 4, size = 2.5,
       )
     }
