@@ -71,6 +71,8 @@ ptstat_old <- function(data,
 
   lifecycle::deprecate_warn("0.1.0.9000", "ptstat_old()", "ptstat()")
 
+  validate_arg_freq_e <- NULL
+
   # Validate input
   validate_arg_data(data)
   if (!is.null(day)) validate_arg_day(data, day)
