@@ -200,13 +200,16 @@ ptstat <- function(.df,
 
   main_df <- main_df |>
     dplyr::group_by(phase) |>
-    dplyr::mutate(accu_ratio = accuracy_ratio(day, freq, freq_e),
-                  record_floor = record_floor(time),
-                  res_freq = res(day, freq),
-                  pred_freq = predicted_values(day, freq),
-                  res_freq_e = res(day, freq_e),
-                  pred_freq_e = predicted_values(day, freq_e)
-                  )
+    dplyr::mutate(
+      log_freq = log10(freq),
+      log_freq_e = log10(freq_e),
+      accu_ratio = accuracy_ratio(day, freq, freq_e),
+      record_floor = record_floor(time),
+      res_freq = res(day, freq),
+      pred_freq = predicted_values(day, freq),
+      res_freq_e = res(day, freq_e),
+      pred_freq_e = predicted_values(day, freq_e)
+      )
 
   # For testing only
   #outside_main_df <<- main_df
