@@ -244,7 +244,7 @@ accuracy <- function(x, y_cor, y_incor) {
 #' @export
 #' @examples
 #' df <- ptdata01
-#' accuracy_ratio(df$jour, df$frequence, df$frequence_nc)
+#' accuracy_ratio(df$jour, df$t_frequency, df$nt_frequency)
 #'
 #' @describeIn vct_funs Calculate accuracy ratio
 accuracy_ratio <- function(x, y_cor, y_incor) {

@@ -70,7 +70,7 @@ test_that("function return phase = a if not supplied", {
            day = "jour",
            count_err = "reponse_nc",
            time = "minute"
-           #freq_err = "frequence_nc"
+           #freq_err = "nt_frequency"
            ), regexp = "i `phase` not supplied. Default phase set to `A` for all observation"
   )
 })

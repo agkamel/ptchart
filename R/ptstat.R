@@ -28,7 +28,7 @@
 #'        freq = t_frequency,
 #'        phase = phase,
 #'        time = minute,
-#'        freq_e = frequence_nc)
+#'        freq_e = nt_frequency)
 ptstat <- function(.df,
                    day = NULL,
                    freq = NULL,

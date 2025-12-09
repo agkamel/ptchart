@@ -1,8 +1,8 @@
 df_test <- ptstat(ptdata01,
        #date = date,
        day = jour,
-       #freq = frequence,
-       #freq_e = frequence_nc,
+       #freq = t_frequency,
+       #freq_e = nt_frequency,
        count = reponse,
        count_e = reponse_nc,
        time = minute,
@@ -19,7 +19,7 @@ test_that("a S3 object of class ptstat is returned", {
                          day = jour,
                          freq = t_frequency,
                          phase = phase,
-                         #freq_e = frequence_nc
+                         #freq_e = nt_frequency
                          ),
                   "ptstat")
 })
@@ -29,7 +29,7 @@ test_that("an error is raised because day, date, or date and date_zero is missin
                          # day, date, or day and date missing
                          freq = t_frequency,
                          phase = phase,
-                         freq_e = frequence_nc
+                         freq_e = nt_frequency
                       ))
 })
 
@@ -43,7 +43,7 @@ test_that("an error is raised because count, freq, count_e, or freq_e is missing
                       #freq = t_frequency,
                       #count = reponse,
                       #count_e = reponse_nc,
-                      #freq_e = frequence_nc,
+                      #freq_e = nt_frequency,
                       #time = minute,
                       phase = phase
   ))
@@ -53,7 +53,7 @@ test_that("an error is raised because count, freq, count_e, or freq_e is missing
                       #freq = t_frequency,
                       #count = reponse,
                       #count_e = reponse_nc,
-                      #freq_e = frequence_nc,
+                      #freq_e = nt_frequency,
                       time = minute,
                       phase = phase
   ))

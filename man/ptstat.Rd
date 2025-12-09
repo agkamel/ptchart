@@ -81,6 +81,6 @@ ptstat(ptdata01,
        freq = t_frequency,
        phase = phase,
        time = minute,
-       freq_e = frequence_nc)
+       freq_e = nt_frequency)
 # TODO
 }

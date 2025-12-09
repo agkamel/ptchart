@@ -63,8 +63,8 @@ phase_a <- tibble(
   minute = minute_a,
 
   # Frequence non-cible:
-  frequence_nc = round(10^(b0_a_nc + b1_a_nc*jour + erreur_a_nc)),
-  reponse_nc = frequence_nc*minute_a,
+  nt_frequency = round(10^(b0_a_nc + b1_a_nc*jour + erreur_a_nc)),
+  reponse_nc = nt_frequency*minute_a,
 
   # Phase:
   phase = "A"
@@ -87,8 +87,8 @@ phase_b <- tibble(
   minute = minute_b,
 
   # Frequence non-cible:
-  frequence_nc = round(10^(b0_b_nc + b1_b_nc*jour + erreur_b_nc)),
-  reponse_nc = frequence_nc*minute_b,
+  nt_frequency = round(10^(b0_b_nc + b1_b_nc*jour + erreur_b_nc)),
+  reponse_nc = nt_frequency*minute_b,
 
   # Phase:
   phase = "B"
@@ -98,7 +98,7 @@ phase_b <- tibble(
 ptdata01 <-
   bind_rows(phase_a, phase_b) %>%
   mutate(i = seq(1:(nrow(phase_a) + nrow(phase_b)))) %>%
-  select(i, date, jour, minute, reponse, frequence, reponse_nc, frequence_nc, phase)
+  select(i, date, jour, minute, reponse, t_frequency, reponse_nc, nt_frequency, phase)
 
 # Writing dataset ----
 usethis::use_data(ptdata01, overwrite = TRUE)
