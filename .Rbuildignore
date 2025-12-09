@@ -12,3 +12,4 @@
 ^deprec_funs.R$
 ^tests\testhat\test-ptstat_old.R$
 ^tests\testhat\test-extractors.R$
+^tests\testhat\test-calculate_funs_deprec.R$
