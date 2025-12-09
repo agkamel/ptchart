@@ -90,7 +90,7 @@ ptstat <- function(.df,
   ## Dates and day priority ----
   if (is_provided(main_df$date) && !is.null(date_zero)){
     main_df$day <- date_to_day(main_df$date, date_zero)
-    if (verbose == TRUE) cli::cli_alert_info("`date` and `date_zero` are used to calculate `day`")
+    if (verbose == TRUE) cli::cli_alert_info("`date` and `date_zero` are used to calculate `day`.")
 
    } else if (is_provided(main_df$date) && is.null(date_zero)) {
     date_zero <- first_sunday(main_df$date)
