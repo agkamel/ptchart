@@ -54,7 +54,7 @@ test_that("function return an error because of freq or count", {
     ptstat_old(ptdata01,
            day = "jour",
            #freq = "t_frequency",
-           #count = "reponse",
+           #count = "t_response",
            time = "minute"
              ), regexp = "! One of these combinaisons must be supplied:\n    `freq`\n    `count`\n    `freq_err`\n    `count_err`"
     )
@@ -68,7 +68,7 @@ test_that("function return phase = a if not supplied", {
   expect_message(
     ptstat_old(ptdata01,
            day = "jour",
-           count_err = "reponse_nc",
+           count_err = "nt_response",
            time = "minute"
            #freq_err = "nt_frequency"
            ), regexp = "i `phase` not supplied. Default phase set to `A` for all observation"
