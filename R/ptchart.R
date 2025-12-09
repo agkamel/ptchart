@@ -6,7 +6,7 @@
 #'
 #' @param title A character vector of length 1 for setting the title.
 #' @param xlab Character vector of length 1. Label of x-axis (default: `"Day"`).
-#' @param ylab Character vector of length 1. Label of y-axis (default: `"Rate"`).
+#' @param ylab Character vector of length 1. Label of y-axis (default: `"Frequency"`).
 #'
 #' @param show_record_floor Logical vector of length 1. Is recording floor showed (default: `TRUE`) or not (`FALSE`)?
 #' @param show_behavior_floor Logical vector of length 1. Is behavior floor showed (default: `TRUE`) or not (`FALSE`)?
@@ -43,7 +43,7 @@ ptchart <- function(object,
                     zoom_y = NULL,
                     title = "ptchart output",
                     xlab = "Day",
-                    ylab = "Rate",
+                    ylab = "Frequency",
 
                     show_record_floor = TRUE,
                     show_behavior_floor = TRUE,
