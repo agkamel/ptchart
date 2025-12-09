@@ -78,7 +78,7 @@ A S3 object of class \code{ptstat}, a list.
 \examples{
 ptstat(ptdata01,
        day = jour,
-       freq = frequence,
+       freq = t_frequency,
        phase = phase,
        time = minute,
        freq_e = frequence_nc)

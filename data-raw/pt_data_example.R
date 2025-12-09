@@ -58,8 +58,8 @@ phase_a <- tibble(
   jour = as.integer(date - first_sunday),
 
   # Frequence cible:
-  frequence = round(10^(b0_a + b1_a*jour + erreur_a)),
-  reponse = frequence*minute_a,
+  t_frequency = round(10^(b0_a + b1_a*jour + erreur_a)),
+  reponse = t_frequency*minute_a,
   minute = minute_a,
 
   # Frequence non-cible:
@@ -82,8 +82,8 @@ phase_b <- tibble(
   jour = as.integer(date - first_sunday),
 
   # Frequence cible:
-  frequence = round(10^(b0_b + b1_b*jour + erreur_b)),
-  reponse = frequence*minute_b,
+  t_frequency = round(10^(b0_b + b1_b*jour + erreur_b)),
+  reponse = t_frequency*minute_b,
   minute = minute_b,
 
   # Frequence non-cible:

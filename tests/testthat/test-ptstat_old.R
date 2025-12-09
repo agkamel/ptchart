@@ -3,7 +3,7 @@ test_that("function return a s3 class 'ptstat'", {
   expect_s3_class(
     ptstat_old(ptdata01,
            day = "jour",
-           freq = "frequence",
+           freq = "t_frequency",
            time = "minute"),
     class = "ptstat")
 })
@@ -15,7 +15,7 @@ test_that("function return an error because of day or date", {
   expect_error(
     ptstat_old(ptdata01,
            #day = "jour",
-           freq = "frequence",
+           freq = "t_frequency",
            time = "minute",
            #date = "date",
            #date_zero = ptdate0
@@ -25,7 +25,7 @@ test_that("function return an error because of day or date", {
   expect_error(
     ptstat_old(ptdata01,
            #day = "jour",
-           freq = "frequence",
+           freq = "t_frequency",
            time = "minute",
            #date = "date",
            date_zero = ptdate0
@@ -40,7 +40,7 @@ test_that("function return an error because of time", {
   expect_error(
     ptstat_old(ptdata01,
            day = "jour",
-           freq = "frequence",
+           freq = "t_frequency",
            #time = "minute"
            ), regexp = "! `time` must be supplied."
   )
@@ -53,7 +53,7 @@ test_that("function return an error because of freq or count", {
   expect_error(
     ptstat_old(ptdata01,
            day = "jour",
-           #freq = "frequence",
+           #freq = "t_frequency",
            #count = "reponse",
            time = "minute"
              ), regexp = "! One of these combinaisons must be supplied:\n    `freq`\n    `count`\n    `freq_err`\n    `count_err`"

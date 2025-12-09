@@ -17,7 +17,7 @@ df_test |>
 test_that("a S3 object of class ptstat is returned", {
   expect_s3_class(ptstat(ptdata01,
                          day = jour,
-                         freq = frequence,
+                         freq = t_frequency,
                          phase = phase,
                          #freq_e = frequence_nc
                          ),
@@ -27,7 +27,7 @@ test_that("a S3 object of class ptstat is returned", {
 test_that("an error is raised because day, date, or date and date_zero is missing", {
   expect_error(ptstat(ptdata01,
                          # day, date, or day and date missing
-                         freq = frequence,
+                         freq = t_frequency,
                          phase = phase,
                          freq_e = frequence_nc
                       ))
@@ -40,7 +40,7 @@ test_that("an error is raised because day, date, or date and date_zero is missin
 test_that("an error is raised because count, freq, count_e, or freq_e is missing.", {
   expect_error(ptstat(ptdata01,
                       day = jour,
-                      #freq = frequence,
+                      #freq = t_frequency,
                       #count = reponse,
                       #count_e = reponse_nc,
                       #freq_e = frequence_nc,
@@ -50,7 +50,7 @@ test_that("an error is raised because count, freq, count_e, or freq_e is missing
 
   expect_error(ptstat(ptdata01,
                       day = jour,
-                      #freq = frequence,
+                      #freq = t_frequency,
                       #count = reponse,
                       #count_e = reponse_nc,
                       #freq_e = frequence_nc,

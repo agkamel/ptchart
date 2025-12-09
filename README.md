@@ -69,7 +69,7 @@ information into the `ptstat()` function.
 ``` r
 measures <- ptstat(ptdata01,
                    day = jour,
-                   freq = frequence,
+                   freq = t_frequency,
                    phase = phase)
 ```
 

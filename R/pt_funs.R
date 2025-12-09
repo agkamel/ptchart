@@ -95,7 +95,7 @@
 #'
 #' @examples
 #' df <- ptdata01
-#' celeration(df$jour, df$frequence)
+#' celeration(df$jour, df$t_frequency)
 #'
 #' @export
 #' @describeIn summary_funs Calculate b1

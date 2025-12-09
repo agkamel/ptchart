@@ -109,16 +109,16 @@ sin(log10(2))
 #
 #
 # turn(ptdata01$jour,
-#             ptdata01$frequence,
+#             ptdata01$t_frequency,
 #             ptdata01$phase)
 #
 # ptdata01 |>
 #   dplyr::group_by(phase) |>
-#   dplyr::mutate(turn = turn(jour, frequence, phase))
+#   dplyr::mutate(turn = turn(jour, t_frequency, phase))
 #
 #
 # temp_df <- tibble::tibble(x = ptdata01$jour,
-#                           y = ptdata01$frequence,
+#                           y = ptdata01$t_frequency,
 #                           phase = ptdata01$phase
 #                           )
 # #temp_df2 <-
@@ -150,7 +150,7 @@ sin(log10(2))
 #
 # 25^(1/2)
 #
-# predicted_values(ptdata01$jour, ptdata01$frequence)
+# predicted_values(ptdata01$jour, ptdata01$t_frequency)
 
 
 

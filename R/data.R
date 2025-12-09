@@ -10,7 +10,7 @@
 #'   \item{jour}{Day of the observation.}
 #'   \item{minute}{Number of minutes.}
 #'   \item{reponse}{Count of target responses.}
-#'   \item{frequence}{Frequency of target responses.}
+#'   \item{t_frequency}{Frequency of target responses.}
 #'   \item{reponse_nc}{Count of non-target responses.}
 #'   \item{frequence_nc}{Frequency of non-target responses.}
 #'   \item{phase}{Phase of intervention.}
