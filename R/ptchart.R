@@ -158,7 +158,7 @@ ptchart <- function(object,
 
 
 
-  if (is_missing(main_df$date)) {
+  #if (is_missing(main_df$date)) {
 
 
     if (show_record_floor) {
@@ -331,123 +331,125 @@ ptchart <- function(object,
         )
     }
 
-  } else {
+  #}
 
-
-
-      # Plancher d'enregistrement
-      #ggplot2::geom_segment(x = ymd("2021-07-20")-0.5,
-      #             xend = ymd("2021-07-20")+0.5,
-      #             y = log10(1),
-      #             yend = log10(1)
-      #             ) +
-
-
-    if (show_record_floor) {
-      output <- output +
-
-        # Record floor
-        ggplot2::geom_point(
-          mapping = ggplot2::aes(x = date, y = record_floor),
-          shape = "\u2013",
-          size = 5,
-          color = "gray30"
-        )
-    }
-
-    if (show_behavior_floor) {
-
-      output <- output +
-
-      # Behavior floor
-      ggplot2::geom_point(
-        mapping = ggplot2::aes(x = date, y = behavior_floor),
-        shape = "\u2012", size = 5, color = "gray20"
-      )
-    }
-
-    if (show_record_ceil) {
-
-      output <- output +
-
-      # Record ceil
-      ggplot2::geom_point(
-        mapping = ggplot2::aes(x = date, y = record_ceil),
-        shape = "\u2013", size = 5, color = "gray10"
-      )
-
-    }
-
-
-    if (show_acc_line) {
-
-      output <- output +
-      #Pente de régression
-      ggplot2::geom_smooth(
-        method = "lm",
-        se = FALSE,
-        mapping = ggplot2::aes(x = date, y = freq, group = phase),
-        color = color_acc_line
-      )
-    }
-
-    if (show_dec_line) {
-      output <- output +
-
-      ggplot2::geom_smooth(
-        method = "lm",
-        se = FALSE,
-        mapping = ggplot2::aes(x = date, y = freq_e, group = phase),
-        color = color_dec_line
-      )
-    }
-
-
-    if (show_accuracy_line) {
-
-      output <- output +
-
-        #Pente de régression
-        ggplot2::geom_smooth(
-          method = "lm",
-          se = FALSE,
-          mapping = ggplot2::aes(x = date, y = accu_ratio, group = phase),
-          color = color_accuracy_line
-        )
-
-
-    }
-
-
-    if (show_acc_point) {
-
-      output <- output +
-      #Point de fréquence cible et non-cible
-      ggplot2::geom_point(
-        mapping = ggplot2::aes(x = date, y = freq),
-        shape = 16#, size = 2
-      )
-    }
-
-    if (show_dec_point) {
-
-      output <- output +
-
-      ggplot2::geom_point(
-        mapping = ggplot2::aes(x = date, y = freq_e),
-        shape = 4, size = 2.5,
-      )
-    }
-
-    if (show_accuracy_point) {
-
-      output <- output +
-
-        ggplot2::geom_point(
-          mapping = ggplot2::aes(x = date, y = accu_ratio),
-          shape = 2, size = 2.5,
-        )
-    }
+  # else {
+  #
+  #
+  #
+  #     # Plancher d'enregistrement
+  #     #ggplot2::geom_segment(x = ymd("2021-07-20")-0.5,
+  #     #             xend = ymd("2021-07-20")+0.5,
+  #     #             y = log10(1),
+  #     #             yend = log10(1)
+  #     #             ) +
+  #
+  #
+  #   if (show_record_floor) {
+  #     output <- output +
+  #
+  #       # Record floor
+  #       ggplot2::geom_point(
+  #         mapping = ggplot2::aes(x = date, y = record_floor),
+  #         shape = "\u2013",
+  #         size = 5,
+  #         color = "gray30"
+  #       )
+  #   }
+  #
+  #   if (show_behavior_floor) {
+  #
+  #     output <- output +
+  #
+  #     # Behavior floor
+  #     ggplot2::geom_point(
+  #       mapping = ggplot2::aes(x = date, y = behavior_floor),
+  #       shape = "\u2012", size = 5, color = "gray20"
+  #     )
+  #   }
+  #
+  #   if (show_record_ceil) {
+  #
+  #     output <- output +
+  #
+  #     # Record ceil
+  #     ggplot2::geom_point(
+  #       mapping = ggplot2::aes(x = date, y = record_ceil),
+  #       shape = "\u2013", size = 5, color = "gray10"
+  #     )
+  #
+  #   }
+  #
+  #
+  #   if (show_acc_line) {
+  #
+  #     output <- output +
+  #     #Pente de régression
+  #     ggplot2::geom_smooth(
+  #       method = "lm",
+  #       se = FALSE,
+  #       mapping = ggplot2::aes(x = date, y = freq, group = phase),
+  #       color = color_acc_line
+  #     )
+  #   }
+  #
+  #   if (show_dec_line) {
+  #     output <- output +
+  #
+  #     ggplot2::geom_smooth(
+  #       method = "lm",
+  #       se = FALSE,
+  #       mapping = ggplot2::aes(x = date, y = freq_e, group = phase),
+  #       color = color_dec_line
+  #     )
+  #   }
+  #
+  #
+  #   if (show_accuracy_line) {
+  #
+  #     output <- output +
+  #
+  #       #Pente de régression
+  #       ggplot2::geom_smooth(
+  #         method = "lm",
+  #         se = FALSE,
+  #         mapping = ggplot2::aes(x = date, y = accu_ratio, group = phase),
+  #         color = color_accuracy_line
+  #       )
+  #
+  #
+  #   }
+  #
+  #
+  #   if (show_acc_point) {
+  #
+  #     output <- output +
+  #     #Point de fréquence cible et non-cible
+  #     ggplot2::geom_point(
+  #       mapping = ggplot2::aes(x = date, y = freq),
+  #       shape = 16#, size = 2
+  #     )
+  #   }
+  #
+  #   if (show_dec_point) {
+  #
+  #     output <- output +
+  #
+  #     ggplot2::geom_point(
+  #       mapping = ggplot2::aes(x = date, y = freq_e),
+  #       shape = 4, size = 2.5,
+  #     )
+  #   }
+  #
+  #   if (show_accuracy_point) {
+  #
+  #     output <- output +
+  #
+  #       ggplot2::geom_point(
+  #         mapping = ggplot2::aes(x = date, y = accu_ratio),
+  #         shape = 2, size = 2.5,
+  #       )
+  #   }
 
 
 
@@ -463,7 +465,7 @@ ptchart <- function(object,
     #geom_abline(slope = object[["terms"]][["b1"]][[1]],
     #           intercept = object[["terms"]][["b0"]][[1]])
 
-  }
+  #}
 
 
   output
