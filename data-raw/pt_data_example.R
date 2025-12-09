@@ -94,7 +94,7 @@ phase_b <- tibble(
   phase = "B"
 )
 
-# Complete dateset - Phases A and B ----
+# Complete dataset - Phases A and B ----
 example_pt_data <-
   bind_rows(phase_a, phase_b) %>%
   mutate(i = seq(1:(nrow(phase_a) + nrow(phase_b)))) %>%
