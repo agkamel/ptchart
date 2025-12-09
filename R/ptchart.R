@@ -69,6 +69,12 @@ ptchart <- function(object,
   stopifnot("`object` must be of class `ptstat`" = is_ptstat(object))
 
   main_df <- object[["main_df"]]
+  pt_measures_b0_b0_e <- object[["pt_measures"]][,c("phase", "b0", "b0_e", "b_up", "b_down", "b_up_e", "b_down_e")]
+
+  df_to_chart <- dplyr::left_join(x = main_df,
+                   y = pt_measures_b0_b0_e,
+                   by = "phase")
+
 
   scale_x_params <- make_scale_x_params(main_df)
   scale_y_params <- make_scale_y_params()
@@ -135,7 +141,7 @@ ptchart <- function(object,
   #  )
 
   output <- ggplot2::ggplot(
-    data = main_df
+    data = df_to_chart
   ) +
     gg_scale_y_log10 +
     gg_scale_x_continuous +
