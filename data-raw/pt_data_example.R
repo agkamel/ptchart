@@ -55,15 +55,15 @@ phase_a <- tibble(
     seq.Date(from = first_sunday + 8, to = first_sunday + 12, by = "days")),
 
   # Jour: Axe des x
-  jour = as.integer(date - first_sunday),
+  day = as.integer(date - first_sunday),
 
   # Frequence cible:
-  t_frequency = round(10^(b0_a + b1_a*jour + erreur_a)),
+  t_frequency = round(10^(b0_a + b1_a*day + erreur_a)),
   t_response = t_frequency*minute_a,
   minute = minute_a,
 
   # Frequence non-cible:
-  nt_frequency = round(10^(b0_a_nc + b1_a_nc*jour + erreur_a_nc)),
+  nt_frequency = round(10^(b0_a_nc + b1_a_nc*day + erreur_a_nc)),
   nt_response = nt_frequency*minute_a,
 
   # Phase:
@@ -79,15 +79,15 @@ phase_b <- tibble(
     seq.Date(from = first_sunday + 22, to = first_sunday + 26, by = "days")),
 
   # Jour: Axe des x
-  jour = as.integer(date - first_sunday),
+  day = as.integer(date - first_sunday),
 
   # Frequence cible:
-  t_frequency = round(10^(b0_b + b1_b*jour + erreur_b)),
+  t_frequency = round(10^(b0_b + b1_b*day + erreur_b)),
   t_response = t_frequency*minute_b,
   minute = minute_b,
 
   # Frequence non-cible:
-  nt_frequency = round(10^(b0_b_nc + b1_b_nc*jour + erreur_b_nc)),
+  nt_frequency = round(10^(b0_b_nc + b1_b_nc*day + erreur_b_nc)),
   nt_response = nt_frequency*minute_b,
 
   # Phase:
@@ -98,7 +98,7 @@ phase_b <- tibble(
 ptdata01 <-
   bind_rows(phase_a, phase_b) %>%
   mutate(i = seq(1:(nrow(phase_a) + nrow(phase_b)))) %>%
-  select(i, date, jour, minute, t_response, t_frequency, nt_response, nt_frequency, phase)
+  select(i, date, day, minute, t_response, t_frequency, nt_response, nt_frequency, phase)
 
 # Writing dataset ----
 usethis::use_data(ptdata01, overwrite = TRUE)

@@ -77,7 +77,7 @@ More specifically:
 }
 \examples{
 ptstat_old(ptdata01,
-       day = "jour",
+       day = "day",
        count = "t_response",
        time = "minute",
        phase = "phase"

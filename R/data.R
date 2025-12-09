@@ -7,7 +7,7 @@
 #' \describe{
 #'   \item{i}{Observation index id.}
 #'   \item{date}{Date of observation in yyyy-mm-dd format.}
-#'   \item{jour}{Day of the observation.}
+#'   \item{day}{Day of the observation.}
 #'   \item{minute}{Number of minutes.}
 #'   \item{t_response}{Count of target responses.}
 #'   \item{t_frequency}{Frequency of target responses.}

@@ -76,7 +76,7 @@ Generate a graph with Standard Celeration Chart conventions
 }
 \examples{
 measures <- ptstat(ptdata01,
-            day = jour,
+            day = day,
             freq = t_frequency,
             phase = phase,
             time = minute,
