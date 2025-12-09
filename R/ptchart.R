@@ -128,10 +128,11 @@ ptchart <- function(object,
     ylim = zoom_y
   )
 
-  # Ligne séparant les phases
-  gg_geom_vline <-  ggplot2::geom_vline(
-      xintercept = lubridate::ymd("2021-08-01")+0.5
-    )
+  # Ligne séparant les phases ####
+  # TODO:
+  #gg_geom_vline <-  ggplot2::geom_vline(
+  #    xintercept = lubridate::ymd("2021-08-01")+0.5
+  #  )
 
   output <- ggplot2::ggplot(
     data = main_df
@@ -140,8 +141,9 @@ ptchart <- function(object,
     gg_scale_x_continuous +
     gg_title +
     gg_theme +
-    gg_coord_fixed +
-    gg_geom_vline
+    gg_coord_fixed# +
+    # TODO:
+    #gg_geom_vline
 
 
 
