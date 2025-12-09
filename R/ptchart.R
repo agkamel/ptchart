@@ -96,6 +96,13 @@ ptchart <- function(object,
     minor_breaks = scale_x_params[["no_date"]],
     limits = c(scale_x_params[["no_date"]][[1]],
                scale_x_params[["no_date"]][[length(scale_x_params[["no_date"]])]])
+               scale_x_params[["no_date"]][[length(scale_x_params[["no_date"]])]])#,
+
+    # TODO: Ajouter les dates sur le graphique
+    # sec.axis = ggplot2::sec_axis(
+    #   ~ .,
+    #   breaks = scale_x_params[["no_date"]][(scale_x_params[["breaks"]])],
+    #   labels = scale_x_params[["date"]][!is.na(scale_x_params[["labels"]])])
   )
 
   gg_title <- ggplot2::ggtitle(title)
