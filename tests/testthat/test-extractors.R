@@ -31,7 +31,7 @@ test_that("object is of class ptstat", {
 })
 
 test_that("object is of class ptstat", {
-  expect_error(describe("x"))
+  expect_error(extract_describe("x"))
 })
 
 test_that("object is of class ptstat", {
