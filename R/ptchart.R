@@ -94,14 +94,12 @@ ptchart <- function(object,
       )
     )
 
-
   gg_scale_x_continuous <- ggplot2::scale_x_continuous(
     name = xlab,
     breaks = scale_x_params[["no_date"]][(scale_x_params[["breaks"]])],
     labels = scale_x_params[["labels"]][!is.na(scale_x_params[["labels"]])],
     minor_breaks = scale_x_params[["no_date"]],
     limits = c(scale_x_params[["no_date"]][[1]],
-               scale_x_params[["no_date"]][[length(scale_x_params[["no_date"]])]])
                scale_x_params[["no_date"]][[length(scale_x_params[["no_date"]])]])#,
 
     # TODO: Ajouter les dates sur le graphique
