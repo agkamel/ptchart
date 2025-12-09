@@ -251,14 +251,14 @@ ptchart <- function(object,
         ggplot2::geom_smooth(
           method = "lm",
           se = FALSE,
-          mapping = ggplot2::aes(x = day, y = pred_freq / 10^max(res_freq), group = phase),
+          mapping = ggplot2::aes(x = day, y = freq * as.double(b_up), group = phase),
           color = color_acc_line,
           linetype = 2
         ) +
         ggplot2::geom_smooth(
           method = "lm",
           se = FALSE,
-          mapping = ggplot2::aes(x = day, y = pred_freq / 10^min(res_freq), group = phase),
+          mapping = ggplot2::aes(x = day, y = freq * as.double(b_down), group = phase),
           color = color_acc_line,
           linetype = 2
         )
@@ -274,14 +274,14 @@ ptchart <- function(object,
         ggplot2::geom_smooth(
           method = "lm",
           se = FALSE,
-          mapping = ggplot2::aes(x = day, y = pred_freq_err * 10^max(res_freq_err), group = phase),
+          mapping = ggplot2::aes(x = day, y = freq_e * as.double(b_up_e), group = phase),
           color = color_dec_line,
           linetype = 2
         ) +
         ggplot2::geom_smooth(
           method = "lm",
           se = FALSE,
-          mapping = ggplot2::aes(x = day, y = pred_freq_err * 10^min(res_freq_err), group = phase),
+          mapping = ggplot2::aes(x = day, y = freq_e * as.double(b_down_e), group = phase),
           color = color_dec_line,
           linetype = 2
         )
