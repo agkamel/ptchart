@@ -132,4 +132,73 @@ test_that("function works correctly", {
 # })
 
 
+# calculate_errors() ----
+
+# test_that("function raises an error if `day` is not integer", {
+#   expect_error(calculate_errors(day = "a", log10_freq = 0.30103))
+#   expect_error(calculate_errors(day = 1.0, log10_freq = 0.30103))
+#   expect_error(calculate_errors(day = TRUE, log10_freq = 0.30103))
+# })
 #
+#
+# test_that("function raises an error if `log10_freq` is not numeric", {
+#   expect_error(calculate_errors(day = 1, log10_freq = "0.30103"))
+#   expect_error(calculate_errors(day = 1, log10_freq = TRUE))
+# })
+#
+#
+# test_that("function raises an error if `antilog` is a logical TRUE or FALSE", {
+#   expect_error(calculate_errors(day = 1, log10_freq = 0.30103, antilog = NA))
+#   expect_error(calculate_errors(day = 1, log10_freq = TRUE, antilog = "TRUE"))
+# })
+
+
+# recode_freq_when_zero() ----
+
+test_that("it works correctly", {
+  expect_equal(recode_freq_when_zero(0, 1), 0.5)
+  expect_equal(recode_freq_when_zero(0.25, 1), 0.5)
+  expect_equal(recode_freq_when_zero(0.25, 0.5), 1)
+})
+
+# calculate_predicted_values() ----
+
+# test_that("function raises an error if `day` is not integer", {
+#   expect_error(calculate_predicted_values(day = "a", log10_freq = 0.30103))
+#   expect_error(calculate_predicted_values(day = 1.0, log10_freq = 0.30103))
+#   expect_error(calculate_predicted_values(day = TRUE, log10_freq = 0.30103))
+# })
+#
+#
+# test_that("function raises an error if `log10_freq` is not numeric", {
+#   expect_error(calculate_predicted_values(day = 1, log10_freq = "0.30103"))
+#   expect_error(calculate_predicted_values(day = 1, log10_freq = TRUE))
+# })
+#
+#
+# test_that("function raises an error if `antilog` is a logical TRUE or FALSE", {
+#   expect_error(calculate_predicted_values(day = 1, log10_freq = 0.30103, antilog = NA))
+#   expect_error(calculate_predicted_values(day = 1, log10_freq = TRUE, antilog = "TRUE"))
+# })
+
+# calculate_time_floor() ----
+
+test_that("value greater that 0 works", {
+  expect_equal(calculate_time_floor(5), 0.2)
+  expect_equal(calculate_time_floor(0.2), 5)
+})
+
+test_that("non-numeric value raise an error", {
+  expect_error(calculate_time_floor("x"))
+})
+
+test_that("value smaller or equal than zero raise an error", {
+  expect_error(calculate_time_floor(0))
+  expect_error(calculate_time_floor(-5))
+})
+
+
+
+
+
+
