@@ -202,6 +202,7 @@ ptchart <- function(object,
       #Pente de régression
       ggplot2::geom_smooth(
         method = "lm",
+        formula = "y ~ x",
         se = FALSE,
         mapping = ggplot2::aes(x = day, y = freq, group = phase),
         color = color_acc_line
@@ -216,6 +217,7 @@ ptchart <- function(object,
 
       ggplot2::geom_smooth(
         method = "lm",
+        formula = "y ~ x",
         se = FALSE,
         mapping = ggplot2::aes(x = day, y = freq_e, group = phase),
         color = color_dec_line
@@ -230,9 +232,11 @@ ptchart <- function(object,
         #Pente de régression
         ggplot2::geom_smooth(
           method = "lm",
+          formula = "y ~ x",
           se = FALSE,
           mapping = ggplot2::aes(x = day, y = accu_ratio, group = phase),
-          color = color_accuracy_line
+          color = color_accuracy_line,
+          linetype = 4
         )
 
 
