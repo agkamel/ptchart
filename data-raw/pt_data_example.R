@@ -9,7 +9,7 @@ library(lubridate)
 
 ## First sunday - Day zero ----
 first_sunday <- as.Date("2021-07-18")
-example_pt_date_zero <- first_sunday
+ptdate0 <- first_sunday
 
 # Parameters - Phase A ----
 
@@ -102,4 +102,4 @@ ptdata01 <-
 
 # Writing dataset ----
 usethis::use_data(ptdata01, overwrite = TRUE)
-usethis::use_data(example_pt_date_zero, overwrite = TRUE)
+usethis::use_data(ptdate0, overwrite = TRUE)

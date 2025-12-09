@@ -18,7 +18,7 @@ test_that("function return an error because of day or date", {
            freq = "frequence",
            time = "minute",
            #date = "date",
-           #date_zero = example_pt_date_zero
+           #date_zero = ptdate0
            ), regexp = "! One of these combinaisons must be supplied:\n    `day`\n    `date`\n    `date` and `date_zero`"
     )
 
@@ -28,7 +28,7 @@ test_that("function return an error because of day or date", {
            freq = "frequence",
            time = "minute",
            #date = "date",
-           date_zero = example_pt_date_zero
+           date_zero = ptdate0
            ), regexp = "! One of these combinaisons must be supplied:\n    `day`\n    `date`\n    `date` and `date_zero`"
   )
 })

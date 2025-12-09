@@ -22,6 +22,6 @@
 #'
 #' Date of day zero. To be used with `ptdata01`.
 #'
-#' @format ## `example_pt_date_zero`
+#' @format ## `ptdate0`
 #' A vector of class `Date` with only one date: 2021-07-18.
-"example_pt_date_zero"
+"ptdate0"
