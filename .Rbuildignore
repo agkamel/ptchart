@@ -8,3 +8,7 @@
 ^_admin$
 ^R\_development$
 ^cran-comments\.md$
+^deprec_extractors.R$
+^deprec_funs.R$
+^tests\testhat\test-ptstat_old.R$
+^tests\testhat\test-extractors.R$
