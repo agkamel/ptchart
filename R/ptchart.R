@@ -31,7 +31,7 @@
 #' @export
 #'
 #' @examples
-#' measures <- ptstat(example_pt_data,
+#' measures <- ptstat(ptdata01,
 #'             day = jour,
 #'             freq = frequence,
 #'             phase = phase,

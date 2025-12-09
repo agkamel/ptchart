@@ -37,7 +37,7 @@ These funtions are summary PT measures that returns a vector of multiple values.
 
 }}
 \examples{
-df <- example_pt_data
+df <- ptdata01
 accuracy_ratio(df$jour, df$frequence, df$frequence_nc)
 
 }

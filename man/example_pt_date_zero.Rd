@@ -14,6 +14,6 @@ A vector of class \code{Date} with only one date: 2021-07-18.
 example_pt_date_zero
 }
 \description{
-Date of day zero. To be used with \code{example_pt_data}.
+Date of day zero. To be used with \code{ptdata01}.
 }
 \keyword{datasets}

@@ -124,7 +124,7 @@ The bounce total \eqn{\mathcal{B}_{\text{total}}} obtained with \code{bounce_tot
 }
 
 \examples{
-df <- example_pt_data
+df <- ptdata01
 celeration(df$jour, df$frequence)
 
 }

@@ -2,7 +2,7 @@
 #'
 #' A fictional dataset for illustrating ptchart package functions.
 #'
-#' @format ## `example_pt_data`
+#' @format ## `ptdata01`
 #' A data frame with 20 rows and 9 columns:
 #' \describe{
 #'   \item{i}{Observation index id.}
@@ -15,12 +15,12 @@
 #'   \item{frequence_nc}{Count of non-target responses.}
 #'   \item{phase}{Phase of intervention.}
 #' }
-"example_pt_data"
+"ptdata01"
 
 
 #' Date of day zero.
 #'
-#' Date of day zero. To be used with `example_pt_data`.
+#' Date of day zero. To be used with `ptdata01`.
 #'
 #' @format ## `example_pt_date_zero`
 #' A vector of class `Date` with only one date: 2021-07-18.

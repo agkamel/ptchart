@@ -1,4 +1,4 @@
-df_test <- ptstat(example_pt_data,
+df_test <- ptstat(ptdata01,
        #date = date,
        day = jour,
        #freq = frequence,
@@ -15,7 +15,7 @@ df_test |>
   ptchart(zoom_x = c(0, 28), zoom_y = c(0.4, 20))
 
 test_that("a S3 object of class ptstat is returned", {
-  expect_s3_class(ptstat(example_pt_data,
+  expect_s3_class(ptstat(ptdata01,
                          day = jour,
                          freq = frequence,
                          phase = phase,
@@ -25,7 +25,7 @@ test_that("a S3 object of class ptstat is returned", {
 })
 
 test_that("an error is raised because day, date, or date and date_zero is missing", {
-  expect_error(ptstat(example_pt_data,
+  expect_error(ptstat(ptdata01,
                          # day, date, or day and date missing
                          freq = frequence,
                          phase = phase,
@@ -38,7 +38,7 @@ test_that("an error is raised because day, date, or date and date_zero is missin
 
 
 test_that("an error is raised because count, freq, count_e, or freq_e is missing.", {
-  expect_error(ptstat(example_pt_data,
+  expect_error(ptstat(ptdata01,
                       day = jour,
                       #freq = frequence,
                       #count = reponse,
@@ -48,7 +48,7 @@ test_that("an error is raised because count, freq, count_e, or freq_e is missing
                       phase = phase
   ))
 
-  expect_error(ptstat(example_pt_data,
+  expect_error(ptstat(ptdata01,
                       day = jour,
                       #freq = frequence,
                       #count = reponse,

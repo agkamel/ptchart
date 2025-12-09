@@ -1,4 +1,4 @@
-# R code for generating `example_pt_data.rda`
+# R code for generating `ptdata01.rda`
 
 # Packages ----
 library(dplyr)
@@ -95,11 +95,11 @@ phase_b <- tibble(
 )
 
 # Complete dataset - Phases A and B ----
-example_pt_data <-
+ptdata01 <-
   bind_rows(phase_a, phase_b) %>%
   mutate(i = seq(1:(nrow(phase_a) + nrow(phase_b)))) %>%
   select(i, date, jour, minute, reponse, frequence, reponse_nc, frequence_nc, phase)
 
 # Writing dataset ----
-usethis::use_data(example_pt_data, overwrite = TRUE)
+usethis::use_data(ptdata01, overwrite = TRUE)
 usethis::use_data(example_pt_date_zero, overwrite = TRUE)

@@ -23,7 +23,7 @@
 #' @returns A S3 object of class `ptstat`, a list.
 #' @export
 #' @examples
-#' ptstat(example_pt_data,
+#' ptstat(ptdata01,
 #'        day = jour,
 #'        freq = frequence,
 #'        phase = phase,

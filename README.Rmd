@@ -70,17 +70,17 @@ library(ptchart)
 ```
 
 To help the user understand the package, the fictional dataset
-`example_pt_data` is provided with the package.
+`ptdata01` is provided with the package.
 
 ```{r}
-example_pt_data
+ptdata01
 ```
 
 To calculate behavioral measures of behavior, we provide the relevant
 information into the `ptstat()` function.
 
 ```{r, message=FALSE}
-measures <- ptstat(example_pt_data,
+measures <- ptstat(ptdata01,
                    day = jour,
                    freq = frequence,
                    phase = phase)

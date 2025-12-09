@@ -94,7 +94,7 @@
 #'
 #'
 #' @examples
-#' df <- example_pt_data
+#' df <- ptdata01
 #' celeration(df$jour, df$frequence)
 #'
 #' @export
@@ -243,7 +243,7 @@ accuracy <- function(x, y_cor, y_incor) {
 #' @return A vector of values.
 #' @export
 #' @examples
-#' df <- example_pt_data
+#' df <- ptdata01
 #' accuracy_ratio(df$jour, df$frequence, df$frequence_nc)
 #'
 #' @describeIn vct_funs Calculate accuracy ratio

@@ -76,7 +76,7 @@ More specifically:
 }
 }
 \examples{
-ptstat_old(example_pt_data,
+ptstat_old(ptdata01,
        day = "jour",
        count = "reponse",
        time = "minute",

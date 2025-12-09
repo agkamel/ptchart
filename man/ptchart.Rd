@@ -75,7 +75,7 @@ A precision teaching chart.
 Generate a graph with Standard Celeration Chart conventions
 }
 \examples{
-measures <- ptstat(example_pt_data,
+measures <- ptstat(ptdata01,
             day = jour,
             freq = frequence,
             phase = phase,

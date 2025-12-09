@@ -76,7 +76,7 @@ A S3 object of class \code{ptstat}, a list.
 
 }}
 \examples{
-ptstat(example_pt_data,
+ptstat(ptdata01,
        day = jour,
        freq = frequence,
        phase = phase,
