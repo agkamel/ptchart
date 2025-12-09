@@ -111,7 +111,7 @@ ptchart <- function(object,
     plot.title = ggplot2::element_text(hjust = 0.5, size = 20),
     panel.grid.major = ggplot2::element_line(colour = "#00b1d9"),
     panel.grid.minor = ggplot2::element_line(colour = "#66d1e8"),
-    text = ggplot2::element_text(family = "serif", size = 12)
+    text = ggplot2::element_text(family = "serif", size = 12),
     #aspect.ratio = 5.44 / 8, # 5 7/16 de pouce par 8 pouce
     #https://jweshleman.wordpress.com/2006/03/25/og-on-standard-celeration-charting-system-standards/
   )
